@@ -10,7 +10,7 @@ target
 .project
 .settings
 bin
-**/node_modules*
-**/vendor/bower
-**/test/coverage
+node_modules
+vendor/bower
+test/coverage
 app/libs
