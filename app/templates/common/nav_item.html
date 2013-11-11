@@ -1,0 +1,8 @@
+<a href="#"><%= name %></a>
+<% if (children) { %>
+    <ul>
+        <% _.each(children, function (navItem) { %>
+            <li><a href="#"><%= navItem.get("name") %></a></li>
+        <% }); %>
+    </ul>
+<% } %>

@@ -1,0 +1,50 @@
+/*-- login page stylesheets -----------------------------------------------*/
+
+@import "variables.less";
+
+html, body, #main, .login {
+  height: 100%;
+}
+
+#header, #footer, #main {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.login {
+  width: 100%;
+  height: 100%;
+  display: table;
+  #outer {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    *position: absolute;
+    *top: 50%;
+  }
+  .login-panel {
+    width: 424px;
+    margin: 0 auto;
+    *position: relative;
+    *top: -50%;
+  }
+  .gui-panel {
+    _position: relative;
+  }
+  .gui-panel-footer {
+    text-align: right;
+    button {
+      margin-left: @margin;
+      *height: 32px;
+    }
+  }
+  label {
+    *margin-right: @margin / 2;
+  }
+  table {
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: @margin;
+  }
+}

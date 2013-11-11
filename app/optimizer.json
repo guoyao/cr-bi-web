@@ -1,0 +1,24 @@
+{
+    "appDir": "app",
+    "dir": "dist",
+    "optimize": "uglify2",
+    "optimizeCss": "none",
+    "removeCombined": true,
+    "mainConfigFile": "app/config.js",
+    "findNestedDependencies": true,
+    "preserveLicenseComments": false,
+    "generateSourceMaps": true,
+    "modules": [
+        {
+            "name": "common"
+        },
+        {
+            "name": "index",
+            "exclude": ["common"]
+        },
+        {
+            "name": "login",
+            "exclude": ["common"]
+        }
+    ]
+}

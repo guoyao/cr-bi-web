@@ -1,0 +1,16 @@
+.DS_Store
+.idea
+*.iml
+out
+dist
+build
+target
+.gradle
+.classpath
+.project
+.settings
+bin
+**/node_modules*
+**/vendor/bower
+**/test/coverage
+app/libs
