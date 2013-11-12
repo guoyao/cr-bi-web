@@ -3,11 +3,11 @@ define(function (require) {
 
     // load external dependencies
     var Marionette = require("marionette"),
-        template = require("text!templates/index/main.html");
+        template = require("text!templates/index/index.html");
 
-    var Main = Marionette.ItemView.extend({
+    var IndexView = Marionette.ItemView.extend({
         template: template
     });
 
-    return Main;
+    return IndexView;
 });

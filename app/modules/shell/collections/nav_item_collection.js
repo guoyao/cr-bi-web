@@ -3,7 +3,7 @@ define(function (require) {
 
     // load external dependencies
     var Backbone = require("backbone"),
-        NavItem = require("modules/common/models/nav_item");
+        NavItem = require("modules/shell/models/nav_item");
 
     var NavItemCollection = Backbone.Collection.extend({
         model: NavItem,

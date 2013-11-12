@@ -5,9 +5,9 @@ define(function (require) {
     var Marionette = require("marionette"),
         _ = require("underscore"),
         gui = require("gui"),
-        template = require("text!templates/common/nav.html"),
-        NavItemView = require("modules/common/views/nav_item_view"),
-        NavItemCollection = require("modules/common/collections/nav_item_collection");
+        template = require("text!templates/shell/nav.html"),
+        NavItemView = require("modules/shell/views/nav_item_view"),
+        NavItemCollection = require("modules/shell/collections/nav_item_collection");
 
     var NavView = Marionette.CompositeView.extend({
         template: template,

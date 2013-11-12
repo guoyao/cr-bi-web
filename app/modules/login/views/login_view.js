@@ -3,11 +3,12 @@ define(function (require) {
 
     // load external dependencies
     var Marionette = require("marionette"),
-        template = require("text!templates/login/main.html"),
         gui = require("gui"),
-        util = require("utils/util");
+        app = require("app"),
+        util = require("utils/util"),
+        template = require("text!templates/login/login.html");
 
-    var Main = Marionette.ItemView.extend({
+    var LoginView = Marionette.ItemView.extend({
         template: template,
         className: "login",
         ui: {
@@ -27,7 +28,7 @@ define(function (require) {
             var username = this.ui.username.val(),
                 password = this.ui.password.val();
             if (!util.string.isBlank(username) && !util.string.isBlank(password) && username == "changju" && password == "123456") {
-                util.app.login(username);
+                app.login.trigger("login:succeed", username);
             } else {
                 this.ui.errorMessage.text("用户名或密码错误");
                 var errorMessageContainer = this.ui.errorMessage.parent().parent();
@@ -45,5 +46,5 @@ define(function (require) {
         }
     });
 
-    return Main;
+    return LoginView;
 });

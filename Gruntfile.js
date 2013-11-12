@@ -103,8 +103,7 @@ module.exports = function (grunt) {
         processhtml: {
             release: {
                 files: {
-                    'dist/index.html': ['app/index.html'],
-                    'dist/login.html': ['app/login.html']
+                    'dist/index.html': ['app/index.html']
                 }
             }
         },

@@ -4,7 +4,7 @@ define(function (require) {
     // load external dependencies
     var Marionette = require("marionette"),
         gui = require("gui"),
-        template = require("text!templates/common/footer.html"),
+        template = require("text!templates/shell/footer.html"),
         util = require("utils/util"),
         appInfo = require("app_info");
 
@@ -21,6 +21,9 @@ define(function (require) {
             this.ui.username.text(appInfo.loginInfo.userInfo.toString());
             this.iePatch();
             this.startTrack();
+        },
+        onClose: function() {
+            clearInterval(intervalId);
         },
         startTrack: function () {
             if (intervalId) {

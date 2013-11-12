@@ -4,9 +4,9 @@ define(function (require) {
     // load external dependencies
     var Marionette = require("marionette"),
         gui = require("gui"),
-        template = require("text!templates/common/header.html"),
-        util = require("utils/util"),
-        NavView = require("modules/common/views/nav_view");
+        app = require("app"),
+        template = require("text!templates/shell/header.html"),
+        NavView = require("modules/shell/views/nav_view");
 
     var HeaderView = Marionette.Layout.extend({
         template: template,
@@ -22,7 +22,7 @@ define(function (require) {
             this.nav.show(new NavView());
         },
         logout: function () {
-            util.app.logout();
+            app.shell.trigger("logout");
         },
         iePatch: function () {
             if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {

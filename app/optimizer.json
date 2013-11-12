@@ -10,15 +10,19 @@
     "generateSourceMaps": true,
     "modules": [
         {
-            "name": "common"
+            "name": "modules/aggregation"
         },
         {
-            "name": "index",
-            "exclude": ["common"]
+            "name": "modules/login/login",
+            "exclude": ["modules/aggregation"]
         },
         {
-            "name": "login",
-            "exclude": ["common"]
+            "name": "modules/shell/shell",
+            "exclude": ["modules/aggregation"]
+        },
+        {
+            "name": "modules/index/index",
+            "exclude": ["modules/aggregation", "modules/shell/shell"]
         }
     ]
 }

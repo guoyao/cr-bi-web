@@ -1,7 +1,6 @@
 define(function (require) {
     // load external dependencies
-    var $ = require("jquery"),
-        appInfo = require("app_info");
+    var $ = require("jquery");
 
     /**
      * string util module
@@ -33,14 +32,6 @@ define(function (require) {
      * navigation util module
      */
     var navigation = (function (window) {
-        function navigateTo(url, backable) {
-            if (backable) {
-                window.location.href = url;
-            } else {
-                window.location.replace(url);
-            }
-        }
-
         function forward() {
             window.history.forward();
         }
@@ -50,7 +41,6 @@ define(function (require) {
         }
 
         return {
-            navigateTo: navigateTo,
             forward: forward,
             back: back
         };
@@ -83,28 +73,6 @@ define(function (require) {
     })(cookie);
 
     /**
-     * app util module
-     */
-    var app = (function () {
-        var LoginInfo = appInfo.loginInfo.constructor;
-
-        function login(userInfo) {
-            storage.set(appInfo.loginCookieKey, new LoginInfo(userInfo, new Date().getTime()));
-            navigation.navigateTo(appInfo.module.index.url);
-        }
-
-        function logout() {
-            storage.remove(appInfo.loginCookieKey);
-            navigation.navigateTo(appInfo.module.login.url);
-        }
-
-        return {
-            login: login,
-            logout: logout
-        };
-    })();
-
-    /**
      * date util module
      */
     var dateTime = (function () {
@@ -124,7 +92,6 @@ define(function (require) {
         string: string,
         array: array,
         navigation: navigation,
-        app: app,
         storage: storage,
         dateTime: dateTime
     };
