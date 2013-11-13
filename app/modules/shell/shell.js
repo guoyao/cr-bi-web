@@ -1,8 +1,7 @@
 // merge dependencies to single file
 define([
-    "modules/aggregation",
     "modules/shell/views/shell_view"
-], function (aggregation, ShellView) {
+], function (ShellView) {
     "use strict";
 
     // load external dependencies

@@ -2,11 +2,10 @@
 //    urlArgs: "version=" + new Date().getTime()
 //});
 define([
-    "modules/aggregation",
     "modules/login/router",
     "modules/login/controller",
     "modules/login/views/login_view"
-], function (aggregation, Router, Controller, LoginView) {
+], function (Router, Controller, LoginView) {
     "use strict";
 
     // load external dependencies
