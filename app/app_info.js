@@ -4,6 +4,18 @@ define(function (require) {
 
     var loginCookieKey = "loginInfo";
 
+    function ModuleDescriptor(artifact, path, description) {
+        this.artifact = artifact;
+        this.path = path;
+        this.description = description;
+    }
+
+    var moduleMap = {
+        login: new ModuleDescriptor("login", "modules/login/login", "登陆页面"),
+        shell: new ModuleDescriptor("shell", "modules/shell/shell", "所有模块的容器"),
+        index: new ModuleDescriptor("index", "modules/index/index", "首页")
+    };
+
     function isLogin() {
         return !!util.storage.get(loginCookieKey);
     }
@@ -22,6 +34,7 @@ define(function (require) {
     return {
         loginCookieKey: loginCookieKey,
         loginInfo: new LoginInfo(null, null), // instance of LoginInfo and will be update before app initialize
-        isLogin: isLogin
+        isLogin: isLogin,
+        moduleMap: moduleMap
     };
 });

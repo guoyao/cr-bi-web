@@ -13,7 +13,8 @@ define([
     var shell = app.module("shell", function () {
         this.startWithParent = false;
         this.render = function () {
-            app.bodyRegion.show(new ShellView());
+            this.view = new ShellView();
+            app.bodyRegion.show(this.view);
         }
     });
 

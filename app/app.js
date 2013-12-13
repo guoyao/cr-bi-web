@@ -23,15 +23,13 @@ define(function (require) {
 
     app.vent.on("login:succeed", function () {
         appInfo.loginInfo.update();
-        var shellModulePath = "modules/shell/shell";
-        require([shellModulePath], function (shellModule) {
+        require([appInfo.moduleMap.shell.path], function (shellModule) {
             shellModule._isInitialized ? shellModule.render() : shellModule.start();
         });
     });
 
     app.vent.on("logout", function () {
-        var loginModulePath = "modules/login/login";
-        require([loginModulePath], function (loginModule) {
+        require([appInfo.moduleMap.login.path], function (loginModule) {
             loginModule._isInitialized ? loginModule.render() : loginModule.start();
         });
     });

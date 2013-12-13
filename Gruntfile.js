@@ -111,21 +111,18 @@ module.exports = function (grunt) {
         server: {
             options: {
                 host: '0.0.0.0',
-                port: 8000
+                port: 3000,
+                prefix: 'dist'
             },
 
             development: {},
 
-            release: {
-                options: {
-                    prefix: 'dist'
-                }
-            },
+            release: {},
 
             test: {
                 options: {
                     forever: false,
-                    port: 8001
+                    port: 3001
                 }
             }
         },
@@ -245,6 +242,8 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', ['dist']);
+
+    grunt.registerTask('s', ['server:development']);
 
     grunt.registerTask('test', ['karma:run']);
 };
