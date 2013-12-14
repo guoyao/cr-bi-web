@@ -18,7 +18,7 @@ define(function (require) {
             this.headerRegion.show(new HeaderView());
             this.footerRegion.show(new FooterView());
             require([appInfo.moduleMap.index.path], function (indexModule) {
-                indexModule._isInitialized ? indexModule.render() : indexModule.start();
+                indexModule.start();
             });
         }
     });

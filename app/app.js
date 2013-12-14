@@ -22,15 +22,23 @@ define(function (require) {
     });
 
     app.vent.on("login:succeed", function () {
+        var loginModule = app[appInfo.moduleMap.login.artifact];
+        if (loginModule) {
+            loginModule.stop();
+        }
         appInfo.loginInfo.update();
         require([appInfo.moduleMap.shell.path], function (shellModule) {
-            shellModule._isInitialized ? shellModule.render() : shellModule.start();
+            shellModule.start();
         });
     });
 
     app.vent.on("logout", function () {
+        var shellModule = app[appInfo.moduleMap.shell.artifact];
+        if (shellModule) {
+            shellModule.stop();
+        }
         require([appInfo.moduleMap.login.path], function (loginModule) {
-            loginModule._isInitialized ? loginModule.render() : loginModule.start();
+            loginModule.start();
         });
     });
 

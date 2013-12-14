@@ -13,7 +13,7 @@ define(function (require) {
     var moduleMap = {
         login: new ModuleDescriptor("login", "modules/login/login", "登陆页面"),
         shell: new ModuleDescriptor("shell", "modules/shell/shell", "所有模块的容器"),
-        index: new ModuleDescriptor("index", "modules/index/index", "首页")
+        index: new ModuleDescriptor("shell.index", "modules/index/index", "首页")
     };
 
     function isLogin() {

@@ -6,15 +6,16 @@ define([
     "use strict";
 
     var app = require("app"),
+        appInfo = require("app_info"),
         shell = require("modules/shell/shell");
 
     // create module
-    var index = app.module("index", function () {
+    var index = app.module(appInfo.moduleMap.index.artifact, function () {
         this.startWithParent = false;
         this.render = function () {
             this.view = new IndexView();
-            shell.view.mainRegion.show(new IndexView());
-        }
+            shell.view.mainRegion.show(this.view);
+        };
     });
 
     index.on("start", function () {

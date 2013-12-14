@@ -10,12 +10,12 @@ define([
         util = require("utils/util");
 
     // create module
-    var shell = app.module("shell", function () {
+    var shell = app.module(appInfo.moduleMap.shell.artifact, function () {
         this.startWithParent = false;
         this.render = function () {
             this.view = new ShellView();
             app.bodyRegion.show(this.view);
-        }
+        };
     });
 
     shell.on("start", function () {

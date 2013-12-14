@@ -14,11 +14,11 @@ define([
         util = require("utils/util");
 
     // create module
-    var login = app.module("login", function () {
+    var login = app.module(appInfo.moduleMap.login.artifact, function () {
         this.startWithParent = false;
         this.render = function () {
             app.bodyRegion.show(new LoginView());
-        }
+        };
     });
 
     login.on("start", function () {
