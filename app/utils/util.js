@@ -10,8 +10,22 @@ define(function (require) {
             return $.trim(value).length === 0;
         }
 
+        function substitute(value) {
+            if (value) {
+                var args = arguments,
+                    pattern = new RegExp("{([0-" + (arguments.length - 2) + "])}", "g");
+
+                return value.replace(pattern, function (match, index) {
+                    return  args[parseInt(index, 10) + 1];
+                });
+            }
+
+            return value;
+        }
+
         return {
-            isBlank: isBlank
+            isBlank: isBlank,
+            substitute: substitute
         };
     })($);
 
@@ -40,9 +54,18 @@ define(function (require) {
             window.history.back();
         }
 
+        function navigateTo(hash) {
+            var location = window.location;
+            if ((!hash && !location.hash) || hash == location.hash) {
+                return;
+            }
+            location.hash = hash || "";
+        }
+
         return {
             forward: forward,
-            back: back
+            back: back,
+            navigateTo: navigateTo
         };
     })(window);
 

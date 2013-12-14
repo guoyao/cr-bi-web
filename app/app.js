@@ -4,7 +4,8 @@ define(function (require) {
     // load external dependencies
     var Backbone = require("backbone"),
         Marionette = require("marionette"),
-        appInfo = require("app_info");
+        appInfo = require("app_info"),
+        util = require("utils/util");
 
     var app = new Marionette.Application();
 
@@ -33,6 +34,7 @@ define(function (require) {
     });
 
     app.vent.on("logout", function () {
+        util.navigation.navigateTo();
         var shellModule = app[appInfo.moduleMap.shell.artifact];
         if (shellModule) {
             shellModule.stop();
