@@ -17,6 +17,15 @@ define([
         this.router = new Router({controller: controller});
         this.render = function () {
             this.view = new ShellView();
+            this.view.on("shown", function () {
+                var hash = window.location.hash;
+                if (hash) {
+                    app.navigate("");
+                    app.navigate(hash.replace("#", ""));
+                } else {
+                    app.navigate(appInfo.moduleMap.index.hash);
+                }
+            });
             app.bodyRegion.show(this.view);
         };
     });

@@ -13,6 +13,7 @@ define(function (require) {
     });
 
     app.on("initialize:before", function () {
+        this.currentModule = null; // current showing module
         this.router = new Marionette.AppRouter();
         this.navigate = function (fragment, options) {
             options = options || {trigger: true};
@@ -42,6 +43,7 @@ define(function (require) {
         if (shellModule) {
             shellModule.stop();
         }
+        app.currentModule = null;
         require([appInfo.moduleMap.login.path], function (loginModule) {
             loginModule.start();
         });

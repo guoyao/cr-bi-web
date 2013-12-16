@@ -23,6 +23,10 @@
         {
             "name": "modules/index/index",
             "exclude": ["aggregation", "modules/shell/shell"]
+        },
+        {
+            "name": "modules/sale/sale",
+            "exclude": ["aggregation", "modules/shell/shell"]
         }
     ]
 }
