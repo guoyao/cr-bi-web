@@ -1,11 +1,8 @@
 //require.config({
 //    urlArgs: "version=" + new Date().getTime()
 //});
-define([
-    "modules/login/router",
-    "modules/login/controller",
-    "modules/login/views/login_view"
-], function (Router, Controller, LoginView) {
+define(["modules/login/views/login_view"
+], function (LoginView) {
     "use strict";
 
     // load external dependencies
@@ -22,7 +19,6 @@ define([
     });
 
     login.on("start", function () {
-        new Router({controller: Controller});
         this.render();
     });
 

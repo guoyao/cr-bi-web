@@ -4,8 +4,7 @@ define(function (require) {
     // load external dependencies
     var Backbone = require("backbone"),
         Marionette = require("marionette"),
-        appInfo = require("app_info"),
-        util = require("utils/util");
+        appInfo = require("app_info");
 
     var app = new Marionette.Application();
 
@@ -14,6 +13,11 @@ define(function (require) {
     });
 
     app.on("initialize:before", function () {
+        this.router = new Marionette.AppRouter();
+        this.navigate = function (fragment, options) {
+            options = options || {trigger: true};
+            this.router.navigate(fragment, options);
+        };
         var isLogin = appInfo.isLogin();
         app.vent.trigger(isLogin ? "login:succeed" : "logout");
     });
@@ -34,7 +38,6 @@ define(function (require) {
     });
 
     app.vent.on("logout", function () {
-        util.navigation.navigateTo();
         var shellModule = app[appInfo.moduleMap.shell.artifact];
         if (shellModule) {
             shellModule.stop();

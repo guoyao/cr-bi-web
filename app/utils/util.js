@@ -54,18 +54,9 @@ define(function (require) {
             window.history.back();
         }
 
-        function navigateTo(hash) {
-            var location = window.location;
-            if ((!hash && !location.hash) || hash == location.hash) {
-                return;
-            }
-            location.hash = hash || "";
-        }
-
         return {
             forward: forward,
-            back: back,
-            navigateTo: navigateTo
+            back: back
         };
     })(window);
 

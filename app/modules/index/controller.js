@@ -2,8 +2,8 @@ define(function () {
     "use strict";
 
     return {
-        index: function (param) {
-
+        routeChange: function (view) {
+//            console.log(view);
         }
     };
 });

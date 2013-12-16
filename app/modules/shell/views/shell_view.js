@@ -2,6 +2,7 @@ define(function (require) {
 
     // load external dependencies
     var Marionette = require("marionette"),
+        app = require("app"),
         appInfo = require("app_info"),
         template = require("text!templates/shell/shell.html"),
         HeaderView = require("modules/shell/views/header_view"),
@@ -17,9 +18,7 @@ define(function (require) {
         onShow: function () {
             this.headerRegion.show(new HeaderView());
             this.footerRegion.show(new FooterView());
-            require([appInfo.moduleMap.index.path], function (indexModule) {
-                indexModule.start();
-            });
+            app.navigate(appInfo.moduleMap.index.hash);
         }
     });
 
