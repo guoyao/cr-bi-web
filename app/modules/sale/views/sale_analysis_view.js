@@ -6,6 +6,7 @@ define(function (require) {
         template = require("text!templates/sale/views/sale_analysis.html");
 
     var SaleAnalysisView = Marionette.ItemView.extend({
+        artifact: "sale",
         template: template
     });
 

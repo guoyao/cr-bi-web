@@ -37,6 +37,7 @@ define(function (require) {
         loginCookieKey: loginCookieKey,
         loginInfo: new LoginInfo(null, null), // instance of LoginInfo and will be update before app initialize
         isLogin: isLogin,
-        moduleMap: moduleMap
+        moduleMap: moduleMap,
+        defaultModule: moduleMap.index
     };
 });

@@ -6,6 +6,7 @@ define(function (require) {
         template = require("text!templates/sale/views/profit_analysis.html");
 
     var ProfitAnalysisView = Marionette.ItemView.extend({
+        artifact: "profit",
         template: template
     });
 

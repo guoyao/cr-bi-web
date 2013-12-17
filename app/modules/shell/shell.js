@@ -20,10 +20,10 @@ define([
             this.view.on("shown", function () {
                 var hash = window.location.hash;
                 if (hash) {
-                    app.navigate("");
+                    app.navigate("", {trigger: false});
                     app.navigate(hash.replace("#", ""));
                 } else {
-                    app.navigate(appInfo.moduleMap.index.hash);
+                    app.navigate(appInfo.defaultModule.hash);
                 }
             });
             app.bodyRegion.show(this.view);
@@ -37,6 +37,13 @@ define([
     shell.on("logout", function () {
         util.storage.remove(appInfo.loginCookieKey);
         app.vent.trigger("logout");
+    });
+
+    // show module root view
+    shell.on("show", function (options) {
+        if (this.view && options && options.view) {
+            this.view.mainRegion.show(options.view);
+        }
     });
 
     return shell;

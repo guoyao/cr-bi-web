@@ -8,14 +8,20 @@ define(function (require) {
     return {
         routeChange: function (module, view) {
             module = appInfo.moduleMap[module];
-            if (module && module != appInfo.moduleMap.login && module != appInfo.moduleMap.shell) {
+            if (!module) {
+                module = appInfo.defaultModule;
+                app.navigate(module.hash, {trigger: false});
+            }
+            if (module != appInfo.moduleMap.login && module != appInfo.moduleMap.shell) {
                 require([module.path], function (module) {
                     if (app.currentModule != module) {
                         if (app.currentModule) {
                             app.currentModule.stop();
                         }
                         app.currentModule = module;
-                        module.start();
+                        module.start({view: view});
+                    } else if (module.navigate) {
+                        module.navigate({view: view});
                     }
                 });
             }
