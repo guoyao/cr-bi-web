@@ -1,126 +1,161 @@
 [
     {
         "name": "首页",
-        "url": "/"
+        "url": "index"
     },
     {
         "name": "综合分析",
+        "url": "comprehensive",
         "children": [
             {
-                "name": "指标达成情况（采购）"
+                "name": "指标达成情况（采购）",
+                "url": "comprehensive/procurement"
             },
             {
-                "name": "指标达成情况（营运）"
+                "name": "指标达成情况（营运）",
+                "url": "comprehensive/operation"
             },
             {
-                "name": "门店异常分析"
+                "name": "门店异常分析",
+                "url": "exception/store"
             },
             {
-                "name": "品类异常分析"
+                "name": "品类异常分析",
+                "url": "exception/class_group"
             }
         ]
     },
     {
         "name": "销售",
+        "url": "sale",
         "children": [
             {
-                "name": "销售分析"
+                "name": "销售分析",
+                "url": "sale/sale"
             },
             {
-                "name": "毛利分析"
+                "name": "毛利分析",
+                "url": "sale/profit"
             },
             {
-                "name": "综合收益（采购）"
+                "name": "综合收益（采购）",
+                "url": "sale/comprehensive_procurement"
             },
             {
-                "name": "通道收益（采购）"
+                "name": "通道收益（采购）",
+                "url": "sale/channel_procurement"
             },
             {
-                "name": "通道收益（营运）"
+                "name": "通道收益（营运）",
+                "url": "sale/channel_operation"
             }
         ]
     },
     {
         "name": "库存",
+        "url": "stock",
         "children": [
             {
-                "name": "库存周转分析"
+                "name": "库存周转分析",
+                "url": "stock/turnover"
             },
             {
-                "name": "库存配置"
+                "name": "库存配置",
+                "url": "stock/configuration"
             }
         ]
     },
     {
         "name": "门店分析",
+        "url": "store",
         "children": [
             {
-                "name": "门店对比"
+                "name": "门店对比",
+                "url": "store/comparison"
             },
             {
-                "name": "门店对标"
+                "name": "门店对标",
+                "url": "store/benchmarking"
             }
         ]
     },
     {
         "name": "节假日分析",
+        "url": "holiday",
         "children": [
             {
-                "name": "销售分析"
+                "name": "销售分析",
+                "url": "sale/sale_holiday"
             },
             {
-                "name": "库存分析"
+                "name": "库存分析",
+                "url": "stock/stock_holiday"
             },
             {
-                "name": "单品销售排名"
+                "name": "单品销售排名",
+                "url": "ranking/product_holiday"
             },
             {
-                "name": "类别销售排名"
+                "name": "类别销售排名",
+                "url": "ranking/category_holiday"
             }
         ]
     },
     {
         "name": "排名分析",
+        "url": "ranking",
         "children": [
             {
-                "name": "门店销售排名"
+                "name": "门店销售排名",
+                "url": "ranking/store"
             },
             {
-                "name": "单品销售排名"
+                "name": "单品销售排名",
+                "url": "ranking/product"
             },
             {
-                "name": "品类组销售排名"
+                "name": "品类组销售排名",
+                "url": "ranking/class_group"
             },
             {
-                "name": "类别销售排名"
+                "name": "类别销售排名",
+                "url": "ranking/category"
             },
             {
-                "name": "供应商销售排名"
+                "name": "供应商销售排名",
+                "url": "ranking/supplier"
             },
             {
-                "name": "品牌售排名"
+                "name": "品牌售排名",
+                "url": "ranking/brand"
             }
         ]
     },
     {
         "name": "品类分析",
+        "url": "assortment",
         "children": [
             {
-                "name": "价格带分析"
+                "name": "价格带分析",
+                "url": "assortment/price_zone"
             }
         ]
     },
     {
         "name": "会员分析",
+        "url": "member",
         "children": [
             {
-                "name": "会员发展分析"
+                "name": "会员发展分析",
+                "url": "member/growth"
             },
             {
-                "name": "会员消费分析"
+                "name": "会员消费分析",
+                "url": "member/consumption"
             },
             {
-                "name": "会员类别分析"
+                "name": "会员类别分析",
+                "url": "member/category"
             }
         ]
     }

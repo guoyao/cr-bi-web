@@ -8,7 +8,13 @@ define(function (require) {
 
     var NavItemView = Marionette.ItemView.extend({
         template: _.template(template),
-        tagName: "li"
+        tagName: "li",
+        events: {
+            "click > a": "onLinkClick"
+        },
+        onLinkClick: function () {
+            return !this.model.get("children");
+        }
     });
 
     return NavItemView;
