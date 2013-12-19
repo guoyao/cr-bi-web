@@ -12,7 +12,8 @@ require.config({
         marionette: "libs/backbone.marionette",
         gui: "libs/gui",
         "jquery.cookie": "libs/jquery.cookie",
-        "jquery.dateFormat": "libs/jquery.dateFormat"
+        "jquery.dateFormat": "libs/jquery.dateFormat",
+        "numeral": "libs/numeral"
     },
     shim: {
         underscore: {

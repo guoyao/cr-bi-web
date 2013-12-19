@@ -9,6 +9,7 @@ require([
     "gui",
     "jquery.cookie",
     "jquery.dateFormat",
+    "numeral",
     "config",
     "app_info",
     "utils/util",

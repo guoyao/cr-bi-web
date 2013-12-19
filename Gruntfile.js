@@ -36,7 +36,8 @@ module.exports = function (grunt) {
                         'app/libs/backbone.marionette.js': 'vendor/bower/backbone.marionette/lib/backbone.marionette.js',
                         'app/libs/gui.js': 'vendor/bower/gui/dist/js/gui.js',
                         'app/libs/jquery.cookie.js': 'vendor/bower/jquery.cookie/jquery.cookie.js',
-                        'app/libs/jquery.dateFormat.js': 'vendor/libs/jquery.dateFormat-1.0.js'
+                        'app/libs/jquery.dateFormat.js': 'vendor/libs/jquery.dateFormat-1.0.js',
+                        'app/libs/numeral.js': 'vendor/bower/numeral/numeral.js'
                     },
                 ]
             },

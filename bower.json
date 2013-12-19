@@ -11,6 +11,7 @@
         "mocha": "~1.13.0",
         "chai": "~1.8.1",
         "gui": ">=0.1.0",
-        "jquery.cookie": ">=1.4.0"
+        "jquery.cookie": ">=1.4.0",
+        "numeral": ">=1.5.2"
     }
 }
