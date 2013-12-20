@@ -2,7 +2,10 @@ define(function (require) {
     // load external dependencies
     var util = require("utils/util");
 
-    var loginCookieKey = "loginInfo";
+    var loginCookieKey = "loginInfo",
+        properties = {
+            weatherServiceURL: "http://localhost:3000/weatherInfo"
+        };
 
     function ModuleDescriptor(artifact, path, hash, description) {
         this.artifact = artifact;
@@ -38,6 +41,7 @@ define(function (require) {
         loginInfo: new LoginInfo(null, null), // instance of LoginInfo and will be update before app initialize
         isLogin: isLogin,
         moduleMap: moduleMap,
-        defaultModule: moduleMap.index
+        defaultModule: moduleMap.index,
+        properties: properties
     };
 });
