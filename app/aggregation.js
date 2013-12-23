@@ -1,27 +1,28 @@
 // merge dependencies to single file
-require([
-    "text",
-    "json2",
-    "jquery",
-    "underscore",
-    "backbone",
-    "marionette",
-    "gui",
-    "jquery.cookie",
-    "jquery.dateFormat",
-    "numeral",
-    "config",
-    "app_info",
-    "utils/util",
-    "app"
-], function () {
-    "use strict";
+require(["config"], function () {
+    require([
+        "text",
+        "json2",
+        "numeral",
+        "underscore",
+        "jquery",
+        "backbone",
+        "marionette",
+        "gui",
+        "jquery.cookie",
+        "jquery.dateFormat",
+        "app_info",
+        "utils/util",
+        "app"
+    ], function () {
+        "use strict";
 
-    var $ = require("jquery"),
-        app = require("app");
+        var $ = require("jquery"),
+            app = require("app");
 
-    // configurations
-    $.cookie.json = true;
+        // configurations
+        $.cookie.json = true;
 
-    app.start();
+        app.start();
+    });
 });

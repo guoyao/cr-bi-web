@@ -16,7 +16,7 @@ app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
-    app.use(express.static(path.join(application_root, 'dist')));
+    app.use(express.static(path.join(application_root, 'app')));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 

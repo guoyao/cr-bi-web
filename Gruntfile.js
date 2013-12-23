@@ -52,7 +52,7 @@ module.exports = function (grunt) {
             options: grunt.file.readJSON('app/optimizer.json'),
             optimize: {
                 options: {
-                    fileExclusionRegExp: /less|optimizer\.json/
+                    fileExclusionRegExp: /less|css|optimizer\.json/
                 }
             }
         },
@@ -64,9 +64,16 @@ module.exports = function (grunt) {
                     compress: false
                 },
                 files: {
-                    'dist/css/common.css': 'app/less/common.less',
-                    'dist/css/index.css': 'app/less/index.less',
-                    'dist/css/login.css': 'app/less/login.less'
+                    'dist/css/aggregation.css': 'app/less/aggregation.less'
+                }
+            },
+            dev: {
+                options: {
+                    compile: true,
+                    compress: false
+                },
+                files: {
+                    'app/css/aggregation.css': 'app/less/aggregation.less'
                 }
             }
         },
@@ -86,6 +93,15 @@ module.exports = function (grunt) {
 
                 // Rewrite image paths during release to be relative to the `./` directory.
                 forceRelative: '../'
+            },
+            'app/css/libs.css': {
+                prefix: "./app/less/",
+
+                // Point this to where your `index.css` file is location.
+                src: 'app/less/libs.less',
+
+                // Rewrite image paths during release to be relative to the `./` directory.
+                forceRelative: '../'
             }
         },
 
@@ -94,9 +110,7 @@ module.exports = function (grunt) {
             release: {
                 files: {
                     'dist/css/libs.min.css': ['dist/css/libs.css'],
-                    'dist/css/common.min.css': ['dist/css/common.css'],
-                    'dist/css/index.min.css': ['dist/css/index.css'],
-                    'dist/css/login.min.css': ['dist/css/login.css']
+                    'dist/css/aggregation.min.css': ['dist/css/aggregation.css']
                 }
             }
         },
@@ -116,7 +130,9 @@ module.exports = function (grunt) {
                 prefix: 'dist'
             },
 
-            development: {},
+            development: {
+                prefix: 'app'
+            },
 
             release: {},
 
@@ -134,6 +150,14 @@ module.exports = function (grunt) {
                     archive: 'dist/source.min.js.gz'
                 },
                 files: ['dist/source.min.js']
+            }
+        },
+
+        // Run predefined tasks whenever watched file patterns are added, changed or deleted
+        watch: {
+            recess: {
+                files: 'app/less/*.less',
+                tasks: ['recess:dev', 'styles:app/css/libs.css']
             }
         },
 
@@ -215,6 +239,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-bower-task');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Third-party tasks.
     grunt.loadNpmTasks('grunt-karma');
@@ -228,7 +253,11 @@ module.exports = function (grunt) {
     // Requirejs tasks.
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-    // When running the default Grunt command, just lint the code.
+
+    grunt.registerTask('dev', ['recess:dev', 'styles:app/css/libs.css']);
+
+    grunt.registerTask('default', ['dev', 'watch']);
+
     grunt.registerTask('dist', [
         'clean',
         'jshint',
@@ -236,15 +265,18 @@ module.exports = function (grunt) {
         'copy:dependencies',
         'requirejs',
         'copy:resources',
-        'recess',
-        'styles',
+        'recess:dist',
+        'styles:dist/css/libs.css',
         'cssmin',
         'processhtml'
     ]);
 
-    grunt.registerTask('default', ['dist']);
+    // start local server for development environment
+    grunt.registerTask('s:dev', ['server:development']);
 
-    grunt.registerTask('s', ['server:development']);
+    // start local server for production environment
+    grunt.registerTask('s:pro', ['server:release']);
 
+    // run test
     grunt.registerTask('test', ['karma:run']);
 };

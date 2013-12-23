@@ -41,6 +41,9 @@ require.config({
         },
         "jquery.cookie": {
             deps : ["jquery"]
+        },
+        "jquery.dateFormat": {
+            deps : ["jquery"]
         }
     }
 });
