@@ -19,8 +19,7 @@ define(function (require) {
             options = options || {trigger: true};
             this.router.navigate(fragment, options);
         };
-        var isLogin = appInfo.isLogin();
-        app.vent.trigger(isLogin ? "login:succeed" : "logout");
+        app.vent.trigger(appInfo.isLogin() ? "login:succeed" : "logout");
     });
 
     app.on("initialize:after", function () {

@@ -28,7 +28,11 @@ define(function (require) {
             var username = this.ui.username.val(),
                 password = this.ui.password.val();
             if (!util.string.isBlank(username) && !util.string.isBlank(password) && username == "changju" && password == "123456") {
-                app.login.trigger("login:succeed", username);
+                app.login.trigger("login:succeed", {
+                    username: username,
+                    position: "系统管理员",
+                    permission: "全部"
+                });
             } else {
                 this.ui.errorMessage.text("用户名或密码错误");
                 var errorMessageContainer = this.ui.errorMessage.parent().parent();

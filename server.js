@@ -25,7 +25,8 @@ app.listen(port, function () {
 });
 
 app.get('/weatherInfo', function (request, response) {
-    http.get('http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName=58457').on('response', function (res) {
+//    上海58367 杭州58457
+    http.get('http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName=58367').on('response', function (res) {
         var body = '',
             query = request.query;
         res.on('data', function (chunk) {
@@ -33,9 +34,8 @@ app.get('/weatherInfo', function (request, response) {
         });
         res.on('end', function () {
             if (query && query.callback) {
-                var parseString = xml2js.parseString,
-                    weatherInfo = {};
-                parseString(body, function (err, result) {
+                var weatherInfo = {};
+                xml2js.parseString(body, function (err, result) {
                     if (!err) {
                         weatherInfo = result.ArrayOfString.string;
                     }
