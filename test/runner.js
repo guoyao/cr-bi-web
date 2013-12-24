@@ -17,15 +17,74 @@
         baseUrl: "base/app",
         paths: {
             // Map dependencies.
-            "underscore": "libs/underscore" // Opt for Lo-Dash Underscore compatibility build over Underscore.
+            text: "libs/text",
+            json2: "libs/json2",
+            jquery: "libs/jquery",
+            underscore: "libs/underscore", // Opt for Lo-Dash Underscore compatibility build over Underscore.
+            backbone: "libs/backbone",
+            marionette: "libs/backbone.marionette",
+            gui: "libs/gui",
+            "jquery.cookie": "libs/jquery.cookie",
+            "jquery.dateFormat": "libs/jquery.dateFormat",
+            "numeral": "libs/numeral"
+        },
+        shim: {
+            underscore: {
+                exports : "_"
+            },
+            // This is required to ensure Backbone works as expected within the AMD environment.
+            backbone: {
+                // These are the two hard dependencies that will be loaded first.
+                deps: ["jquery", "underscore"],
+
+                // This maps the global `Backbone` object to `require("backbone")`.
+                exports: "Backbone"
+            },
+            marionette: {
+                // These are hard dependencies that will be loaded first.
+                deps : ["jquery", "underscore", "backbone"],
+                exports : "Marionette"
+            },
+            json2: {
+                exports: "json2"
+            },
+            gui: {
+                deps : ["jquery"],
+                exports : "gui"
+            },
+            "jquery.cookie": {
+                deps : ["jquery"]
+            },
+            "jquery.dateFormat": {
+                deps : ["jquery"]
+            }
         }
     });
 
-    require(["config", "underscore"], function (config, _) {
+    require([
+        "text",
+        "json2",
+        "numeral",
+        "underscore",
+        "jquery",
+        "backbone",
+        "marionette",
+        "gui",
+        "jquery.cookie",
+        "jquery.dateFormat",
+        "app_info",
+        "utils/util",
+        "app"
+    ], function () {
+        // load external dependencies
+        var $ = require("jquery"),
+            _ = require("underscore"),
+            app = require("app");
 
-        require.config({
-            baseUrl: "base/app"
-        });
+        // configurations
+        $.cookie.json = true;
+
+        app.start();
 
         var specs = _.chain(karma.files)
             // Convert the files object to an array of file paths.
