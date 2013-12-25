@@ -28,6 +28,7 @@ define(function (require) {
             var username = this.ui.username.val(),
                 password = this.ui.password.val();
             if (!util.string.isBlank(username) && !util.string.isBlank(password) && username == "changju" && password == "123456") {
+                this.ui.errorMessage.text("");
                 app.login.trigger("login:succeed", {
                     username: username,
                     position: "系统管理员",

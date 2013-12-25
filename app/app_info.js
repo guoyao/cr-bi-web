@@ -8,7 +8,8 @@ define(function (require) {
             weatherServiceURL: "http://localhost:3000/weatherInfo"
         };
 
-    function ModuleDescriptor(artifact, path, hash, description) {
+    function ModuleDescriptor(name, artifact, path, hash, description) {
+        this.name = name;
         this.artifact = artifact;
         this.path = path;
         this.hash = hash;
@@ -16,10 +17,10 @@ define(function (require) {
     }
 
     var moduleMap = {
-        login: new ModuleDescriptor("login", "modules/login/login", "login", "登陆页面"),
-        shell: new ModuleDescriptor("shell", "modules/shell/shell", "", "所有模块的容器"),
-        index: new ModuleDescriptor("shell.index", "modules/index/index", "index", "首页"),
-        sale: new ModuleDescriptor("shell.sale", "modules/sale/sale", "sale", "销售分析")
+        login: new ModuleDescriptor("login", "login", "modules/login/login", "login", "登陆页面"),
+        shell: new ModuleDescriptor("shell", "shell", "modules/shell/shell", "", "所有模块的容器"),
+        index: new ModuleDescriptor("index", "shell.index", "modules/index/index", "index", "首页"),
+        sale: new ModuleDescriptor("sale", "shell.sale", "modules/sale/sale", "sale", "销售分析")
     };
 
     function isLogin() {

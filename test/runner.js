@@ -3,6 +3,10 @@
 
     var karma = window.__karma__;
 
+    karma.options = {
+        asyncWaitTime: 500
+    };
+
     // Put Karma into an asynchronous waiting mode until we have loaded our
     // tests.
     karma.loaded = function () {};
@@ -83,8 +87,6 @@
 
         // configurations
         $.cookie.json = true;
-
-//        app.start();
 
         var specs = _.chain(karma.files)
             // Convert the files object to an array of file paths.

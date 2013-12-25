@@ -14,7 +14,8 @@ define(["modules/login/views/login_view"
     var login = app.module(appInfo.moduleMap.login.artifact, function () {
         this.startWithParent = false;
         this.render = function () {
-            app.bodyRegion.show(new LoginView());
+            this.view = new LoginView();
+            app.bodyRegion.show(this.view);
         };
     });
 
