@@ -198,7 +198,7 @@ module.exports = function (grunt) {
                     'vendor/bower/requirejs/require.js',
                     'test/runner.js',
 
-                    { pattern: 'app/**/*.js', included: false },
+                    { pattern: 'app/**/*.*', included: false },
                     // Derives test framework from Karma configuration.
                     {
                         pattern: 'test/<%= karma.options.frameworks[0] %>/**/*.spec.js',
@@ -217,7 +217,7 @@ module.exports = function (grunt) {
             },
 
             // This is useful for running the tests just once.
-            run: {
+            single: {
                 options: {
                     singleRun: true
                 }
@@ -277,6 +277,9 @@ module.exports = function (grunt) {
     // start local server for production environment
     grunt.registerTask('s:pro', ['server:release']);
 
-    // run test
-    grunt.registerTask('test', ['karma:run']);
+    // run test using single mode
+    grunt.registerTask('test', ['karma:single']);
+
+    // run test using daemon mode
+    grunt.registerTask('test:daemon', ['karma:daemon']);
 };

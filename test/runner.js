@@ -84,7 +84,7 @@
         // configurations
         $.cookie.json = true;
 
-        app.start();
+//        app.start();
 
         var specs = _.chain(karma.files)
             // Convert the files object to an array of file paths.
@@ -99,6 +99,9 @@
             .value();
 
         // Load all specs and start Karma.
-        require(specs, karma.start);
+        require(specs, function () {
+            karma.start();
+            app.start();
+        });
     });
 })(this);
