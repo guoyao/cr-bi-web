@@ -10,13 +10,19 @@ var application_root = __dirname,
     path = require('path'),
     xml2js = require("xml2js"),
     app = express(),
-    port = 3000;
+    port = 3000,
+    directory = (process.argv.length > 2 && process.argv[2] == 'env=production') ? 'dist' : 'app';
+
+// production only
+app.configure('production', function(){
+    directory = 'dist';
+});
 
 app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
-    app.use(express.static(path.join(application_root, 'app')));
+    app.use(express.static(path.join(application_root, directory)));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
