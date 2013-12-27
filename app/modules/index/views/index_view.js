@@ -3,6 +3,7 @@ define(function (require) {
 
     // load external dependencies
     var $ = require("jquery"),
+        _ = require("underscore"),
         numeral = require("numeral"),
         Marionette = require("marionette"),
         appInfo = require("app_info"),
@@ -23,6 +24,7 @@ define(function (require) {
 
     var IndexView = Marionette.ItemView.extend({
         template: template,
+        id: appInfo.moduleMap.index.name + "-module",
         ui: {
             username: "#username",
             position: "#position",
@@ -33,12 +35,23 @@ define(function (require) {
             temperature: "#temperature",
             humidity: "#humidity",
             wind: "#wind",
-            climateImage: "#climateImage"
+            climateImage: "#climateImage",
+            yearToDateSaleChart: "#yearToDateSaleChart",
+            yearToDateProfitChart: "#yearToDateProfitChart",
+            yearToDateQuantityChart: "#yearToDateQuantityChart",
+            systemMessageTable: "systemMessageTable"
         },
         onRender: function () {
-            showSellMainKPIReport.call(this);
+            showFakeDatum.call(this);
             showDateInfo.call(this);
             showWeatherInfo.call(this);
+        },
+        onShow: function () {
+            var chartWidth = (this.ui.yearToDateSaleChart.parent().width() - this.ui.yearToDateSaleChart.pixels('margin-right') * 2) / 3;
+            this.ui.yearToDateSaleChart.width(chartWidth);
+            this.ui.yearToDateProfitChart.width(chartWidth);
+            this.ui.yearToDateQuantityChart.width(chartWidth);
+            showYearToDateComparisonChart.call(this);
         }
     });
 
@@ -66,21 +79,24 @@ define(function (require) {
             lunarUtil.getChineseDate(todayOfLastYearLunarInfos[2])));
     }
 
-    function showSellMainKPIReport() {
+    function showFakeDatum() {
+        var that = this;
         $.getJSON("assets/data/index.json")
             .done(function (data) {
-                var datum = data["sell_report_main_kpi_data"];
+                var sellReportMainKpiDatum = data["sell_report_main_kpi_data"];
                 $("#sell-report-main-kpi-table td span").each(function (index) {
                     var $this = $(this),
                         text = $this.text();
                     if (text == "万元" || text == "万次") {
-                        $this.text(numeral(datum[index] / 10000).format("0,0") + text);
+                        $this.text(numeral(sellReportMainKpiDatum[index] / 10000).format("0,0") + text);
                     } else if (text == "%" || text == "元") {
-                        $this.text(numeral(datum[index]).format("0,0.00") + text);
+                        $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0.00") + text);
                     } else {
-                        $this.text(numeral(datum[index]).format("0,0") + text);
+                        $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
                     }
                 });
+                that.ui.systemMessageTable.flexigrid();
+                that.ui.systemMessageTable.flexAddData(data["system_messages"]);
             });
     }
 
@@ -125,6 +141,115 @@ define(function (require) {
                 }
                 that.ui.climateImage.attr("src", climateImageUrl);
             });
+    }
+
+    var chartOption = {
+        chart: {
+            type: 'column',
+            borderWidth: 1,
+            borderColor: '#d1d1d1'
+        },
+        legend: {
+            enabled: false
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                enabled: false
+            },
+            labels: {
+                enabled: false
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        }
+    };
+
+    function showYearToDateComparisonChart() {
+        this.ui.yearToDateSaleChart.highcharts(_.extend({}, chartOption, {
+            title: {
+                text: '年至今销售额vs上年同期'
+            },
+            xAxis: {
+                categories: [
+                    'Jan'
+                ],
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [
+                {
+                    name: 'Tokyo',
+                    data: [49.9]
+                },
+                {
+                    name: 'New York',
+                    color: '#8BBC21',
+                    data: [83.6]
+                }
+            ]
+        }));
+        this.ui.yearToDateProfitChart.highcharts(_.extend({}, chartOption, {
+            title: {
+                text: '年至今毛利额vs上年同期'
+            },
+            xAxis: {
+                categories: [
+                    'Jan'
+                ],
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [
+                {
+                    name: 'Tokyo',
+                    data: [49.9]
+                },
+                {
+                    name: 'New York',
+                    color: '#8BBC21',
+                    data: [83.6]
+                }
+            ]
+        }));
+        this.ui.yearToDateQuantityChart.highcharts(_.extend({}, chartOption, {
+            title: {
+                text: '年至今客单数vs上年同期'
+            },
+            xAxis: {
+                categories: [
+                    'Jan'
+                ],
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [
+                {
+                    name: 'Tokyo',
+                    data: [49.9]
+                },
+                {
+                    name: 'New York',
+                    color: '#8BBC21',
+                    data: [83.6]
+                }
+            ]
+        }));
     }
 
     return IndexView;

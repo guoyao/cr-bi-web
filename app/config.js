@@ -14,7 +14,8 @@ require.config({
         "jquery.cookie": "libs/jquery.cookie",
         "jquery.dateFormat": "libs/jquery.dateFormat",
         numeral: "libs/numeral",
-        highcharts: "libs/highcharts"
+        highcharts: "libs/highcharts",
+        flexigrid: "libs/flexigrid"
     },
     shim: {
         underscore: {
@@ -47,6 +48,9 @@ require.config({
             deps : ["jquery"]
         },
         highcharts: {
+            deps : ["jquery"]
+        },
+        flexigrid: {
             deps : ["jquery"]
         }
     }

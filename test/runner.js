@@ -31,7 +31,8 @@
             "jquery.cookie": "libs/jquery.cookie",
             "jquery.dateFormat": "libs/jquery.dateFormat",
             numeral: "libs/numeral",
-            highcharts: "libs/highcharts"
+            highcharts: "libs/highcharts",
+            flexigrid: "libs/flexigrid"
         },
         shim: {
             underscore: {
@@ -65,6 +66,9 @@
             },
             highcharts: {
                 deps : ["jquery"]
+            },
+            flexigrid: {
+                deps : ["jquery"]
             }
         }
     });
@@ -80,6 +84,8 @@
         "gui",
         "jquery.cookie",
         "jquery.dateFormat",
+        "highcharts",
+        "flexigrid",
         "app_info",
         "utils/util",
         "app"

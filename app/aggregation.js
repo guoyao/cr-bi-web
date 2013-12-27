@@ -12,6 +12,7 @@ require(["config"], function () {
         "jquery.cookie",
         "jquery.dateFormat",
         "highcharts",
+        "flexigrid",
         "app_info",
         "utils/util",
         "app"
@@ -33,6 +34,13 @@ require(["config"], function () {
         });
 
         $.cookie.json = true;
+
+        // a small jquery plugin for getting pixels from css property
+        if (!$.fn.pixels) {
+            $.fn.pixels = function (property) {
+                return parseInt(this.css(property).slice(0, -2));
+            };
+        }
         // ----------[end]--------- global configurations for jquery and it's plugins -------------
 
         app.start();
