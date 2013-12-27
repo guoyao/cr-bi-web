@@ -18,7 +18,7 @@ define(function (require) {
             loginDuration: "#loginDuration"
         },
         onShow: function () {
-            this.ui.username.text(appInfo.loginInfo.userInfo.toString());
+            this.ui.username.text(appInfo.loginInfo.userInfo.username);
             this.iePatch();
             this.startTrack();
         },
