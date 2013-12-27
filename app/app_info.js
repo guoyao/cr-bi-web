@@ -4,6 +4,7 @@ define(function (require) {
 
     var loginCookieKey = "loginInfo",
         properties = {
+            serviceRoot: "",
             imageRoot: "assets/images/",
             weatherServiceURL: "http://localhost:3000/weatherInfo"
         };

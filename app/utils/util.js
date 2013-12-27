@@ -23,9 +23,19 @@ define(function (require) {
             return value;
         }
 
+        /**
+         * @description 字符串是否属于绝对URI
+         * @param {String} URI 字符串
+         * @returns {boolean} 是否是绝对的
+         */
+        function isAbsoluteURI(URI) {
+            return URI.search(/^[^:]+:\/\//) === 0;
+        }
+
         return {
             isBlank: isBlank,
-            substitute: substitute
+            substitute: substitute,
+            isAbsoluteURI: isAbsoluteURI
         };
     })($);
 

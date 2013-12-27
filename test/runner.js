@@ -4,7 +4,7 @@
     var karma = window.__karma__;
 
     karma.options = {
-        asyncWaitTime: 500
+        asyncWaitTime: 1000
     };
 
     // Put Karma into an asynchronous waiting mode until we have loaded our
@@ -83,10 +83,23 @@
         // load external dependencies
         var $ = require("jquery"),
             _ = require("underscore"),
-            app = require("app");
+            app = require("app"),
+            appInfo = require("app_info"),
+            util = require("utils/util");
 
-        // configurations
+        appInfo.properties.serviceRoot = "base/app/";
+
+        // ----------[start]--------- global configurations for jquery and it's plugins -------------
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (settings.url && !util.string.isAbsoluteURI(settings.url)) {
+                    settings.url = appInfo.properties.serviceRoot + settings.url;
+                }
+            }
+        });
+
         $.cookie.json = true;
+        // ----------[end]--------- global configurations for jquery and it's plugins -------------
 
         var specs = _.chain(karma.files)
             // Convert the files object to an array of file paths.
