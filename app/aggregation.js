@@ -11,6 +11,7 @@ require(["config"], function () {
         "gui",
         "jquery.cookie",
         "jquery.dateFormat",
+        "highcharts",
         "app_info",
         "utils/util",
         "app"

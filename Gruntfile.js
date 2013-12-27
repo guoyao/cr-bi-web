@@ -37,7 +37,8 @@ module.exports = function (grunt) {
                         'app/libs/gui.js': 'vendor/bower/gui/dist/js/gui.js',
                         'app/libs/jquery.cookie.js': 'vendor/bower/jquery.cookie/jquery.cookie.js',
                         'app/libs/jquery.dateFormat.js': 'vendor/libs/jquery.dateFormat-1.0.js',
-                        'app/libs/numeral.js': 'vendor/bower/numeral/numeral.js'
+                        'app/libs/numeral.js': 'vendor/bower/numeral/numeral.js',
+                        'app/libs/highcharts.js': 'vendor/libs/highcharts.js'
                     },
                 ]
             },
@@ -131,7 +132,9 @@ module.exports = function (grunt) {
             },
 
             development: {
-                prefix: 'app'
+                options: {
+                    prefix: 'app'
+                }
             },
 
             release: {},
@@ -254,7 +257,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 
-    grunt.registerTask('dev', ['recess:dev', 'styles:app/css/libs.css']);
+    grunt.registerTask('dev', ['copy:dependencies', 'recess:dev', 'styles:app/css/libs.css']);
 
     grunt.registerTask('default', ['dev', 'watch']);
 
@@ -272,14 +275,14 @@ module.exports = function (grunt) {
     ]);
 
     // start local server for development environment
-    grunt.registerTask('s:dev', ['server:development']);
+    grunt.registerTask('s:dev', ['dev', 'server:development']);
 
     // start local server for production environment
-    grunt.registerTask('s:pro', ['server:release']);
+    grunt.registerTask('s:pro', ['dist', 'server:release']);
 
     // run test using single mode
-    grunt.registerTask('test', ['karma:single']);
+    grunt.registerTask('test', ['dev', 'karma:single']);
 
     // run test using daemon mode
-    grunt.registerTask('test:daemon', ['karma:daemon']);
+    grunt.registerTask('test:daemon', ['dev', 'karma:daemon']);
 };

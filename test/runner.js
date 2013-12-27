@@ -30,7 +30,8 @@
             gui: "libs/gui",
             "jquery.cookie": "libs/jquery.cookie",
             "jquery.dateFormat": "libs/jquery.dateFormat",
-            "numeral": "libs/numeral"
+            numeral: "libs/numeral",
+            highcharts: "libs/highcharts"
         },
         shim: {
             underscore: {
@@ -60,6 +61,9 @@
                 deps : ["jquery"]
             },
             "jquery.dateFormat": {
+                deps : ["jquery"]
+            },
+            highcharts: {
                 deps : ["jquery"]
             }
         }
