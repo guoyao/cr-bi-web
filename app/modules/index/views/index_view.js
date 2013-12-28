@@ -39,7 +39,7 @@ define(function (require) {
             yearToDateSaleChart: "#yearToDateSaleChart",
             yearToDateProfitChart: "#yearToDateProfitChart",
             yearToDateQuantityChart: "#yearToDateQuantityChart",
-            systemMessageTable: "systemMessageTable"
+            systemMessageTable: "#systemMessageTable"
         },
         onRender: function () {
             showFakeDatum.call(this);
@@ -95,7 +95,15 @@ define(function (require) {
                         $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
                     }
                 });
-                that.ui.systemMessageTable.flexigrid();
+                console.log(data["system_messages"]);
+                that.ui.systemMessageTable.flexigrid({
+                    dataType: 'json',
+                    colModel: [
+                        { display: '列1标题', name: 'message', sortable: true, width: 150, align: 'center' },
+                        { display: '列1标题', name: 'date', sortable: true, width: 80, align: 'center' }
+                    ]
+                });
+                console.log(that.ui.systemMessageTable.flexAddData);
                 that.ui.systemMessageTable.flexAddData(data["system_messages"]);
             });
     }
@@ -216,13 +224,13 @@ define(function (require) {
             },
             series: [
                 {
-                    name: 'Tokyo',
-                    data: [49.9]
+                    name: 'London',
+                    data: [71.5]
                 },
                 {
-                    name: 'New York',
+                    name: 'Berlin',
                     color: '#8BBC21',
-                    data: [83.6]
+                    data: [78.8]
                 }
             ]
         }));
@@ -240,13 +248,13 @@ define(function (require) {
             },
             series: [
                 {
-                    name: 'Tokyo',
-                    data: [49.9]
+                    name: 'Beijing',
+                    data: [135.6]
                 },
                 {
-                    name: 'New York',
+                    name: 'Shanghai',
                     color: '#8BBC21',
-                    data: [83.6]
+                    data: [106.6]
                 }
             ]
         }));

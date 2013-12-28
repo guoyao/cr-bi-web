@@ -38,7 +38,7 @@ require(["config"], function () {
         // a small jquery plugin for getting pixels from css property
         if (!$.fn.pixels) {
             $.fn.pixels = function (property) {
-                return parseInt(this.css(property).slice(0, -2));
+                return parseInt(this.css(property).slice(0, -2), 10);
             };
         }
         // ----------[end]--------- global configurations for jquery and it's plugins -------------

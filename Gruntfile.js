@@ -39,7 +39,7 @@ module.exports = function (grunt) {
                         'app/libs/jquery.dateFormat.js': 'vendor/libs/jquery.dateFormat-1.0.js',
                         'app/libs/numeral.js': 'vendor/bower/numeral/numeral.js',
                         'app/libs/highcharts.js': 'vendor/libs/highcharts.js',
-                        'app/libs/flexigrid.js': 'vendor/libs/flexigrid.js'
+                        'app/libs/flexigrid.js': 'vendor/libs/flexigrid/flexigrid.js'
                     },
                 ]
             },
