@@ -32,7 +32,10 @@ app.listen(port, function () {
 
 app.get('/weatherInfo', function (request, response) {
 //    上海58367 杭州58457
-    http.get('http://www.webxml.com.cn/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName=58367').on('response', function (res) {
+    http.get({
+        host: 'www.webxml.com.cn',
+        path: '/WebServices/WeatherWebService.asmx/getWeatherbyCityName?theCityName=58367'
+    }).on('response', function (res) {
         var body = '',
             query = request.query;
         res.on('data', function (chunk) {
@@ -52,5 +55,7 @@ app.get('/weatherInfo', function (request, response) {
                 response.send(body);
             }
         });
-    });
+    }).on('error', function (e) {
+            console.log('problem with request: ' + e.message);
+        });
 });

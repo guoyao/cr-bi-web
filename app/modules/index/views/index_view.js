@@ -39,10 +39,11 @@ define(function (require) {
             yearToDateSaleChart: "#yearToDateSaleChart",
             yearToDateProfitChart: "#yearToDateProfitChart",
             yearToDateQuantityChart: "#yearToDateQuantityChart",
-            systemMessageTable: "#systemMessageTable"
+            systemMessageTable: "#systemMessageTable",
+            retailSaleTrendChart: "#retailSaleTrendChart",
+            yearToDateProportionChart: "#yearToDateProportionChart"
         },
         onRender: function () {
-            showFakeDatum.call(this);
             showDateInfo.call(this);
             showWeatherInfo.call(this);
         },
@@ -52,6 +53,9 @@ define(function (require) {
             this.ui.yearToDateProfitChart.width(chartWidth);
             this.ui.yearToDateQuantityChart.width(chartWidth);
             showYearToDateComparisonChart.call(this);
+            showRetailSaleTrendChart.call(this);
+            showYearToDateProportionChart.call(this);
+            showFakeDatum.call(this);
         }
     });
 
@@ -83,7 +87,8 @@ define(function (require) {
         var that = this;
         $.getJSON("assets/data/index.json")
             .done(function (data) {
-                var sellReportMainKpiDatum = data["sell_report_main_kpi_data"];
+                var sellReportMainKpiDatum = data["sell_report_main_kpi_data"],
+                    tableWidth = that.ui.systemMessageTable.parent().width();
                 $("#sell-report-main-kpi-table td span").each(function (index) {
                     var $this = $(this),
                         text = $this.text();
@@ -95,15 +100,14 @@ define(function (require) {
                         $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
                     }
                 });
-                console.log(data["system_messages"]);
                 that.ui.systemMessageTable.flexigrid({
                     dataType: 'json',
+                    height: 313,
                     colModel: [
-                        { display: '列1标题', name: 'message', sortable: true, width: 150, align: 'center' },
-                        { display: '列1标题', name: 'date', sortable: true, width: 80, align: 'center' }
+                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 1 * 4, align: 'left' },
+                        { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
                     ]
                 });
-                console.log(that.ui.systemMessageTable.flexAddData);
                 that.ui.systemMessageTable.flexAddData(data["system_messages"]);
             });
     }
@@ -255,6 +259,82 @@ define(function (require) {
                     name: 'Shanghai',
                     color: '#8BBC21',
                     data: [106.6]
+                }
+            ]
+        }));
+    }
+
+    function showRetailSaleTrendChart() {
+        this.ui.retailSaleTrendChart.highcharts(_.extend({}, chartOption, {
+            title: {
+                text: '零售客单价&客单数趋势'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [
+                {
+                    name: 'Beijing',
+                    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                },
+                {
+                    name: 'Shanghai',
+                    color: '#8BBC21',
+                    data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+                }
+            ]
+        }));
+    }
+
+    function showYearToDateProportionChart() {
+        this.ui.yearToDateProportionChart.highcharts(_.extend({}, chartOption, {
+            title: {
+                text: '年至今及上年同期占比'
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [
+                {
+                    name: 'Beijing',
+                    data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+                },
+                {
+                    name: 'Shanghai',
+                    color: '#8BBC21',
+                    data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
                 }
             ]
         }));

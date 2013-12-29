@@ -43,8 +43,11 @@ module.exports = function (grunt) {
                     },
                 ]
             },
-            resources: {
+            resources_dist: {
                 files: [{expand: true, src: ['vendor/**/images/**'], dest: 'dist'}]
+            },
+            resources_dev: {
+                files: [{expand: true, src: ['vendor/**/images/**'], dest: 'app'}]
             }
         },
 
@@ -258,7 +261,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 
-    grunt.registerTask('dev', ['copy:dependencies', 'recess:dev', 'styles:app/css/libs.css']);
+    grunt.registerTask('dev', ['copy:dependencies', 'copy:resources_dev', 'recess:dev', 'styles:app/css/libs.css']);
 
     grunt.registerTask('default', ['dev', 'watch']);
 
@@ -267,6 +270,7 @@ module.exports = function (grunt) {
         'jshint',
         'bower',
         'copy:dependencies',
+        'copy:resources_dist',
         'requirejs',
         'copy:resources',
         'recess:dist',

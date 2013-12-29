@@ -15,3 +15,4 @@ vendor/bower
 test/coverage
 app/libs
 app/css
+app/vendor
