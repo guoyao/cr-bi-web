@@ -6,6 +6,7 @@ define(function (require) {
         _ = require("underscore"),
         numeral = require("numeral"),
         Marionette = require("marionette"),
+        gui = require("gui"),
         appInfo = require("app_info"),
         util = require("utils/util"),
         template = require("text!templates/index/index.html");
@@ -52,6 +53,7 @@ define(function (require) {
             this.ui.yearToDateSaleChart.width(chartWidth);
             this.ui.yearToDateProfitChart.width(chartWidth);
             this.ui.yearToDateQuantityChart.width(chartWidth);
+            iePatch.call(this);
             showYearToDateComparisonChart.call(this);
             showRetailSaleTrendChart.call(this);
             showYearToDateProportionChart.call(this);
@@ -152,6 +154,10 @@ define(function (require) {
                     }
                 }
                 that.ui.climateImage.attr("src", climateImageUrl);
+            })
+            .fail(function(error) {
+                that.ui.climateImage.attr("src", appInfo.properties.imageRoot + climateKeyWords[0].value);
+                console.log(error.responseText);
             });
     }
 
@@ -338,6 +344,12 @@ define(function (require) {
                 }
             ]
         }));
+    }
+
+    function iePatch() {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 8) {
+            this.ui.yearToDateQuantityChart.css("margin-right", 0);
+        }
     }
 
     return IndexView;
