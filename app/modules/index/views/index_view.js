@@ -9,7 +9,9 @@ define(function (require) {
         gui = require("gui"),
         appInfo = require("app_info"),
         util = require("utils/util"),
-        template = require("text!templates/index/index.html");
+        chartUtil = require("utils/chart"),
+        template = require("text!templates/index/index.html"),
+        YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart");
 
     var climateKeyWords = [
         {key: "n/a", value: "weather_not_available.png"},
@@ -185,114 +187,74 @@ define(function (require) {
             });
     }
 
-    var chartOption = {
-        chart: {
-            type: 'column',
-            borderWidth: 1,
-            borderColor: '#d1d1d1'
-        },
-        legend: {
-            enabled: false
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                enabled: false
-            },
-            labels: {
-                enabled: false
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        }
-    };
-
     function showYearToDateComparisonChart() {
-        this.ui.yearToDateSaleChart.highcharts(_.extend({}, chartOption, {
+        new YearToDateComparisonChart(this.ui.yearToDateSaleChart, null, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今销售额vs上年同期'
             },
             xAxis: {
-                categories: [
-                    'Jan'
-                ],
+                categories: [""],
                 labels: {
                     enabled: false
                 }
             },
             series: [
                 {
-                    name: 'Tokyo',
+                    name: '年至今销售额',
                     data: [49.9]
                 },
                 {
-                    name: 'New York',
+                    name: '销售额同期',
                     data: [83.6]
                 }
             ]
-        }));
-        this.ui.yearToDateProfitChart.highcharts(_.extend({}, chartOption, {
+        }).render();
+        new YearToDateComparisonChart(this.ui.yearToDateProfitChart, null, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今毛利额vs上年同期'
             },
             xAxis: {
-                categories: [
-                    'Jan'
-                ],
+                categories: [""],
                 labels: {
                     enabled: false
                 }
             },
             series: [
                 {
-                    name: 'London',
+                    name: '年至今毛利额',
                     data: [71.5]
                 },
                 {
-                    name: 'Berlin',
+                    name: '毛利额同期',
                     data: [78.8]
                 }
             ]
-        }));
-        this.ui.yearToDateQuantityChart.highcharts(_.extend({}, chartOption, {
+        }).render();
+        new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, null, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今客单数vs上年同期'
             },
             xAxis: {
-                categories: [
-                    'Jan'
-                ],
+                categories: [""],
                 labels: {
                     enabled: false
                 }
             },
             series: [
                 {
-                    name: 'Beijing',
+                    name: '年至今零售客单数',
                     data: [135.6]
                 },
                 {
-                    name: 'Shanghai',
+                    name: '零售客单数同期',
                     data: [106.6]
                 }
             ]
-        }));
+        }).render();
     }
 
     function showRetailSaleTrendChart() {
-        this.ui.retailSaleTrendChart.highcharts(_.extend({}, chartOption, {
+        this.ui.retailSaleTrendChart.highcharts(_.extend({}, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '零售客单价&客单数趋势'
             },

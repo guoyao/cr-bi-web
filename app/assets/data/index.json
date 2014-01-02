@@ -13,6 +13,16 @@
         17.31,
         12.85
     ],
+    "year_to_date_comparison_datum": [
+        {
+            "year_to_date_sale": 49.9,
+            "corresponding_period_sale": 83.6,
+            "year_to_date_profit": 71.5,
+            "corresponding_period_profit": 78.8,
+            "year_to_date_quantity": 135.6,
+            "corresponding_period_quantity": 106.6
+        }
+    ],
     "system_messages": {
         "page": 1,
         "total": 1,

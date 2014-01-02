@@ -15,6 +15,7 @@ require(["config"], function () {
         "flexigrid",
         "app_info",
         "utils/util",
+        "utils/chart",
         "app"
     ], function () {
         "use strict";
