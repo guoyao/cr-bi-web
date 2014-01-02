@@ -1,6 +1,8 @@
 define(function (require) {
-    var _ = require("underscore"),
-        defaultOptions = {
+    // load external dependencies
+    var _ = require("underscore");
+
+    var defaultOptions = {
             legend: {
                 enabled: false
             },
@@ -19,8 +21,19 @@ define(function (require) {
             this.options = _.extend({}, globalOptions, defaultOptions, options);
         };
 
+    YearToDateComparisonChart.prototype.init = function () {
+        _.each(this.options.series, function (series) {
+            series.data = _.map(this.dataProvider, function (data) {
+                return data[series.dataField];
+            });
+        }, this);
+
+        return this;
+    };
+
     YearToDateComparisonChart.prototype.render = function () {
         this.$element.highcharts(this.options);
+        return this;
     };
 
     return YearToDateComparisonChart;

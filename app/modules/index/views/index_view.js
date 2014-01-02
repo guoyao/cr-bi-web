@@ -65,7 +65,6 @@ define(function (require) {
             this.ui.yearToDateProfitChart.width(chartWidth);
             this.ui.yearToDateQuantityChart.width(chartWidth);
             iePatch.call(this);
-            showYearToDateComparisonChart.call(this);
             showRetailSaleTrendChart.call(this);
             showProportionChart.call(this);
             showFakeDatum.call(this);
@@ -116,6 +115,7 @@ define(function (require) {
                         $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
                     }
                 });
+                showYearToDateComparisonChart.call(that, data["year_to_date_comparison_datum"]);
                 that.ui.systemMessageTable.flexigrid({
                     dataType: 'json',
                     height: 310,
@@ -187,8 +187,8 @@ define(function (require) {
             });
     }
 
-    function showYearToDateComparisonChart() {
-        new YearToDateComparisonChart(this.ui.yearToDateSaleChart, null, chartUtil.baseColumnChartOptions, {
+    function showYearToDateComparisonChart(dataProvider) {
+        new YearToDateComparisonChart(this.ui.yearToDateSaleChart, dataProvider, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今销售额vs上年同期'
             },
@@ -201,15 +201,15 @@ define(function (require) {
             series: [
                 {
                     name: '年至今销售额',
-                    data: [49.9]
+                    dataField: "year_to_date_sale"
                 },
                 {
                     name: '销售额同期',
-                    data: [83.6]
+                    dataField: "corresponding_period_sale"
                 }
             ]
-        }).render();
-        new YearToDateComparisonChart(this.ui.yearToDateProfitChart, null, chartUtil.baseColumnChartOptions, {
+        }).init().render();
+        new YearToDateComparisonChart(this.ui.yearToDateProfitChart, dataProvider, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今毛利额vs上年同期'
             },
@@ -222,15 +222,15 @@ define(function (require) {
             series: [
                 {
                     name: '年至今毛利额',
-                    data: [71.5]
+                    dataField: "year_to_date_profit"
                 },
                 {
                     name: '毛利额同期',
-                    data: [78.8]
+                    dataField: "corresponding_period_profit"
                 }
             ]
-        }).render();
-        new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, null, chartUtil.baseColumnChartOptions, {
+        }).init().render();
+        new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, dataProvider, chartUtil.baseColumnChartOptions, {
             title: {
                 text: '年至今客单数vs上年同期'
             },
@@ -243,14 +243,14 @@ define(function (require) {
             series: [
                 {
                     name: '年至今零售客单数',
-                    data: [135.6]
+                    dataField: "year_to_date_quantity"
                 },
                 {
                     name: '零售客单数同期',
-                    data: [106.6]
+                    dataField: "corresponding_period_quantity"
                 }
             ]
-        }).render();
+        }).init().render();
     }
 
     function showRetailSaleTrendChart() {
