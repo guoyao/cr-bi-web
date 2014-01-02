@@ -37,12 +37,21 @@ define(function (require) {
             humidity: "#humidity",
             wind: "#wind",
             climateImage: "#climateImage",
+            sellReportMainKpiTable: "#sellReportMainKpiTable",
             yearToDateSaleChart: "#yearToDateSaleChart",
             yearToDateProfitChart: "#yearToDateProfitChart",
             yearToDateQuantityChart: "#yearToDateQuantityChart",
             systemMessageTable: "#systemMessageTable",
             retailSaleTrendChart: "#retailSaleTrendChart",
-            yearToDateProportionChart: "#yearToDateProportionChart"
+            retailSaleTrendTable: "#retailSaleTrendTable",
+            yearToDateOperationProportionChart: "#yearToDateOperationProportionChart",
+            lastYearOperationProportionChart: "#lastYearOperationProportionChart",
+            yearToDateDistrictProportionChart: "#yearToDateDistrictProportionChart",
+            lastYearDistrictProportionChart: "#lastYearDistrictProportionChart",
+            yearToDateRetailProportionChart: "#yearToDateRetailProportionChart",
+            lastYearRetailProportionChart: "#lastYearRetailProportionChart",
+            yearToDateRetailProportionTable: "#yearToDateRetailProportionTable",
+            lastYearRetailProportionTable: "#lastYearRetailProportionTable"
         },
         onRender: function () {
             showDateInfo.call(this);
@@ -56,7 +65,7 @@ define(function (require) {
             iePatch.call(this);
             showYearToDateComparisonChart.call(this);
             showRetailSaleTrendChart.call(this);
-            showYearToDateProportionChart.call(this);
+            showProportionChart.call(this);
             showFakeDatum.call(this);
         }
     });
@@ -89,9 +98,12 @@ define(function (require) {
         var that = this;
         $.getJSON("assets/data/index.json")
             .done(function (data) {
-                var sellReportMainKpiDatum = data["sell_report_main_kpi_data"],
+                var sellReportMainKpiDatum = data["sell_report_main_kpi_datum"],
+                    retailSaleTrendDatum = data["retail_sale_trend_datum"],
+                    yearToDateRetailProportionDatum = data["year_to_date_retail_proportion_datum"],
+                    lastYearRetailProportionDatum = data["last_year_retail_proportion_datum"],
                     tableWidth = that.ui.systemMessageTable.parent().width();
-                $("#sell-report-main-kpi-table td span").each(function (index) {
+                that.ui.sellReportMainKpiTable.find("td span").each(function (index) {
                     var $this = $(this),
                         text = $this.text();
                     if (text == "万元" || text == "万次") {
@@ -104,13 +116,25 @@ define(function (require) {
                 });
                 that.ui.systemMessageTable.flexigrid({
                     dataType: 'json',
-                    height: 313,
+                    height: 310,
                     colModel: [
-                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 1 * 4, align: 'left' },
+                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 18, align: 'left' },
                         { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
                     ]
                 });
                 that.ui.systemMessageTable.flexAddData(data["system_messages"]);
+                that.ui.retailSaleTrendTable.find("td.text-primary").each(function (index) {
+                    var $this = $(this);
+                    $this.text(retailSaleTrendDatum[index] + $this.text());
+                });
+                that.ui.yearToDateRetailProportionTable.find("td span").each(function (index) {
+                    var $this = $(this);
+                    $this.text(numeral(yearToDateRetailProportionDatum[index]).format("0,0.00") + $this.text());
+                });
+                that.ui.lastYearRetailProportionTable.find("td span").each(function (index) {
+                    var $this = $(this);
+                    $this.text(numeral(lastYearRetailProportionDatum[index]).format("0,0.00") + $this.text());
+                });
             });
     }
 
@@ -215,7 +239,6 @@ define(function (require) {
                 },
                 {
                     name: 'New York',
-                    color: '#8BBC21',
                     data: [83.6]
                 }
             ]
@@ -239,7 +262,6 @@ define(function (require) {
                 },
                 {
                     name: 'Berlin',
-                    color: '#8BBC21',
                     data: [78.8]
                 }
             ]
@@ -263,7 +285,6 @@ define(function (require) {
                 },
                 {
                     name: 'Shanghai',
-                    color: '#8BBC21',
                     data: [106.6]
                 }
             ]
@@ -275,6 +296,27 @@ define(function (require) {
             title: {
                 text: '零售客单价&客单数趋势'
             },
+            legend: {
+                enabled: true
+            },
+            yAxis: [{
+                min: 0,
+                title: {
+                    enabled: false
+                },
+                labels: {
+                    enabled: true
+                }
+            }, {
+                min: 0,
+                title: {
+                    enabled: false
+                },
+                labels: {
+                    enabled: true
+                },
+                opposite: true
+            }],
             xAxis: {
                 categories: [
                     'Jan',
@@ -289,10 +331,7 @@ define(function (require) {
                     'Oct',
                     'Nov',
                     'Dec'
-                ],
-                labels: {
-                    enabled: false
-                }
+                ]
             },
             series: [
                 {
@@ -301,49 +340,167 @@ define(function (require) {
                 },
                 {
                     name: 'Shanghai',
-                    color: '#8BBC21',
                     data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+                },
+                {
+                    type: "spline",
+                    name: 'Beijing',
+                    yAxis: 1,
+                    lineWidth: 3,
+                    data: [47.9, 37.5, 35.7, 38.3, 44.0, 36.0, 35.6, 48.5, 36.4, 34.1, 35.6, 46.4],
+                    marker: {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[2],
+                        fillColor: 'white'
+                    }
+                },
+                {
+                    type: "spline",
+                    name: 'Shanghai',
+                    yAxis: 1,
+                    lineWidth: 3,
+                    data: [43.6, 38.8, 36.5, 43.4, 36.0, 34.5, 45.0, 44.3, 41.2, 43.5, 46.6, 40.3],
+                    marker: {
+                        lineWidth: 2,
+                        lineColor: Highcharts.getOptions().colors[3],
+                        fillColor: 'white'
+                    }
                 }
             ]
         }));
     }
 
-    function showYearToDateProportionChart() {
-        this.ui.yearToDateProportionChart.highcharts(_.extend({}, chartOption, {
-            title: {
-                text: '年至今及上年同期占比'
-            },
-            xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
-                labels: {
-                    enabled: false
-                }
-            },
-            series: [
-                {
-                    name: 'Beijing',
-                    data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+    function showProportionChart() {
+        var baseProportionChartOptions = {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    marginRight: 115
                 },
-                {
-                    name: 'Shanghai',
-                    color: '#8BBC21',
-                    data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+                title: {
+                    text: ''
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: true
+                    },
+                    series: {
+                        point: {
+                            events: {
+                                legendItemClick: function () {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
                 }
-            ]
+            },
+            operationProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
+                {
+                    type: 'pie',
+                    name: '占比',
+                    data: [
+                        ['大卖场', 73.46],
+                        ['标超', 8.25],
+                        {
+                            name: '综超',
+                            y: 17.26,
+                            sliced: false,
+                            selected: false
+                        },
+                        ['配送中心', 0.60],
+                        ['加盟管理部', 0.12],
+                        ['网购', 0.05],
+                        ['优农', 0.11],
+                        ['CityLife', 0.13],
+                        ['奥特莱斯', 0.03]
+                    ]
+                }
+            ]}),
+            districtProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
+                {
+                    type: 'pie',
+                    name: '占比',
+                    data: [
+                        ['杭州市区', 49.75],
+                        ['杭州地区', 11.81],
+                        {
+                            name: '绍兴地区',
+                            y: 4.74,
+                            sliced: false,
+                            selected: false
+                        },
+                        ['宁波地区', 5.50],
+                        ['嘉兴地区', 3.94],
+                        ['台州地区', 6.22],
+                        ['金华地区', 9.27],
+                        ['温州地区', 3.15],
+                        ['丽水地区', 1.94],
+                        ['湖州地区', 2.05],
+                        ['衢州地区', 1.62],
+                        ['苏州地区', 0.00]
+                    ]
+                }
+            ]}),
+            retailProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
+                {
+                    type: 'pie',
+                    name: '占比',
+                    data: [
+                        ['经销-零售', 70.88],
+                        ['经销-批发', 5.11],
+                        {
+                            name: '联营-零售',
+                            y: 23.56,
+                            sliced: false,
+                            selected: false
+                        },
+                        ['联营-批发', 0.45]
+                    ]
+                }
+            ]});
+        this.ui.yearToDateOperationProportionChart.highcharts(_.extend({}, operationProportionChartOptions, {
+            legend: {
+                enabled: true,
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                layout: "vertical"
+            }
         }));
+        this.ui.lastYearOperationProportionChart.highcharts(operationProportionChartOptions);
+        this.ui.yearToDateDistrictProportionChart.highcharts(_.extend({}, districtProportionChartOptions, {
+            legend: {
+                enabled: true,
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                layout: "vertical"
+            }
+        }));
+        this.ui.lastYearDistrictProportionChart.highcharts(districtProportionChartOptions);
+        this.ui.yearToDateRetailProportionChart.highcharts(_.extend({}, retailProportionChartOptions, {
+            legend: {
+                enabled: true,
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                layout: "vertical"
+            }
+        }));
+        this.ui.lastYearRetailProportionChart.highcharts(retailProportionChartOptions);
     }
 
     function iePatch() {

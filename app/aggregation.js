@@ -35,13 +35,35 @@ require(["config"], function () {
 
         $.cookie.json = true;
 
-        // a small jquery plugin for getting pixels from css property
+        Highcharts.setOptions({
+            colors: ["#2f7ed8", "#8bbc21", "#f28f43", "#77a1e5", "#cc0000", "#0d233a", "#1aadce", "#492970", "#c42525", "#a6c96a"]
+        });
+        // ----------[end]--------- global configurations for jquery and it's plugins -------------
+
+        // ----------[start]--------- some small jquery plugins -------------
+        //  small jquery plugin for getting pixels from css property
         if (!$.fn.pixels) {
             $.fn.pixels = function (property) {
                 return parseInt(this.css(property).slice(0, -2), 10);
             };
         }
-        // ----------[end]--------- global configurations for jquery and it's plugins -------------
+
+        // use max available height of parent container, parent container should have fixed height.
+        if (!$.fn.useAvailableHeight) {
+            $.fn.useAvailableHeight = function () {
+                var $parent = this.parent(),
+                    availableHeight = $parent.height() - (this.outerHeight(true) - this.height()),
+                    $that = this;
+                $parent.children().each(function () {
+                    var $this = $(this);
+                    if ($this[0] != $that[0]) {
+                        availableHeight -= $this.outerHeight(true);
+                    }
+                });
+                this.height(availableHeight);
+            };
+        }
+        // ----------[start]--------- some small jquery plugins -------------
 
         app.start();
     });

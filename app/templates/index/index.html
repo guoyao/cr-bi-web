@@ -8,11 +8,11 @@
                     </div>
                     <div class="gui-panel-body">
                         主要KPI：<br />
-                        <table id="sell-report-main-kpi-table" class="gui-table gui-table-bordered gui-table-striped text-center" style="margin-top: 10px;">
+                        <table id="sellReportMainKpiTable" class="gui-table gui-table-bordered gui-table-striped gui-table-condensed text-center" style="margin-top: 10px;">
                             <tbody>
                                 <tr>
                                     <td>销售额<br /><span class="text-primary">万元</span></td>
-                                    <td>销售额同比增幅<br /><span class="text-info">%</span></td>
+                                    <td>销售额同比增幅<br /><span class="text-primary">%</span></td>
                                     <td>可比门店销售额同比增幅<br /><span class="text-primary">%</span></td>
                                 </tr>
                                 <tr>
@@ -34,9 +34,9 @@
                         </table>
                         年至今同期对比：<br />
                         <div>
-                            <div id="yearToDateSaleChart" class="pull-left yearToDateChart"></div>
-                            <div id="yearToDateProfitChart" class="pull-left yearToDateChart"></div>
-                            <div id="yearToDateQuantityChart" class="pull-left yearToDateChart"></div>
+                            <div id="yearToDateSaleChart" class="pull-left small-chart year-to-date-chart"></div>
+                            <div id="yearToDateProfitChart" class="pull-left small-chart year-to-date-chart"></div>
+                            <div id="yearToDateQuantityChart" class="pull-left small-chart year-to-date-chart"></div>
                         </div>
                     </div>
                 </div>
@@ -73,10 +73,76 @@
             <div class="span12-medium">
                 <div class="gui-panel gui-panel-default">
                     <div class="gui-panel-heading">
-                        <h3 class="gui-panel-title">零售客单价&客单数趋势</h3>
+                        <h3 class="gui-panel-title panel-title-with-buttons">零售客单价&客单数趋势</h3>
+                        <div class="gui-btn-bar pull-right" data-toggle="buttons">
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">1
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">2
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">3
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">4
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">5
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">6
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">7
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">8
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">9
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">10
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">11
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">12
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">全年
+                            </label>
+                        </div>
                     </div>
-                    <div class="gui-panel-body report-panel-body">
-                        <div id="retailSaleTrendChart"></div>
+                    <div class="gui-panel-body">
+                        <div class="gui-btn-bar" data-toggle="buttons" style="margin-bottom: 12px;">
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">零售额+客单数
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">零售额+客单价
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">客单数+客单价
+                            </label>
+                        </div>
+                        <div style="position: relative;">
+                            <div id="retailSaleTrendChart" class="base-chart"></div>
+                            <table id="retailSaleTrendTable" class="gui-table gui-table-bordered gui-table-striped gui-table-condensed">
+                                <tbody>
+                                    <tr><td>日均客单数同比增幅</td></tr>
+                                    <tr><td class="text-primary">%</td></tr>
+                                    <tr><td>客单数大于上年同期的天数</td></tr>
+                                    <tr><td class="text-primary"></td></tr>
+                                    <tr><td>日均客单价同比增幅</td></tr>
+                                    <tr><td class="text-primary">%</td></tr>
+                                    <tr><td>客单价大于上年同期的天数</td></tr>
+                                    <tr><td class="text-primary"></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,10 +151,58 @@
             <div class="span12-medium">
                 <div class="gui-panel gui-panel-default">
                     <div class="gui-panel-heading">
-                        <h3 class="gui-panel-title">年至今及上年同期占比</h3>
+                        <h3 class="gui-panel-title panel-title-with-buttons">年至今及上年同期占比</h3>
+                        <div class="gui-btn-bar pull-right" data-toggle="buttons">
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">整体
+                            </label>
+                            <label class="gui-btn gui-btn-default">
+                                <input type="radio" name="options">可比
+                            </label>
+                        </div>
                     </div>
-                    <div class="gui-panel-body report-panel-body">
-                        <div id="yearToDateProportionChart"></div>
+                    <div class="gui-panel-body">
+                        <div class="row-fluid">
+                            <div class="span4" style="position: relative;">
+                                业态销售额占比及上年同期占比<br />
+                                年至今
+                                <div id="yearToDateOperationProportionChart" class="base-chart"></div>
+                                上年同期
+                                <div id="lastYearOperationProportionChart" class="base-chart"></div>
+                                <hr class="vertical-right"/>
+                            </div>
+                            <div class="span4" style="position: relative;">
+                                区域销售额占比及上年同期占比<br />
+                                年至今
+                                <div id="yearToDateDistrictProportionChart" class="base-chart"></div>
+                                上年同期
+                                <div id="lastYearDistrictProportionChart" class="base-chart"></div>
+                                <hr class="vertical-right"/>
+                            </div>
+                            <div class="span4" style="position: relative;">
+                                零售批发经销联营销售额占比及上年同期占比<br />
+                                年至今
+                                <div id="yearToDateRetailProportionChart" class="base-chart"></div>
+                                上年同期
+                                <div id="lastYearRetailProportionChart" class="base-chart"></div>
+                                <table id="yearToDateRetailProportionTable" class="gui-table gui-table-bordered gui-table-striped gui-table-condensed">
+                                    <tbody>
+                                        <tr><td>零售：<span class="text-primary">%</span></td></tr>
+                                        <tr><td>批发：<span class="text-primary">%</span></td></tr>
+                                        <tr><td>经销：<span class="text-primary">%</span></td></tr>
+                                        <tr><td>联营：<span class="text-primary">%</span></td></tr>
+                                    </tbody>
+                                </table>
+                                <table id="lastYearRetailProportionTable" class="gui-table gui-table-bordered gui-table-striped gui-table-condensed">
+                                    <tbody>
+                                    <tr><td>零售：<span class="text-primary">%</span></td></tr>
+                                    <tr><td>批发：<span class="text-primary">%</span></td></tr>
+                                    <tr><td>经销：<span class="text-primary">%</span></td></tr>
+                                    <tr><td>联营：<span class="text-primary">%</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

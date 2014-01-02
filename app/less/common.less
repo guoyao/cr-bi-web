@@ -1,5 +1,3 @@
-@import "variables.less";
-
 // ----------------------- global css hook -------------------------
 .hidden {
   visibility: hidden;
@@ -22,8 +20,19 @@
   float: right;
 }
 
-.vr {
-  margin: 0 @margin;
+//.vr {
+//  margin: 0 @margin;
+//}
+
+hr {
+  &.vertical-right {
+    .hr-vertical();
+  }
+  &.vertical-left {
+    .hr-vertical();
+    left: 0;
+    right: auto;
+  }
 }
 
 .copyright {
@@ -91,8 +100,21 @@ input {
   background-color: @nav-theme-color;
 }
 
-.report-panel-body {
-  height: @report-panel-body-height;
+.panel-title-with-buttons {
+  display: inline;
+  line-height: 34px;
+}
+
+.small-chart {
+  height: @chart-height-small;
+}
+
+.base-chart {
+  height: @chart-height-base;
+}
+
+.large-chart {
+  height: @chart-height-large;
 }
 
 // ------------------- customize third lib's styles ----------

@@ -1,5 +1,5 @@
 {
-    "sell_report_main_kpi_data": [
+    "sell_report_main_kpi_datum": [
         38810000,
         42.07,
         37.16,
@@ -38,5 +38,23 @@
             {"cell" : ["013年12月09日 销售数据更新正常", "2013/12/09"]},
             {"cell" : ["013年12月08日 销售数据更新正常", "2013/12/08"]}
         ]
-    }
+    },
+    "retail_sale_trend_datum": [
+        4.01,
+        28,
+        19.04,
+        31
+    ],
+    "year_to_date_retail_proportion_datum": [
+        94.44,
+        5.56,
+        76.00,
+        24.00
+    ],
+    "last_year_retail_proportion_datum": [
+        95.00,
+        5.00,
+        77.64,
+        22.36
+    ]
 }
