@@ -1,6 +1,6 @@
 define(function (require) {
     // load external dependencies
-    var util = require("utils/util");
+    var storageUtil = require("modules/api/utils/storage_util");
 
     var loginCookieKey = "loginInfo",
         properties = {
@@ -18,6 +18,7 @@ define(function (require) {
     }
 
     var moduleMap = {
+        api: new ModuleDescriptor("api", "api", "modules/api/api", "", "类RSL(Runtime Shared Library)模块"),
         login: new ModuleDescriptor("login", "login", "modules/login/login", "login", "登陆页面"),
         shell: new ModuleDescriptor("shell", "shell", "modules/shell/shell", "", "所有模块的容器"),
         index: new ModuleDescriptor("index", "shell.index", "modules/index/index", "index", "首页"),
@@ -25,7 +26,7 @@ define(function (require) {
     };
 
     function isLogin() {
-        return !!util.storage.get(loginCookieKey);
+        return !!storageUtil.get(loginCookieKey);
     }
 
     function LoginInfo(userInfo, loginDate) {
@@ -34,7 +35,7 @@ define(function (require) {
     }
 
     LoginInfo.prototype.update = function (loginInfo) {
-        loginInfo = loginInfo || util.storage.get(loginCookieKey);
+        loginInfo = loginInfo || storageUtil.get(loginCookieKey);
         this.userInfo = loginInfo.userInfo;
         this.loginDate = (loginInfo.loginDate instanceof Date) ? loginInfo.loginDate : new Date(loginInfo.loginDate);
     };

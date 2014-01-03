@@ -5,7 +5,7 @@ define(function (require) {
     var Marionette = require("marionette"),
         gui = require("gui"),
         template = require("text!templates/shell/footer.html"),
-        util = require("utils/util"),
+        dateTimeUtil = require("modules/api/utils/date_time_util"),
         appInfo = require("app_info");
 
     var intervalId;
@@ -33,11 +33,11 @@ define(function (require) {
                 view = this;
             intervalId = setInterval(function () {
                 var timeDiff = new Date().getTime() - loginTime,
-                    hours = Math.floor(timeDiff / util.dateTime.MILLSECONDS_OF_HOUR),
-                    minutes = Math.floor((timeDiff - hours * util.dateTime.MILLSECONDS_OF_HOUR) / util.dateTime.MILLSECONDS_OF_MINUTE),
-                    seconds = Math.floor((timeDiff - hours * util.dateTime.MILLSECONDS_OF_HOUR - minutes * util.dateTime.MILLSECONDS_OF_MINUTE) / util.dateTime.MILLSECONDS_OF_SECOND);
-                view.ui.loginDuration.text(util.dateTime.toPretty(hours) + " : " + util.dateTime.toPretty(minutes) + " : " + util.dateTime.toPretty(seconds));
-            }, util.dateTime.MILLSECONDS_OF_SECOND);
+                    hours = Math.floor(timeDiff / dateTimeUtil.MILLSECONDS_OF_HOUR),
+                    minutes = Math.floor((timeDiff - hours * dateTimeUtil.MILLSECONDS_OF_HOUR) / dateTimeUtil.MILLSECONDS_OF_MINUTE),
+                    seconds = Math.floor((timeDiff - hours * dateTimeUtil.MILLSECONDS_OF_HOUR - minutes * dateTimeUtil.MILLSECONDS_OF_MINUTE) / dateTimeUtil.MILLSECONDS_OF_SECOND);
+                view.ui.loginDuration.text(dateTimeUtil.toPretty(hours) + " : " + dateTimeUtil.toPretty(minutes) + " : " + dateTimeUtil.toPretty(seconds));
+            }, dateTimeUtil.MILLSECONDS_OF_SECOND);
         },
         iePatch: function () {
             if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {

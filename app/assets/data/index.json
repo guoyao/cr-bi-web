@@ -13,7 +13,7 @@
         17.31,
         12.85
     ],
-    "year_to_date_comparison_datum": [
+    "year_to_date_comparison_chart_datum": [
         {
             "year_to_date_sale": 49.9,
             "corresponding_period_sale": 83.6,
@@ -49,6 +49,64 @@
             {"cell" : ["013年12月08日 销售数据更新正常", "2013/12/08"]}
         ]
     },
+    "retail_sale_trend_chart_datum": [
+        {
+            "date": "2010/11/26",
+            "retail_sale": 34261659.91,
+            "corresponding_period_retail_sale": 19428806.82,
+            "guest_amount": 344081,
+            "corresponding_period_guest_amount": 312047
+        },
+        {
+            "date": "2010/11/27",
+            "retail_sale": 44606369.99,
+            "corresponding_period_retail_sale": 21949341.46,
+            "guest_amount": 412753,
+            "corresponding_period_guest_amount": 331276
+        },
+        {
+            "date": "2010/11/28",
+            "retail_sale": 48193194.77,
+            "corresponding_period_retail_sale": 30379567.42,
+            "guest_amount": 441223,
+            "corresponding_period_guest_amount": 399107
+        },
+        {
+            "date": "2010/11/29",
+            "retail_sale": 19375761.02,
+            "corresponding_period_retail_sale": 31421530.44,
+            "guest_amount": 284758,
+            "corresponding_period_guest_amount": 412938
+        },
+        {
+            "date": "2010/11/30",
+            "retail_sale": 21337557.60,
+            "corresponding_period_retail_sale": 20405878.48,
+            "guest_amount": 311804,
+            "corresponding_period_guest_amount": 321930
+        },
+        {
+            "date": "2010/12/01",
+            "retail_sale": 22413050.05,
+            "corresponding_period_retail_sale": 20559371.82,
+            "guest_amount": 326467,
+            "corresponding_period_guest_amount": 315521
+        },
+        {
+            "date": "2010/12/02",
+            "retail_sale": 22038101.77,
+            "corresponding_period_retail_sale": 20330986.20,
+            "guest_amount": 323114,
+            "corresponding_period_guest_amount": 317995
+        },
+        {
+            "date": "2010/12/03",
+            "retail_sale": 27190023.91,
+            "corresponding_period_retail_sale": 20104906.82,
+            "guest_amount": 359193,
+            "corresponding_period_guest_amount": 319055
+        }
+    ],
     "retail_sale_trend_datum": [
         4.01,
         28,

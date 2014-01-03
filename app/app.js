@@ -32,7 +32,7 @@ define(function (require) {
             loginModule.stop();
         }
         appInfo.loginInfo.update();
-        require([appInfo.moduleMap.shell.path], function (shellModule) {
+        require([appInfo.moduleMap.api.path, appInfo.moduleMap.shell.path], function (api, shellModule) {
             shellModule.start();
         });
     });

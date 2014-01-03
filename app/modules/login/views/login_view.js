@@ -5,7 +5,7 @@ define(function (require) {
     var Marionette = require("marionette"),
         gui = require("gui"),
         app = require("app"),
-        util = require("utils/util"),
+        stringUtil = require("modules/api/utils/string_util"),
         template = require("text!templates/login/login.html");
 
     var LoginView = Marionette.ItemView.extend({
@@ -27,7 +27,7 @@ define(function (require) {
         login: function () {
             var username = this.ui.username.val(),
                 password = this.ui.password.val();
-            if (!util.string.isBlank(username) && !util.string.isBlank(password) && username == "changju" && password == "123456") {
+            if (!stringUtil.isBlank(username) && !stringUtil.isBlank(password) && username == "changju" && password == "123456") {
                 this.ui.errorMessage.text("");
                 app.login.trigger("login:succeed", {
                     username: username,

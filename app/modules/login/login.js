@@ -8,7 +8,7 @@ define(["modules/login/views/login_view"
     // load external dependencies
     var app = require("app"),
         appInfo = require("app_info"),
-        util = require("utils/util");
+        storageUtil = require("modules/api/utils/storage_util");
 
     // create module
     var login = app.module(appInfo.moduleMap.login.artifact, function () {
@@ -25,7 +25,7 @@ define(["modules/login/views/login_view"
 
     login.on("login:succeed", function (userInfo) {
         var LoginInfo = appInfo.loginInfo.constructor;
-        util.storage.set(appInfo.loginCookieKey, new LoginInfo(userInfo, new Date().getTime()));
+        storageUtil.set(appInfo.loginCookieKey, new LoginInfo(userInfo, new Date().getTime()));
         app.vent.trigger("login:succeed");
     });
 

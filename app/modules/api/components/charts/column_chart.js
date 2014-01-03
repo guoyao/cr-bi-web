@@ -1,6 +1,7 @@
 define(function (require) {
     // load external dependencies
-    var _ = require("underscore");
+    var _ = require("underscore"),
+        collectionUtil = require("modules/api/utils/collection_util");
 
     var ColumnChart = function ($element, dataProvider, options, globalOptions) {
         this.$element = $element;
@@ -19,7 +20,7 @@ define(function (require) {
         },
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}：</td>' +
                 '<td style="padding:0"><b>{point.y:.2f}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
@@ -34,11 +35,21 @@ define(function (require) {
     };
 
     ColumnChart.prototype.setDataProvider = function (dataProvider) {
+        var xAxis = collectionUtil.isArray(this.options.xAxis) ? this.options.xAxis : [this.options.xAxis];
         this._dataProvider = dataProvider;
+        _.each(xAxis, function (axis) {
+            if (axis.categoryField) {
+                axis.categories = _.map(dataProvider, function (data) {
+                    return data[axis.categoryField];
+                });
+            }
+        });
         _.each(this.options.series, function (series) {
-            series.data = _.map(dataProvider, function (data) {
-                return data[series.dataField];
-            });
+            if (series.dataField) {
+                series.data = _.map(dataProvider, function (data) {
+                    return data[series.dataField];
+                });
+            }
         }, this);
 
         return this;

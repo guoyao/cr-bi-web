@@ -1,15 +1,16 @@
 define(function (require) {
     // load external dependencies
-    var util = require("utils/util"),
+    var _ = require("underscore"),
+        classUtil = require("modules/api/utils/class_util"),
         ColumnChart = require("modules/api/components/charts/column_chart");
 
     var YearToDateComparisonChart = function ($element, dataProvider, options, globalOptions) {
         this.constructor.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
     };
 
-    util.clazz.inherits(YearToDateComparisonChart, ColumnChart);
+    classUtil.inherits(YearToDateComparisonChart, ColumnChart);
 
-    YearToDateComparisonChart.defaultOptions = {
+    YearToDateComparisonChart.defaultOptions = _.extend(YearToDateComparisonChart.uper.constructor.defaultOptions, {
         legend: {
             enabled: false
         },
@@ -27,7 +28,7 @@ define(function (require) {
                 enabled: false
             }
         }
-    };
+    });
 
     return YearToDateComparisonChart;
 });

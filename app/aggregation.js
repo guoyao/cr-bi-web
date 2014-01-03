@@ -13,9 +13,9 @@ require(["config"], function () {
         "jquery.dateFormat",
         "highcharts",
         "flexigrid",
+        "modules/api/utils/string_util",
+        "modules/api/utils/storage_util",
         "app_info",
-        "utils/util",
-        "utils/chart",
         "app"
     ], function () {
         "use strict";
@@ -23,12 +23,12 @@ require(["config"], function () {
         var $ = require("jquery"),
             app = require("app"),
             appInfo = require("app_info"),
-            util = require("utils/util");
+            stringUtil = require("modules/api/utils/string_util");
 
         // ----------[start]--------- global configurations for jquery and it's plugins -------------
         $.ajaxSetup({
             beforeSend: function (xhr, settings) {
-                if (settings.url && !util.string.isAbsoluteURI(settings.url)) {
+                if (settings.url && !stringUtil.isAbsoluteURI(settings.url)) {
                     settings.url = appInfo.properties.serviceRoot + settings.url;
                 }
             }
@@ -41,6 +41,7 @@ require(["config"], function () {
         });
         // ----------[end]--------- global configurations for jquery and it's plugins -------------
 
+
         // ----------[start]--------- some small jquery plugins -------------
         //  small jquery plugin for getting pixels from css property
         if (!$.fn.pixels) {
@@ -48,23 +49,7 @@ require(["config"], function () {
                 return parseInt(this.css(property).slice(0, -2), 10);
             };
         }
-
-        // use max available height of parent container, parent container should have fixed height.
-        if (!$.fn.useAvailableHeight) {
-            $.fn.useAvailableHeight = function () {
-                var $parent = this.parent(),
-                    availableHeight = $parent.height() - (this.outerHeight(true) - this.height()),
-                    $that = this;
-                $parent.children().each(function () {
-                    var $this = $(this);
-                    if ($this[0] != $that[0]) {
-                        availableHeight -= $this.outerHeight(true);
-                    }
-                });
-                this.height(availableHeight);
-            };
-        }
-        // ----------[start]--------- some small jquery plugins -------------
+        // ----------[end]--------- some small jquery plugins -------------
 
         app.start();
     });

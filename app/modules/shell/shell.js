@@ -9,7 +9,7 @@ define([
     // load external dependencies
     var app = require("app"),
         appInfo = require("app_info"),
-        util = require("utils/util");
+        storageUtil = require("modules/api/utils/storage_util");
 
     // create module
     var shell = app.module(appInfo.moduleMap.shell.artifact, function () {
@@ -35,7 +35,7 @@ define([
     });
 
     shell.on("logout", function () {
-        util.storage.remove(appInfo.loginCookieKey);
+        storageUtil.remove(appInfo.loginCookieKey);
         app.vent.trigger("logout");
     });
 

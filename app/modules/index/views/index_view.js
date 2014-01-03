@@ -8,9 +8,11 @@ define(function (require) {
         Marionette = require("marionette"),
         gui = require("gui"),
         appInfo = require("app_info"),
-        util = require("utils/util"),
-        chartUtil = require("utils/chart"),
+        dateTimeUtil = require("modules/api/utils/date_time_util"),
+        stringUtil = require("modules/api/utils/string_util"),
+        collectionUtil = require("modules/api/utils/collection_util"),
         template = require("text!templates/index/index.html"),
+        ColumnChart = require("modules/api/components/charts/column_chart"),
         YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart");
 
     var climateKeyWords = [
@@ -65,7 +67,6 @@ define(function (require) {
             this.ui.yearToDateProfitChart.width(chartWidth);
             this.ui.yearToDateQuantityChart.width(chartWidth);
             iePatch.call(this);
-            showRetailSaleTrendChart.call(this);
             showProportionChart.call(this);
             showFakeDatum.call(this);
         }
@@ -74,7 +75,7 @@ define(function (require) {
     function showDateInfo() {
         var today = new Date(),
             todayOfLastYear = new Date(today.getTime()),
-            lunarUtil = util.dateTime.lunar,
+            lunarUtil = dateTimeUtil.lunar,
             todayLunarInfos = lunarUtil.toLunar(today),
             todayOfLastYearLunarInfos;
 
@@ -83,12 +84,12 @@ define(function (require) {
         this.ui.username.text(appInfo.loginInfo.userInfo.username);
         this.ui.position.text(appInfo.loginInfo.userInfo.position);
         this.ui.permission.text(appInfo.loginInfo.userInfo.permission);
-        this.ui.today.text(util.string.substitute("{0}（{1} 农历{2}{3}）",
+        this.ui.today.text(stringUtil.substitute("{0}（{1} 农历{2}{3}）",
             $.format.date(today, "yyyy年MM月dd日"),
             lunarUtil.getChineseDay(today.getDay()),
             lunarUtil.getChineseMonth(todayLunarInfos[1]),
             lunarUtil.getChineseDate(todayLunarInfos[2])));
-        this.ui.todayOfLastYear.text(util.string.substitute("{0}（{1} 农历{2}{3}）",
+        this.ui.todayOfLastYear.text(stringUtil.substitute("{0}（{1} 农历{2}{3}）",
             $.format.date(todayOfLastYear, "yyyy年MM月dd日"),
             lunarUtil.getChineseDay(todayOfLastYear.getDay()),
             lunarUtil.getChineseMonth(todayOfLastYearLunarInfos[1]),
@@ -115,7 +116,7 @@ define(function (require) {
                         $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
                     }
                 });
-                showYearToDateComparisonChart.call(that, data["year_to_date_comparison_datum"]);
+                showYearToDateComparisonChart.call(that, data["year_to_date_comparison_chart_datum"]);
                 that.ui.systemMessageTable.flexigrid({
                     dataType: 'json',
                     height: 310,
@@ -137,6 +138,7 @@ define(function (require) {
                     var $this = $(this);
                     $this.text(numeral(lastYearRetailProportionDatum[index]).format("0,0.00") + $this.text());
                 });
+                showRetailSaleTrendChart.call(that, data["retail_sale_trend_chart_datum"]);
             });
     }
 
@@ -149,7 +151,7 @@ define(function (require) {
                     climate,
                     realWeatherInfo,
                     climateImageUrl = appInfo.properties.imageRoot + climateKeyWords[1].value;
-                if (util.array.isArray(data)) {
+                if (collectionUtil.isArray(data)) {
                     if (data.length > 0 && data[0].search('维护') > -1) { // 天气信息服务维护中
                         that.ui.climateImage.attr("src", appInfo.properties.imageRoot + climateKeyWords[0].value);
                         return;
@@ -159,7 +161,7 @@ define(function (require) {
                     }
                     if (data.length > 6) {
                         climate = data[6];
-                        if (!util.string.isBlank(climate)) {
+                        if (!stringUtil.isBlank(climate)) {
                             for (i = 2, length = climateKeyWords.length; i < length; i++) {
                                 if (climate.search(climateKeyWords[i].key) > -1) {
                                     climateImageUrl = appInfo.properties.imageRoot + climateKeyWords[i].value;
@@ -202,7 +204,7 @@ define(function (require) {
                     dataField: "corresponding_period_sale"
                 }
             ]
-        }, chartUtil.partialSharedColumnChartOptions).render();
+        }).render();
         new YearToDateComparisonChart(this.ui.yearToDateProfitChart, dataProvider, {
             title: {
                 text: '年至今毛利额vs上年同期'
@@ -217,7 +219,7 @@ define(function (require) {
                     dataField: "corresponding_period_profit"
                 }
             ]
-        }, chartUtil.partialSharedColumnChartOptions).render();
+        }).render();
         new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, dataProvider, {
             title: {
                 text: '年至今客单数vs上年同期'
@@ -232,11 +234,11 @@ define(function (require) {
                     dataField: "corresponding_period_quantity"
                 }
             ]
-        }, chartUtil.partialSharedColumnChartOptions).render();
+        }).render();
     }
 
-    function showRetailSaleTrendChart() {
-        this.ui.retailSaleTrendChart.highcharts(_.extend({}, chartUtil.baseColumnChartOptions, {
+    function showRetailSaleTrendChart(dataProvider) {
+        new ColumnChart(this.ui.retailSaleTrendChart, dataProvider, {
             title: {
                 text: '零售客单价&客单数趋势'
             },
@@ -253,36 +255,23 @@ define(function (require) {
                 opposite: true
             }],
             xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ]
+                categoryField: "date"
             },
             series: [
                 {
-                    name: 'Beijing',
-                    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                    name: '零售额',
+                    dataField: "retail_sale"
                 },
                 {
-                    name: 'Shanghai',
-                    data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+                    name: '上年同期零售额',
+                    dataField: "corresponding_period_retail_sale"
                 },
                 {
                     type: "spline",
-                    name: 'Beijing',
+                    name: '客单数',
                     yAxis: 1,
                     lineWidth: 3,
-                    data: [47.9, 37.5, 35.7, 38.3, 44.0, 36.0, 35.6, 48.5, 36.4, 34.1, 35.6, 46.4],
+                    dataField: "guest_amount",
                     marker: {
                         lineWidth: 2,
                         lineColor: Highcharts.getOptions().colors[2],
@@ -291,10 +280,10 @@ define(function (require) {
                 },
                 {
                     type: "spline",
-                    name: 'Shanghai',
+                    name: '上年同期客单数',
                     yAxis: 1,
                     lineWidth: 3,
-                    data: [43.6, 38.8, 36.5, 43.4, 36.0, 34.5, 45.0, 44.3, 41.2, 43.5, 46.6, 40.3],
+                    dataField: "corresponding_period_guest_amount",
                     marker: {
                         lineWidth: 2,
                         lineColor: Highcharts.getOptions().colors[3],
@@ -302,7 +291,7 @@ define(function (require) {
                     }
                 }
             ]
-        }));
+        }).render();
     }
 
     function showProportionChart() {
