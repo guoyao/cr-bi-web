@@ -1,5 +1,5 @@
 define(function () {
-    var baseColumnChartOptions = {
+    var partialSharedColumnChartOptions = {
         chart: {
             type: 'column',
             borderWidth: 1,
@@ -25,6 +25,6 @@ define(function () {
     };
 
     return {
-        baseColumnChartOptions: baseColumnChartOptions
+        partialSharedColumnChartOptions: partialSharedColumnChartOptions
     }
 });

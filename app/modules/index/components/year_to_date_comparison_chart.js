@@ -1,39 +1,32 @@
 define(function (require) {
     // load external dependencies
-    var _ = require("underscore");
+    var util = require("utils/util"),
+        ColumnChart = require("modules/api/components/charts/column_chart");
 
-    var defaultOptions = {
-            legend: {
-                enabled: false
-            },
-            yAxis: {
-                title: {
-                    enabled: false
-                },
-                labels: {
-                    enabled: false
-                }
-            }
-        },
-        YearToDateComparisonChart = function ($element, dataProvider, globalOptions, options) {
-            this.$element = $element;
-            this.dataProvider = dataProvider;
-            this.options = _.extend({}, globalOptions, defaultOptions, options);
-        };
-
-    YearToDateComparisonChart.prototype.init = function () {
-        _.each(this.options.series, function (series) {
-            series.data = _.map(this.dataProvider, function (data) {
-                return data[series.dataField];
-            });
-        }, this);
-
-        return this;
+    var YearToDateComparisonChart = function ($element, dataProvider, options, globalOptions) {
+        this.constructor.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
     };
 
-    YearToDateComparisonChart.prototype.render = function () {
-        this.$element.highcharts(this.options);
-        return this;
+    util.clazz.inherits(YearToDateComparisonChart, ColumnChart);
+
+    YearToDateComparisonChart.defaultOptions = {
+        legend: {
+            enabled: false
+        },
+        xAxis: {
+            categories: [""],
+            labels: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                enabled: false
+            },
+            labels: {
+                enabled: false
+            }
+        }
     };
 
     return YearToDateComparisonChart;

@@ -348,12 +348,28 @@ define(function (require) {
         };
     })();
 
+    /**
+     * class util module
+     */
+    var clazz = (function () {
+        function inherits(Child, Parent) {
+            var TempFunc = function () {};
+            TempFunc.prototype = Parent.prototype;
+            Child.prototype = new TempFunc();
+            Child.prototype.constructor = Child;
+            Child.uper = Parent.prototype;
+        }
+        return {
+            inherits: inherits
+        };
+    })();
 
     return {
         string: string,
         array: array,
         navigation: navigation,
         storage: storage,
-        dateTime: dateTime
+        dateTime: dateTime,
+        clazz: clazz
     };
 });

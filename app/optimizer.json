@@ -13,20 +13,24 @@
             "name": "aggregation"
         },
         {
-            "name": "modules/login/login",
+            "name": "modules/api/api",
             "exclude": ["aggregation"]
+        },
+        {
+            "name": "modules/login/login",
+            "exclude": ["aggregation", "modules/api/api"]
         },
         {
             "name": "modules/shell/shell",
-            "exclude": ["aggregation"]
+            "exclude": ["aggregation", "modules/api/api"]
         },
         {
             "name": "modules/index/index",
-            "exclude": ["aggregation", "modules/shell/shell"]
+            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
         },
         {
             "name": "modules/sale/sale",
-            "exclude": ["aggregation", "modules/shell/shell"]
+            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
         }
     ]
 }

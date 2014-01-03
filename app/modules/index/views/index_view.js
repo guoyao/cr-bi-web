@@ -188,15 +188,9 @@ define(function (require) {
     }
 
     function showYearToDateComparisonChart(dataProvider) {
-        new YearToDateComparisonChart(this.ui.yearToDateSaleChart, dataProvider, chartUtil.baseColumnChartOptions, {
+        new YearToDateComparisonChart(this.ui.yearToDateSaleChart, dataProvider, {
             title: {
                 text: '年至今销售额vs上年同期'
-            },
-            xAxis: {
-                categories: [""],
-                labels: {
-                    enabled: false
-                }
             },
             series: [
                 {
@@ -208,16 +202,10 @@ define(function (require) {
                     dataField: "corresponding_period_sale"
                 }
             ]
-        }).init().render();
-        new YearToDateComparisonChart(this.ui.yearToDateProfitChart, dataProvider, chartUtil.baseColumnChartOptions, {
+        }, chartUtil.partialSharedColumnChartOptions).render();
+        new YearToDateComparisonChart(this.ui.yearToDateProfitChart, dataProvider, {
             title: {
                 text: '年至今毛利额vs上年同期'
-            },
-            xAxis: {
-                categories: [""],
-                labels: {
-                    enabled: false
-                }
             },
             series: [
                 {
@@ -229,16 +217,10 @@ define(function (require) {
                     dataField: "corresponding_period_profit"
                 }
             ]
-        }).init().render();
-        new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, dataProvider, chartUtil.baseColumnChartOptions, {
+        }, chartUtil.partialSharedColumnChartOptions).render();
+        new YearToDateComparisonChart(this.ui.yearToDateQuantityChart, dataProvider, {
             title: {
                 text: '年至今客单数vs上年同期'
-            },
-            xAxis: {
-                categories: [""],
-                labels: {
-                    enabled: false
-                }
             },
             series: [
                 {
@@ -250,7 +232,7 @@ define(function (require) {
                     dataField: "corresponding_period_quantity"
                 }
             ]
-        }).init().render();
+        }, chartUtil.partialSharedColumnChartOptions).render();
     }
 
     function showRetailSaleTrendChart() {
@@ -258,24 +240,15 @@ define(function (require) {
             title: {
                 text: '零售客单价&客单数趋势'
             },
-            legend: {
-                enabled: true
-            },
             yAxis: [{
                 min: 0,
                 title: {
-                    enabled: false
-                },
-                labels: {
-                    enabled: true
+                    text: "万元"
                 }
             }, {
                 min: 0,
                 title: {
-                    enabled: false
-                },
-                labels: {
-                    enabled: true
+                    text: "万次"
                 },
                 opposite: true
             }],
