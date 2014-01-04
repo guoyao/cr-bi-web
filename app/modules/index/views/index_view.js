@@ -13,7 +13,8 @@ define(function (require) {
         collectionUtil = require("modules/api/utils/collection_util"),
         template = require("text!templates/index/index.html"),
         ColumnChart = require("modules/api/components/charts/column_chart"),
-        YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart");
+        YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart"),
+        ProportionChart = require("modules/index/components/proportion_chart");
 
     var climateKeyWords = [
         {key: "n/a", value: "weather_not_available.png"},
@@ -67,7 +68,6 @@ define(function (require) {
             this.ui.yearToDateProfitChart.width(chartWidth);
             this.ui.yearToDateQuantityChart.width(chartWidth);
             iePatch.call(this);
-            showProportionChart.call(this);
             showFakeDatum.call(this);
         }
     });
@@ -130,6 +130,7 @@ define(function (require) {
                     var $this = $(this);
                     $this.text(retailSaleTrendDatum[index] + $this.text());
                 });
+                showRetailSaleTrendChart.call(that, data["retail_sale_trend_chart_datum"]);
                 that.ui.yearToDateRetailProportionTable.find("td span").each(function (index) {
                     var $this = $(this);
                     $this.text(numeral(yearToDateRetailProportionDatum[index]).format("0,0.00") + $this.text());
@@ -138,7 +139,10 @@ define(function (require) {
                     var $this = $(this);
                     $this.text(numeral(lastYearRetailProportionDatum[index]).format("0,0.00") + $this.text());
                 });
-                showRetailSaleTrendChart.call(that, data["retail_sale_trend_chart_datum"]);
+                showProportionChart.call(that,
+                    data["operation_proportion_chart_datum"],
+                    data["district_proportion_chart_datum"],
+                    data["retail_proportion_chart_datum"]);
             });
     }
 
@@ -294,137 +298,48 @@ define(function (require) {
         }).render();
     }
 
-    function showProportionChart() {
-        var baseProportionChartOptions = {
-                chart: {
-                    plotBackgroundColor: null,
-                    plotBorderWidth: null,
-                    plotShadow: false,
-                    marginRight: 115
-                },
-                title: {
-                    text: ''
-                },
-                legend: {
-                    enabled: false
-                },
-                tooltip: {
-                    pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
-                },
-                plotOptions: {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: 'pointer',
-                        dataLabels: {
-                            enabled: false
-                        },
-                        showInLegend: true
-                    },
-                    series: {
-                        point: {
-                            events: {
-                                legendItemClick: function () {
-                                    return false;
-                                }
-                            }
-                        }
-                    }
-                }
+    function showProportionChart(operationChartDataProvider, districtChartDataProvider, retailChartDataProvider) {
+        var legendOptions = {
+                enabled: true,
+                align: 'right',
+                verticalAlign: 'top',
+                floating: true,
+                layout: "vertical"
             },
-            operationProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
-                {
-                    type: 'pie',
-                    name: '占比',
-                    data: [
-                        ['大卖场', 73.46],
-                        ['标超', 8.25],
-                        {
-                            name: '综超',
-                            y: 17.26,
-                            sliced: false,
-                            selected: false
-                        },
-                        ['配送中心', 0.60],
-                        ['加盟管理部', 0.12],
-                        ['网购', 0.05],
-                        ['优农', 0.11],
-                        ['CityLife', 0.13],
-                        ['奥特莱斯', 0.03]
-                    ]
-                }
-            ]}),
-            districtProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
-                {
-                    type: 'pie',
-                    name: '占比',
-                    data: [
-                        ['杭州市区', 49.75],
-                        ['杭州地区', 11.81],
-                        {
-                            name: '绍兴地区',
-                            y: 4.74,
-                            sliced: false,
-                            selected: false
-                        },
-                        ['宁波地区', 5.50],
-                        ['嘉兴地区', 3.94],
-                        ['台州地区', 6.22],
-                        ['金华地区', 9.27],
-                        ['温州地区', 3.15],
-                        ['丽水地区', 1.94],
-                        ['湖州地区', 2.05],
-                        ['衢州地区', 1.62],
-                        ['苏州地区', 0.00]
-                    ]
-                }
-            ]}),
-            retailProportionChartOptions = _.extend({}, baseProportionChartOptions, {series: [
-                {
-                    type: 'pie',
-                    name: '占比',
-                    data: [
-                        ['经销-零售', 70.88],
-                        ['经销-批发', 5.11],
-                        {
-                            name: '联营-零售',
-                            y: 23.56,
-                            sliced: false,
-                            selected: false
-                        },
-                        ['联营-批发', 0.45]
-                    ]
-                }
-            ]});
-        this.ui.yearToDateOperationProportionChart.highcharts(_.extend({}, operationProportionChartOptions, {
-            legend: {
-                enabled: true,
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                layout: "vertical"
-            }
-        }));
-        this.ui.lastYearOperationProportionChart.highcharts(operationProportionChartOptions);
-        this.ui.yearToDateDistrictProportionChart.highcharts(_.extend({}, districtProportionChartOptions, {
-            legend: {
-                enabled: true,
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                layout: "vertical"
-            }
-        }));
-        this.ui.lastYearDistrictProportionChart.highcharts(districtProportionChartOptions);
-        this.ui.yearToDateRetailProportionChart.highcharts(_.extend({}, retailProportionChartOptions, {
-            legend: {
-                enabled: true,
-                align: 'right',
-                verticalAlign: 'top',
-                floating: true,
-                layout: "vertical"
-            }
-        }));
-        this.ui.lastYearRetailProportionChart.highcharts(retailProportionChartOptions);
+            seriesOptions = [{
+                type: 'pie',
+                name: '占比',
+                nameField: "name",
+                dataField: "proportion"
+            }];
+        new ProportionChart(this.ui.yearToDateOperationProportionChart, operationChartDataProvider, {
+            legend: legendOptions,
+            series: seriesOptions
+        }).render();
+        new ProportionChart(this.ui.lastYearOperationProportionChart, operationChartDataProvider, {
+            series: seriesOptions
+        }).render();
+
+        new ProportionChart(this.ui.yearToDateDistrictProportionChart, districtChartDataProvider, {
+            legend: legendOptions,
+            series: seriesOptions
+        }).render();
+        new ProportionChart(this.ui.lastYearDistrictProportionChart, districtChartDataProvider, {
+            series: [{
+                type: 'pie',
+                name: '占比',
+                nameField: "name",
+                dataField: "corresponding_period_proportion"
+            }]
+        }).render();
+
+        new ProportionChart(this.ui.yearToDateRetailProportionChart, retailChartDataProvider, {
+            legend: legendOptions,
+            series: seriesOptions
+        }).render();
+        new ProportionChart(this.ui.lastYearRetailProportionChart, retailChartDataProvider, {
+            series: seriesOptions
+        }).render();
     }
 
     function iePatch() {

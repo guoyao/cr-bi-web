@@ -1,13 +1,15 @@
 define(function (require) {
     // load external dependencies
     var _ = require("underscore"),
-        collectionUtil = require("modules/api/utils/collection_util");
+        classUtil = require("modules/api/utils/class_util"),
+        collectionUtil = require("modules/api/utils/collection_util"),
+        Chart = require("modules/api/components/charts/chart");
 
     var ColumnChart = function ($element, dataProvider, options, globalOptions) {
-        this.$element = $element;
-        this.options = _.extend({}, globalOptions, this.constructor.defaultOptions, options);
-        this.setDataProvider(dataProvider);
+        ColumnChart.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
     };
+
+    classUtil.inherits(ColumnChart, Chart);
 
     ColumnChart.defaultOptions = {
         chart: {
@@ -30,13 +32,20 @@ define(function (require) {
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0
+            },
+            series: {
+                events: {
+                    legendItemClick: function () {
+                        return false;
+                    }
+                }
             }
         }
     };
 
     ColumnChart.prototype.setDataProvider = function (dataProvider) {
+        ColumnChart.uper.setDataProvider.call(this, dataProvider);
         var xAxis = collectionUtil.isArray(this.options.xAxis) ? this.options.xAxis : [this.options.xAxis];
-        this._dataProvider = dataProvider;
         _.each(xAxis, function (axis) {
             if (axis.categoryField) {
                 axis.categories = _.map(dataProvider, function (data) {
@@ -52,15 +61,6 @@ define(function (require) {
             }
         }, this);
 
-        return this;
-    };
-
-    ColumnChart.prototype.getDataProvider = function () {
-        return this._dataProvider;
-    };
-
-    ColumnChart.prototype.render = function () {
-        this.$element.highcharts(this.options);
         return this;
     };
 

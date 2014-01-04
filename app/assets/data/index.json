@@ -113,6 +113,37 @@
         19.04,
         31
     ],
+    "operation_proportion_chart_datum": [
+        {"name": "大卖场", "proportion": 73.46, "corresponding_period_proportion": 17.26},
+        {"name": "标超", "proportion": 8.25, "corresponding_period_proportion": 0.60},
+        {"name": "综超", "proportion": 17.26, "corresponding_period_proportion": 8.25},
+        {"name": "配送中心", "proportion": 0.60, "corresponding_period_proportion": 73.46},
+        {"name": "加盟管理部", "proportion": 0.12, "corresponding_period_proportion": 0.05},
+        {"name": "网购", "proportion": 0.05, "corresponding_period_proportion": 0.12},
+        {"name": "优农", "proportion": 0.11, "corresponding_period_proportion": 0.03},
+        {"name": "CityLife", "proportion": 0.13, "corresponding_period_proportion": 0.11},
+        {"name": "奥特莱斯", "proportion": 0.03, "corresponding_period_proportion": 0.13}
+    ],
+    "district_proportion_chart_datum": [
+        {"name": "杭州市区", "proportion": 49.75, "corresponding_period_proportion": 5.50},
+        {"name": "杭州地区", "proportion": 11.81, "corresponding_period_proportion": 3.94},
+        {"name": "绍兴地区", "proportion": 4.74, "corresponding_period_proportion": 6.22},
+        {"name": "宁波地区", "proportion": 5.50, "corresponding_period_proportion": 9.27},
+        {"name": "嘉兴地区", "proportion": 3.94, "corresponding_period_proportion": 3.15},
+        {"name": "台州地区", "proportion": 6.22, "corresponding_period_proportion": 1.94},
+        {"name": "金华地区", "proportion": 9.27, "corresponding_period_proportion": 2.05},
+        {"name": "温州地区", "proportion": 3.15, "corresponding_period_proportion": 1.62},
+        {"name": "丽水地区", "proportion": 1.94, "corresponding_period_proportion": 0.00},
+        {"name": "湖州地区", "proportion": 2.05, "corresponding_period_proportion": 4.74},
+        {"name": "衢州地区", "proportion": 1.62, "corresponding_period_proportion": 11.81},
+        {"name": "苏州地区", "proportion": 0.00, "corresponding_period_proportion": 49.75}
+    ],
+    "retail_proportion_chart_datum": [
+        {"name": "经销-零售", "proportion": 70.88, "corresponding_period_proportion": 23.56},
+        {"name": "经销-批发", "proportion": 5.11, "corresponding_period_proportion": 0.45},
+        {"name": "联营-零售", "proportion": 23.56, "corresponding_period_proportion": 5.11},
+        {"name": "联营-批发", "proportion": 0.45, "corresponding_period_proportion": 70.88}
+    ],
     "year_to_date_retail_proportion_datum": [
         94.44,
         5.56,

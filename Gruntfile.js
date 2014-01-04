@@ -40,7 +40,7 @@ module.exports = function (grunt) {
                         'app/libs/numeral.js': 'vendor/bower/numeral/numeral.js',
                         'app/libs/highcharts.js': 'vendor/libs/highcharts.js',
                         'app/libs/flexigrid.js': 'vendor/libs/flexigrid/flexigrid.js'
-                    },
+                    }
                 ]
             },
             resources_dist: {

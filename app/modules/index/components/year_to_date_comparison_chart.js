@@ -5,12 +5,12 @@ define(function (require) {
         ColumnChart = require("modules/api/components/charts/column_chart");
 
     var YearToDateComparisonChart = function ($element, dataProvider, options, globalOptions) {
-        this.constructor.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
+        YearToDateComparisonChart.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
     };
 
     classUtil.inherits(YearToDateComparisonChart, ColumnChart);
 
-    YearToDateComparisonChart.defaultOptions = _.extend(YearToDateComparisonChart.uper.constructor.defaultOptions, {
+    YearToDateComparisonChart.defaultOptions = _.extend({}, YearToDateComparisonChart.uper.constructor.defaultOptions, {
         legend: {
             enabled: false
         },

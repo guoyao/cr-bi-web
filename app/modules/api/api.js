@@ -10,4 +10,5 @@ define(function (require) {
 
     // components
     require("modules/api/components/charts/column_chart");
+    require("modules/api/components/charts/pie_chart");
 });
