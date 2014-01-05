@@ -10,7 +10,6 @@ define(function (require) {
         appInfo = require("app_info"),
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         stringUtil = require("modules/api/utils/string_util"),
-        collectionUtil = require("modules/api/utils/collection_util"),
         template = require("text!templates/index/index.html"),
         ColumnChart = require("modules/api/components/charts/column_chart"),
         YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart"),
@@ -155,7 +154,7 @@ define(function (require) {
                     climate,
                     realWeatherInfo,
                     climateImageUrl = appInfo.properties.imageRoot + climateKeyWords[1].value;
-                if (collectionUtil.isArray(data)) {
+                if (_.isArray(data)) {
                     if (data.length > 0 && data[0].search('维护') > -1) { // 天气信息服务维护中
                         that.ui.climateImage.attr("src", appInfo.properties.imageRoot + climateKeyWords[0].value);
                         return;

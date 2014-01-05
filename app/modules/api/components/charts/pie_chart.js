@@ -1,14 +1,26 @@
 define(function (require) {
     // load external dependencies
     var _ = require("underscore"),
-        classUtil = require("modules/api/utils/class_util"),
+        Class = require("modules/api/core/class"),
         Chart = require("modules/api/components/charts/chart");
 
-    var PieChart = function ($element, dataProvider, options, globalOptions) {
-        PieChart.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
-    };
+    var PieChart = new Class(Chart, {
+        initialize: function ($element, dataProvider, options, globalOptions) {
+            PieChart.superclass.initialize.call(this, $element, dataProvider, options, globalOptions);
+        },
+        setDataProvider: function (dataProvider) {
+            PieChart.superclass.setDataProvider.call(this, dataProvider);
+            _.each(this.options.series, function (series) {
+                if (series.dataField) {
+                    series.data = _.map(dataProvider, function (data) {
+                        return [series.nameField ? data[series.nameField] : "", data[series.dataField]];
+                    });
+                }
+            }, this);
 
-    classUtil.inherits(PieChart, Chart);
+            return this;
+        }
+    });
 
     PieChart.defaultOptions = {
         chart: {
@@ -38,19 +50,6 @@ define(function (require) {
                 }
             }
         }
-    };
-
-    PieChart.prototype.setDataProvider = function (dataProvider) {
-        PieChart.uper.setDataProvider.call(this, dataProvider);
-        _.each(this.options.series, function (series) {
-            if (series.dataField) {
-                series.data = _.map(dataProvider, function (data) {
-                    return [series.nameField ? data[series.nameField] : "", data[series.dataField]];
-                });
-            }
-        }, this);
-
-        return this;
     };
 
     return PieChart;

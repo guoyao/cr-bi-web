@@ -1,16 +1,16 @@
 define(function (require) {
     // load external dependencies
     var _ = require("underscore"),
-        classUtil = require("modules/api/utils/class_util"),
+        Class = require("modules/api/core/class"),
         ColumnChart = require("modules/api/components/charts/column_chart");
 
-    var YearToDateComparisonChart = function ($element, dataProvider, options, globalOptions) {
-        YearToDateComparisonChart.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
-    };
+    var YearToDateComparisonChart = new Class(ColumnChart, {
+        initialize: function ($element, dataProvider, options, globalOptions) {
+            YearToDateComparisonChart.superclass.initialize.call(this, $element, dataProvider, options, globalOptions);
+        }
+    });
 
-    classUtil.inherits(YearToDateComparisonChart, ColumnChart);
-
-    YearToDateComparisonChart.defaultOptions = _.extend({}, YearToDateComparisonChart.uper.constructor.defaultOptions, {
+    YearToDateComparisonChart.defaultOptions = _.extend({}, YearToDateComparisonChart.superclass.constructor.defaultOptions, {
         legend: {
             enabled: false
         },

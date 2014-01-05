@@ -1,16 +1,16 @@
 define(function (require) {
     // load external dependencies
     var _ = require("underscore"),
-        classUtil = require("modules/api/utils/class_util"),
+        Class = require("modules/api/core/class"),
         PieChart = require("modules/api/components/charts/pie_chart");
 
-    var ProportionChart = function ($element, dataProvider, options, globalOptions) {
-        ProportionChart.uper.constructor.call(this, $element, dataProvider, options, globalOptions);
-    };
+    var ProportionChart = new Class(PieChart, {
+        initialize: function ($element, dataProvider, options, globalOptions) {
+            ProportionChart.superclass.initialize.call(this, $element, dataProvider, options, globalOptions);
+        }
+    });
 
-    classUtil.inherits(ProportionChart, PieChart);
-
-    ProportionChart.defaultOptions = _.extend({}, ProportionChart.uper.constructor.defaultOptions, {
+    ProportionChart.defaultOptions = _.extend({}, ProportionChart.superclass.constructor.defaultOptions, {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,

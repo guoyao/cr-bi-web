@@ -1,28 +1,28 @@
 define(function (require) {
     // load external dependencies
-    var _ = require("underscore");
+    var _ = require("underscore"),
+        Class = require("modules/api/core/class");
 
-    var Chart = function ($element, dataProvider, options, globalOptions) {
-        this.$element = $element;
-        this.options = _.extend({}, globalOptions, this.constructor.defaultOptions, options);
-        this.setDataProvider(dataProvider);
-    };
+    var Chart = new Class({
+        initialize: function ($element, dataProvider, options, globalOptions) {
+            this.$element = $element;
+            this.options = _.extend({}, globalOptions, this.constructor.defaultOptions, options);
+            this.setDataProvider(dataProvider);
+        },
+        setDataProvider: function (dataProvider) {
+            this._dataProvider = dataProvider;
+            return this;
+        },
+        getDataProvider: function () {
+            return this._dataProvider;
+        },
+        render: function () {
+            this.$element.highcharts(this.options);
+            return this;
+        }
+    });
 
     Chart.defaultOptions = {};
-
-    Chart.prototype.setDataProvider = function (dataProvider) {
-        this._dataProvider = dataProvider;
-        return this;
-    };
-
-    Chart.prototype.getDataProvider = function () {
-        return this._dataProvider;
-    };
-
-    Chart.prototype.render = function () {
-        this.$element.highcharts(this.options);
-        return this;
-    };
 
     return Chart;
 });
