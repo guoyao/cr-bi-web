@@ -8,6 +8,7 @@ define(function (require) {
     var Class = function () {
         var superclass = null,
             properties = _.toArray(arguments);
+
         if (_.isFunction(properties[0])) {
             superclass = properties.shift();
         }
@@ -21,13 +22,17 @@ define(function (require) {
             klass.prototype = new tempFunc();
             klass.superclass = superclass.prototype;
         }
+
         for (var i = 0, length = properties.length; i < length; i++) {
             _.extend(klass.prototype, properties[i]);
         }
-        if (!klass.prototype.initialize)
+
+        if (!klass.prototype.initialize) {
             klass.prototype.initialize = emptyInitializeFunc;
+        }
 
         klass.prototype.constructor = klass;
+
         return klass;
     };
 
