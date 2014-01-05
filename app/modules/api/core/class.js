@@ -5,7 +5,14 @@ define(function (require) {
     var tempFunc = function () {},
         emptyInitializeFunc = function () {};
 
-    var Class = function () {
+    /**
+     * @description 用来生成类
+     * @param {Class} [父类] 可选参数，必须是函数
+     * @param {Object} [实例方法] 可选参数
+     * @returns {Class}
+     * @constructor
+     */
+    function Class() {
         var superclass = null,
             properties = _.toArray(arguments);
 
