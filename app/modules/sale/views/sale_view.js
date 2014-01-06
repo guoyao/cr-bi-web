@@ -2,6 +2,7 @@ define(function (require) {
 
     // load external dependencies
     var Marionette = require("marionette"),
+        appInfo = require("app_info"),
         template = require("text!templates/sale/views/sale.html"),
         SaleAnalysisView = require("modules/sale/views/sale_analysis_view"),
         ProfitAnalysisView = require("modules/sale/views/profit_analysis_view");
@@ -14,8 +15,9 @@ define(function (require) {
 
     var SaleView = Marionette.Layout.extend({
         template: template,
+        id: appInfo.moduleMap.sale.name + "Module",
         regions: {
-            bodyRegion: "#module-body"
+            bodyRegion: ".view-container"
         },
         onShow: function () {
             this.navigate(this.options);

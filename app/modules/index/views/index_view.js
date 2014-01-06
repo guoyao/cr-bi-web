@@ -29,7 +29,7 @@ define(function (require) {
     var IndexView = Marionette.ItemView.extend({
         template: template,
         disableGlobalQuery: true,
-        id: appInfo.moduleMap.index.name + "-module",
+        id: appInfo.moduleMap.index.name + "Module",
         ui: {
             username: "#username",
             position: "#position",
