@@ -41,7 +41,7 @@ define(function (require) {
         klass.prototype.constructor = klass;
 
         return klass;
-    };
+    }
 
     return Class;
 });
