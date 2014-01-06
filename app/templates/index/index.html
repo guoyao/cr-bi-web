@@ -60,7 +60,15 @@
             </div>
             <div class="gui-panel gui-panel-default system-message-panel">
                 <div class="gui-panel-heading">
-                    <h3 class="gui-panel-title">系统信息</h3>
+                    <h3 class="gui-panel-title panel-title-with-buttons">系统信息</h3>
+                    <div class="gui-btn-bar pull-right" data-toggle="buttons">
+                        <label class="gui-btn gui-btn-default">
+                            <input type="radio" name="options">近期
+                        </label>
+                        <label class="gui-btn gui-btn-default">
+                            <input type="radio" name="options">全部
+                        </label>
+                    </div>
                 </div>
                 <div class="gui-panel-body">
                     <table id="systemMessageTable"></table>

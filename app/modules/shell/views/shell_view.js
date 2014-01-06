@@ -8,6 +8,10 @@ define(function (require) {
 
     var ShellView = Marionette.Layout.extend({
         template: template,
+        ui: {
+            globalQueryContainer: "#globalQueryContainer",
+            datePicker: ".date-picker"
+        },
         regions: {
             headerRegion: "#header",
             mainRegion: "#main",
@@ -19,6 +23,7 @@ define(function (require) {
             this.headerRegion.show(new HeaderView());
             this.footerRegion.show(new FooterView());
             this.trigger("shown");
+//            this.ui.datePicker.guiDatePicker();
         }
     });
 

@@ -42,6 +42,11 @@ define([
     // show module root view
     shell.on("show", function (options) {
         if (this.view && options && options.view) {
+            if (options.view.disableGlobalQuery) {
+                this.view.ui.globalQueryContainer.hide();
+            } else {
+                this.view.ui.globalQueryContainer.show();
+            }
             this.view.moduleRegion.show(options.view);
         }
     });

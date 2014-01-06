@@ -6,7 +6,6 @@ define(function (require) {
         _ = require("underscore"),
         numeral = require("numeral"),
         Marionette = require("marionette"),
-        gui = require("gui"),
         appInfo = require("app_info"),
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         stringUtil = require("modules/api/utils/string_util"),
@@ -29,6 +28,7 @@ define(function (require) {
 
     var IndexView = Marionette.ItemView.extend({
         template: template,
+        disableGlobalQuery: true,
         id: appInfo.moduleMap.index.name + "-module",
         ui: {
             username: "#username",
