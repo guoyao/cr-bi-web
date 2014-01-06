@@ -62,11 +62,6 @@ define(function (require) {
             showWeatherInfo.call(this);
         },
         onShow: function () {
-            var chartWidth = (this.ui.yearToDateSaleChart.parent().width() - this.ui.yearToDateSaleChart.pixels('margin-right') * 2) / 3;
-            this.ui.yearToDateSaleChart.width(chartWidth);
-            this.ui.yearToDateProfitChart.width(chartWidth);
-            this.ui.yearToDateQuantityChart.width(chartWidth);
-            iePatch.call(this);
             showFakeDatum.call(this);
         }
     });
@@ -120,7 +115,7 @@ define(function (require) {
                     dataType: 'json',
                     height: 310,
                     colModel: [
-                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 18, align: 'left' },
+                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
                         { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
                     ]
                 });
@@ -339,12 +334,6 @@ define(function (require) {
         new ProportionChart(this.ui.lastYearRetailProportionChart, retailChartDataProvider, {
             series: seriesOptions
         }).render();
-    }
-
-    function iePatch() {
-        if (gui.browserInfo.isIE && gui.browserInfo.version <= 8) {
-            this.ui.yearToDateQuantityChart.css("margin-right", 0);
-        }
     }
 
     return IndexView;

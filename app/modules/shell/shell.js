@@ -42,7 +42,7 @@ define([
     // show module root view
     shell.on("show", function (options) {
         if (this.view && options && options.view) {
-            this.view.mainRegion.show(options.view);
+            this.view.moduleRegion.show(options.view);
         }
     });
 

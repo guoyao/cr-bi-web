@@ -76,6 +76,7 @@ input {
 }
 
 #main {
+  position: relative;
   margin-top: @logo-large-height + @padding * 4 + @border-weight * 2 + 32 + @margin * 3; // 32 is nav's height
 //  margin-bottom: 32 + @border-weight * 2 + @margin;
   padding-bottom: 32 + @border-weight * 2 + @margin;
@@ -100,20 +101,26 @@ input {
   background-color: @nav-theme-color;
 }
 
+#globalQueryContainer {
+  position: fixed;
+  z-index: 10000;
+  width: 200px;
+}
+
 .panel-title-with-buttons {
   display: inline;
   line-height: 34px;
 }
 
-.small-chart {
+.chart-small {
   height: @chart-height-small;
 }
 
-.base-chart {
+.chart-base {
   height: @chart-height-base;
 }
 
-.large-chart {
+.chart-large {
   height: @chart-height-large;
 }
 

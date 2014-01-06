@@ -11,6 +11,8 @@ define(function (require) {
         regions: {
             headerRegion: "#header",
             mainRegion: "#main",
+            globalQueryRegion: "#globalQueryContainer",
+            moduleRegion: "#moduleContainer",
             footerRegion: "#footer"
         },
         onShow: function () {
