@@ -29,18 +29,20 @@ define(function (require) {
         });
 
         it("should display sale module when location.hash equals sale module's hash", function (done) {
-            app.navigate(appInfo.moduleMap.sale.hash);
             var that = this;
             setTimeout(function () {
-                var saleModule = that.shell[appInfo.moduleMap.sale.name];
-                expect(saleModule).to.exist;
-                expect(saleModule._isInitialized).to.be.true;
+                app.navigate(appInfo.moduleMap.sale.hash);
+                setTimeout(function () {
+                    var saleModule = that.shell[appInfo.moduleMap.sale.name];
+                    expect(saleModule).to.exist;
+                    expect(saleModule._isInitialized).to.be.true;
 
-                var indexModule = that.shell[appInfo.moduleMap.index.name];
-                expect(indexModule._isInitialized).to.be.false;
-                expect(app).to.have.property("currentModule", saleModule);
-                done();
-            }, karmaOptions.asyncWaitTime);
+                    var indexModule = that.shell[appInfo.moduleMap.index.name];
+                    expect(indexModule._isInitialized).to.be.false;
+                    expect(app).to.have.property("currentModule", saleModule);
+                    done();
+                }, karmaOptions.asyncWaitTime);
+            }, karmaOptions.asyncWaitTime / 2);
         });
 
         it("should display index module when index menu clicked", function (done) {

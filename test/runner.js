@@ -86,8 +86,9 @@
         "jquery.dateFormat",
         "highcharts",
         "flexigrid",
+        "modules/api/utils/string_util",
+        "modules/api/utils/storage_util",
         "app_info",
-        "utils/util",
         "app"
     ], function () {
         // load external dependencies
@@ -95,21 +96,35 @@
             _ = require("underscore"),
             app = require("app"),
             appInfo = require("app_info"),
-            util = require("utils/util");
+            stringUtil = require("modules/api/utils/string_util");
 
         appInfo.properties.serviceRoot = "base/app/";
 
         // ----------[start]--------- global configurations for jquery and it's plugins -------------
         $.ajaxSetup({
             beforeSend: function (xhr, settings) {
-                if (settings.url && !util.string.isAbsoluteURI(settings.url)) {
+                if (settings.url && !stringUtil.isAbsoluteURI(settings.url)) {
                     settings.url = appInfo.properties.serviceRoot + settings.url;
                 }
             }
         });
 
         $.cookie.json = true;
+
+        Highcharts.setOptions({
+            colors: ["#2f7ed8", "#8bbc21", "#f28f43", "#77a1e5", "#cc0000", "#0d233a", "#1aadce", "#492970", "#c42525", "#a6c96a"]
+        });
         // ----------[end]--------- global configurations for jquery and it's plugins -------------
+
+
+        // ----------[start]--------- some small jquery plugins -------------
+        //  small jquery plugin for getting pixels from css property
+        if (!$.fn.pixels) {
+            $.fn.pixels = function (property) {
+                return parseInt(this.css(property).slice(0, -2), 10);
+            };
+        }
+        // ----------[end]--------- some small jquery plugins -------------
 
         var specs = _.chain(karma.files)
             // Convert the files object to an array of file paths.
@@ -123,7 +138,7 @@
             })
             .value();
 
-        // Load all specs and start Karma.
+        // Load all specs then start Karma and app
         require(specs, function () {
             karma.start();
             app.start();

@@ -4,7 +4,7 @@ define(function (require) {
     // load external dependencies
     var app = require("app"),
         appInfo = require("app_info"),
-        util = require("utils/util"),
+        stringUtil = require("modules/api/utils/string_util"),
         karmaOptions = window.__karma__.options;
 
     // Test that the app start succeed.
@@ -25,14 +25,14 @@ define(function (require) {
 
         it("should login failed if username or password not correct", function () {
             this.loginView.login();
-            expect(util.string.isBlank(this.loginView.ui.errorMessage.text())).to.be.false;
+            expect(stringUtil.isBlank(this.loginView.ui.errorMessage.text())).to.be.false;
         });
 
         it("should login succeed and display shell module if username or password are correct", function (done) {
             this.loginView.ui.username.val("changju");
             this.loginView.ui.password.val("123456");
             this.loginView.login();
-            expect(util.string.isBlank(this.loginView.ui.errorMessage.text())).to.be.true;
+            expect(stringUtil.isBlank(this.loginView.ui.errorMessage.text())).to.be.true;
             var that = this;
             setTimeout(function () {
                 var shellModule = app[appInfo.moduleMap.shell.artifact];
