@@ -26,38 +26,17 @@ define(function (require) {
         var that = this;
         $.getJSON("assets/data/sale.json")
             .done(function (data) {
-                var saleData = data["sale"];
-                showTimeSeriesChart.call(that, saleData["time_series_datum"]);
-                showClassGroupChart.call(that, saleData["class_group_datum"]);
-                showCategoryChart.call(that, saleData["category_datum"]);
-                showOperationChart.call(that, saleData["operation_datum"]);
-                showDistrictChart.call(that, saleData["district_datum"]);
-                showSupplierChart.call(that, saleData["supplier_datum"]);
+                showChart.call(that, data["sale"]);
             });
     }
 
-    function showTimeSeriesChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.timeSeriesChart, dataProvider).render();
-    }
-
-    function showClassGroupChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.classGroupChart, dataProvider).render();
-    }
-
-    function showCategoryChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.categoryChart, dataProvider).render();
-    }
-
-    function showOperationChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.operationChart, dataProvider).render();
-    }
-
-    function showDistrictChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.districtChart, dataProvider).render();
-    }
-
-    function showSupplierChart(dataProvider) {
-        new SaleAnalysisChart(this.ui.supplierChart, dataProvider).render();
+    function showChart(saleData) {
+        new SaleAnalysisChart(this.ui.timeSeriesChart, saleData["time_series_datum"]).render();
+        new SaleAnalysisChart(this.ui.classGroupChart, saleData["class_group_datum"]).render();
+        new SaleAnalysisChart(this.ui.categoryChart, saleData["category_datum"]).render();
+        new SaleAnalysisChart(this.ui.operationChart, saleData["operation_datum"]).render();
+        new SaleAnalysisChart(this.ui.districtChart, saleData["district_datum"]).render();
+        new SaleAnalysisChart(this.ui.supplierChart, saleData["supplier_datum"]).render();
     }
 
     return SaleAnalysisView;
