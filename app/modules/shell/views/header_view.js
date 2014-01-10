@@ -18,18 +18,19 @@ define(function (require) {
             nav: "#nav"
         },
         onShow: function () {
-            this.iePatch();
             this.nav.show(new NavView());
+            iePatch.call(this);
         },
         logout: function () {
             app.shell.trigger("logout");
-        },
-        iePatch: function () {
-            if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
-                this.$el.guiAffix({ offset: 0 });
-            }
         }
     });
+
+    function iePatch() {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+            this.$el.guiAffix({ offset: 0 });
+        }
+    }
 
     return HeaderView;
 });

@@ -6,6 +6,7 @@ define(function (require) {
         _ = require("underscore"),
         numeral = require("numeral"),
         Marionette = require("marionette"),
+        gui = require("gui"),
         appInfo = require("app_info"),
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         stringUtil = require("modules/api/utils/string_util"),
@@ -56,13 +57,15 @@ define(function (require) {
             yearToDateRetailProportionChart: "#yearToDateRetailProportionChart",
             lastYearRetailProportionChart: "#lastYearRetailProportionChart",
             yearToDateRetailProportionTable: "#yearToDateRetailProportionTable",
-            lastYearRetailProportionTable: "#lastYearRetailProportionTable"
+            lastYearRetailProportionTable: "#lastYearRetailProportionTable",
+            buttons: ".gui-btn"
         },
         onRender: function () {
             showDateInfo.call(this);
             showWeatherInfo.call(this);
         },
         onShow: function () {
+            iePatch.call(this);
             showFakeDatum.call(this);
         }
     });
@@ -335,6 +338,12 @@ define(function (require) {
         new ProportionChart(this.ui.lastYearRetailProportionChart, retailChartDataProvider, {
             series: seriesOptions
         }).render();
+    }
+
+    function iePatch() {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 9) {
+            this.ui.buttons.guiButton();
+        }
     }
 
     return IndexView;

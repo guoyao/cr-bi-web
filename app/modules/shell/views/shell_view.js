@@ -9,6 +9,7 @@ define(function (require) {
     var ShellView = Marionette.Layout.extend({
         template: template,
         ui: {
+            header: "#header",
             globalQueryContainer: "#globalQueryContainer",
             datePicker: ".date-picker"
         },
@@ -24,8 +25,20 @@ define(function (require) {
             this.footerRegion.show(new FooterView());
             this.trigger("shown");
 //            this.ui.datePicker.guiDatePicker();
+            iePatch.call(this);
         }
     });
+
+    function iePatch() {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+            this.ui.globalQueryContainer.guiAffix({
+                offset: {
+                    top: 119,
+                    left: "10px"
+                }
+            });
+        }
+    }
 
     return ShellView;
 });

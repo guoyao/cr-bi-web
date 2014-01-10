@@ -22,21 +22,22 @@ define(function (require) {
             this.collection.fetch();
         },
         onShow: function () {
-            if (!this.iePatch()) {
+            if (!iePatch.call(this)) {
                 this.ui.menu.guiNav();
             }
-        },
-        iePatch: function () {
-            if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
-                var view = this;
-                _.defer(function () {
-                    view.ui.menu.guiNav();
-                });
-                return true;
-            }
-            return false;
         }
     });
+
+    function iePatch() {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+            var that = this;
+            _.defer(function () {
+                that.ui.menu.guiNav();
+            });
+            return true;
+        }
+        return false;
+    }
 
     return NavView;
 });
