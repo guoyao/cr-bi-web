@@ -4,6 +4,7 @@ define(function (require) {
     // load external dependencies
     var Backbone = require("backbone"),
         Marionette = require("marionette"),
+        gui = require("gui"),
         appInfo = require("app_info");
 
     var app = new Marionette.Application();
@@ -18,11 +19,17 @@ define(function (require) {
         this.navigate = function (fragment, options) {
             options = options || {trigger: true};
             this.router.navigate(fragment, options);
+            if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+                window.location.hash = fragment;
+            }
         };
         app.vent.trigger(appInfo.isLogin() ? "login:succeed" : "logout");
     });
 
     app.on("initialize:after", function () {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+            return;
+        }
         Backbone.history.start();
     });
 

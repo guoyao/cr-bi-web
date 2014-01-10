@@ -9,6 +9,7 @@ define(function (require) {
         appInfo = require("app_info"),
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         stringUtil = require("modules/api/utils/string_util"),
+        logUtil = require("modules/api/utils/log_util"),
         template = require("text!templates/index/index.html"),
         ColumnChart = require("modules/api/components/charts/column_chart"),
         YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart"),
@@ -183,7 +184,7 @@ define(function (require) {
             })
             .fail(function(error) {
                 that.ui.climateImage.attr("src", appInfo.properties.imageRoot + climateKeyWords[0].value);
-                console.log(error.responseText);
+                logUtil.log(error.responseText);
             });
     }
 

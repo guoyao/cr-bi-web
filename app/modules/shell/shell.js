@@ -2,12 +2,14 @@
 define([
     "modules/shell/router",
     "modules/shell/controller",
-    "modules/shell/views/shell_view"
-], function (Router, controller, ShellView) {
+    "modules/shell/views/shell_view",
+    "modules/shell/history_patch_ie"
+], function (Router, controller, ShellView, historyPatchIE) {
     "use strict";
 
     // load external dependencies
-    var app = require("app"),
+    var gui = require("gui"),
+        app = require("app"),
         appInfo = require("app_info"),
         storageUtil = require("modules/api/utils/storage_util");
 
@@ -20,8 +22,12 @@ define([
             this.view.on("shown", function () {
                 var hash = window.location.hash;
                 if (hash) {
-                    app.navigate("", {trigger: false});
-                    app.navigate(hash.replace("#", ""));
+                    if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+                        historyPatchIE.navigate(hash);
+                    } else {
+                        app.navigate("", {trigger: false});
+                        app.navigate(hash.replace("#", ""));
+                    }
                 } else {
                     app.navigate(appInfo.defaultModule.hash);
                 }
@@ -31,11 +37,13 @@ define([
     });
 
     shell.on("start", function () {
+        historyPatchIE.start();
         this.render();
     });
 
     shell.on("logout", function () {
         storageUtil.remove(appInfo.loginCookieKey);
+        historyPatchIE.stop();
         app.vent.trigger("logout");
     });
 
