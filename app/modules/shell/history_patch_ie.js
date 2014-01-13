@@ -9,7 +9,7 @@ define(function (require) {
         intervalId;
 
     function start() {
-        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 7) {
             if (!intervalId) {
                 intervalId = setInterval(function () {
                     if (locationHash != location.hash) {

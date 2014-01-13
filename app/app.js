@@ -19,7 +19,7 @@ define(function (require) {
         this.navigate = function (fragment, options) {
             options = options || {trigger: true};
             this.router.navigate(fragment, options);
-            if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+            if (gui.browserInfo.isIE && gui.browserInfo.version <= 7) {
                 window.location.hash = fragment;
             }
         };
@@ -27,7 +27,7 @@ define(function (require) {
     });
 
     app.on("initialize:after", function () {
-        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+        if (gui.browserInfo.isIE && gui.browserInfo.version <= 7) {
             return;
         }
         Backbone.history.start();

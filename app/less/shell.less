@@ -48,9 +48,13 @@
 #globalQueryContainer {
   position: fixed;
   z-index: 10000;
-  width: 215px;
+  width: 235px;
   left: 10px;
   display: none;
+  *top: 119px;
+}
+
+#globalQueryPanel {
   border-color: darken(@theme-color, 30%);
   .border-bottom-radius(0);
   .gui-panel {
@@ -70,6 +74,11 @@
     padding: @padding * 1.5 @padding;
     background-color: darken(@theme-color, 50%);
   }
+  .global-query-panel-heading {
+    _color: #ffffff !important;
+    _padding: @padding * 1.5 @padding !important;
+    _background-color: darken(@theme-color, 50%) !important;
+  }
   .gui-panel-body {
     padding: @padding;
   }
@@ -86,8 +95,10 @@
     }
   }
   .gui-btn-bar {
+    *position: static;
     .gui-btn {
       padding: @padding - 2 @padding;
+      *position: static;
     }
   }
 }

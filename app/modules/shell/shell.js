@@ -22,7 +22,7 @@ define([
             this.view.on("shown", function () {
                 var hash = window.location.hash;
                 if (hash) {
-                    if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
+                    if (gui.browserInfo.isIE && gui.browserInfo.version <= 7) {
                         historyPatchIE.navigate(hash);
                     } else {
                         app.navigate("", {trigger: false});
