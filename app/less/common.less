@@ -20,15 +20,8 @@
   float: right;
 }
 
-hr {
-  &.vertical-right {
-    .hr-vertical();
-  }
-  &.vertical-left {
-    .hr-vertical();
-    left: 0;
-    right: auto;
-  }
+.vertical-line {
+  .vertical-line();
 }
 
 .copyright {
@@ -71,6 +64,7 @@ input {
 // ------------------- customize third lib's styles ----------
 .gui-panel {
   margin-bottom: @margin * 2;
+  *zoom:1;
 }
 
 .gui-nav {

@@ -58,7 +58,9 @@ define(function (require) {
             lastYearRetailProportionChart: "#lastYearRetailProportionChart",
             yearToDateRetailProportionTable: "#yearToDateRetailProportionTable",
             lastYearRetailProportionTable: "#lastYearRetailProportionTable",
-            buttons: ".gui-btn"
+            buttonBars: ".gui-btn-bar",
+            buttons: ".gui-btn",
+            verticalLines: ".vertical-line"
         },
         onRender: function () {
             showDateInfo.call(this);
@@ -66,6 +68,9 @@ define(function (require) {
         },
         onShow: function () {
             iePatch.call(this);
+            this.ui.buttonBars.guiButtonBar({
+                selectedIndex: 0
+            });
             showFakeDatum.call(this);
         }
     });
@@ -117,7 +122,9 @@ define(function (require) {
                 showYearToDateComparisonChart.call(that, data["year_to_date_comparison_chart_datum"]);
                 that.ui.systemMessageTable.flexigrid({
                     dataType: 'json',
+                    width: tableWidth,
                     height: 310,
+                    resizable: false,
                     colModel: [
                         { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
                         { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
@@ -341,8 +348,13 @@ define(function (require) {
     }
 
     function iePatch() {
-        if (gui.browserInfo.isIE && gui.browserInfo.version <= 9) {
-            this.ui.buttons.guiButton();
+        if (gui.browserInfo.isIE) {
+            if (gui.browserInfo.version <= 9) {
+                this.ui.buttons.guiButton();
+            }
+            if (gui.browserInfo.version <= 6) {
+                this.ui.verticalLines.height(this.ui.verticalLines.parent().height());
+            }
         }
     }
 

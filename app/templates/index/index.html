@@ -60,7 +60,6 @@
             </div>
             <div class="gui-panel gui-panel-default system-message-panel">
                 <div class="gui-panel-heading">
-                    <h3 class="gui-panel-title panel-title-with-buttons">系统信息</h3>
                     <div class="gui-btn-bar pull-right" data-toggle="buttons">
                         <label class="gui-btn gui-btn-default">
                             <input type="radio" name="options">近期
@@ -69,6 +68,7 @@
                             <input type="radio" name="options">全部
                         </label>
                     </div>
+                    <h3 class="gui-panel-title panel-title-with-buttons">系统信息</h3>
                 </div>
                 <div class="gui-panel-body">
                     <table id="systemMessageTable"></table>
@@ -80,7 +80,6 @@
         <div class="span12">
             <div class="gui-panel gui-panel-default">
                 <div class="gui-panel-heading">
-                    <h3 class="gui-panel-title panel-title-with-buttons">零售客单价&客单数趋势</h3>
                     <div class="gui-btn-bar pull-right" data-toggle="buttons">
                         <label class="gui-btn gui-btn-default">
                             <input type="radio" name="options">1
@@ -122,6 +121,7 @@
                             <input type="radio" name="options">全年
                         </label>
                     </div>
+                    <h3 class="gui-panel-title panel-title-with-buttons">零售客单价&客单数趋势</h3>
                 </div>
                 <div class="gui-panel-body">
                     <div class="gui-btn-bar" data-toggle="buttons" style="margin-bottom: 12px;">
@@ -160,7 +160,6 @@
         <div class="span12">
             <div class="gui-panel gui-panel-default">
                 <div class="gui-panel-heading">
-                    <h3 class="gui-panel-title panel-title-with-buttons">年至今及上年同期占比</h3>
                     <div class="gui-btn-bar pull-right" data-toggle="buttons">
                         <label class="gui-btn gui-btn-default">
                             <input type="radio" name="options">整体
@@ -169,6 +168,7 @@
                             <input type="radio" name="options">可比
                         </label>
                     </div>
+                    <h3 class="gui-panel-title panel-title-with-buttons">年至今及上年同期占比</h3>
                 </div>
                 <div class="gui-panel-body">
                     <div class="row-fluid">
@@ -178,7 +178,7 @@
                             <div id="yearToDateOperationProportionChart" class="chart-base"></div>
                             上年同期
                             <div id="lastYearOperationProportionChart" class="chart-base"></div>
-                            <hr class="vertical-right"/>
+                            <div class="vertical-line"></div>
                         </div>
                         <div class="span4" style="position: relative;">
                             区域销售额占比及上年同期占比<br />
@@ -186,7 +186,7 @@
                             <div id="yearToDateDistrictProportionChart" class="chart-base"></div>
                             上年同期
                             <div id="lastYearDistrictProportionChart" class="chart-base"></div>
-                            <hr class="vertical-right"/>
+                            <div class="vertical-line"></div>
                         </div>
                         <div class="span4" style="position: relative;">
                             零售批发经销联营销售额占比及上年同期占比<br />
