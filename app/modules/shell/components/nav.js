@@ -5,13 +5,13 @@ define(function (require) {
     var Marionette = require("marionette"),
         _ = require("underscore"),
         gui = require("gui"),
-        template = require("text!templates/shell/nav.html"),
-        NavItemView = require("modules/shell/views/nav_item_view"),
+        template = require("text!templates/shell/components/nav.html"),
+        NavItem = require("modules/shell/components/nav_item"),
         NavItemCollection = require("modules/shell/collections/nav_item_collection");
 
-    var NavView = Marionette.CompositeView.extend({
+    var Nav = Marionette.CompositeView.extend({
         template: template,
-        itemView: NavItemView,
+        itemView: NavItem,
         itemViewContainer: '.gui-nav',
         className: "grid-medium",
         ui: {
@@ -39,5 +39,5 @@ define(function (require) {
         return false;
     }
 
-    return NavView;
+    return Nav;
 });

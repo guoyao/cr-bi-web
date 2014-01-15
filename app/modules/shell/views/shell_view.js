@@ -2,7 +2,7 @@ define(function (require) {
 
     // load external dependencies
     var Marionette = require("marionette"),
-        template = require("text!templates/shell/shell.html"),
+        template = require("text!templates/shell/views/shell.html"),
         HeaderView = require("modules/shell/views/header_view"),
         FooterView = require("modules/shell/views/footer_view"),
         GlobalQueryPanel = require("modules/shell/components/global_query_panel");

@@ -6,7 +6,7 @@ define(function (require) {
         gui = require("gui"),
         app = require("app"),
         stringUtil = require("modules/api/utils/string_util"),
-        template = require("text!templates/login/login.html");
+        template = require("text!templates/login/views/login.html");
 
     var LoginView = Marionette.ItemView.extend({
         template: template,

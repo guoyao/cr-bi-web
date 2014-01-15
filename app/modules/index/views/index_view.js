@@ -11,7 +11,7 @@ define(function (require) {
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         stringUtil = require("modules/api/utils/string_util"),
         logUtil = require("modules/api/utils/log_util"),
-        template = require("text!templates/index/index.html"),
+        template = require("text!templates/index/views/index.html"),
         ColumnChart = require("modules/api/components/charts/column_chart"),
         YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart"),
         ProportionChart = require("modules/index/components/proportion_chart");

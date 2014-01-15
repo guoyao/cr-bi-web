@@ -5,8 +5,8 @@ define(function (require) {
     var Marionette = require("marionette"),
         gui = require("gui"),
         app = require("app"),
-        template = require("text!templates/shell/header.html"),
-        NavView = require("modules/shell/views/nav_view");
+        template = require("text!templates/shell/views/header.html"),
+        Nav = require("modules/shell/components/nav");
 
     var HeaderView = Marionette.Layout.extend({
         template: template,
@@ -18,7 +18,7 @@ define(function (require) {
             nav: "#nav"
         },
         onShow: function () {
-            this.nav.show(new NavView());
+            this.nav.show(new Nav());
             iePatch.call(this);
         },
         logout: function () {

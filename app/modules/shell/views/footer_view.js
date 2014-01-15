@@ -4,7 +4,7 @@ define(function (require) {
     // load external dependencies
     var Marionette = require("marionette"),
         gui = require("gui"),
-        template = require("text!templates/shell/footer.html"),
+        template = require("text!templates/shell/views/footer.html"),
         dateTimeUtil = require("modules/api/utils/date_time_util"),
         appInfo = require("app_info");
 

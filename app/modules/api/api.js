@@ -9,6 +9,7 @@ define(function (require) {
     require("modules/api/utils/navigation_util");
     require("modules/api/utils/date_time_util");
     require("modules/api/utils/collection_util");
+    require("modules/api/utils/log_util");
 
     // components
     require("modules/api/components/charts/column_chart");
