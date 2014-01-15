@@ -23,17 +23,20 @@ define(function (require) {
             expect(this.login._isInitialized).to.be.true;
         });
 
-        it("should login failed if username or password not correct", function () {
+        it("should login failed if username or password not correct", function (done) {
+            var that = this;
             this.loginView.login();
-            expect(stringUtil.isBlank(this.loginView.ui.errorMessage.text())).to.be.false;
+            setTimeout(function () {
+                expect(stringUtil.isBlank(that.loginView.ui.errorMessage.text())).to.be.false;
+                done();
+            }, karmaOptions.asyncWaitTime);
         });
 
         it("should login succeed and display shell module if username or password are correct", function (done) {
+            var that = this;
             this.loginView.ui.username.val("changju");
             this.loginView.ui.password.val("123456");
             this.loginView.login();
-            expect(stringUtil.isBlank(this.loginView.ui.errorMessage.text())).to.be.true;
-            var that = this;
             setTimeout(function () {
                 var shellModule = app[appInfo.moduleMap.shell.artifact];
                 expect(shellModule).to.exist;

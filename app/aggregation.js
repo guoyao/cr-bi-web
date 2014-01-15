@@ -15,6 +15,7 @@ require(["config"], function () {
         "flexigrid",
         "modules/api/utils/string_util",
         "modules/api/utils/storage_util",
+        "modules/api/utils/log_util",
         "app_info",
         "app"
     ], function () {
