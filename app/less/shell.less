@@ -49,9 +49,18 @@
   position: fixed;
   z-index: 10000;
   width: 235px;
-  left: 10px;
+  left: 0;
   display: none;
   *top: 119px;
+  &.collapsed {
+    left: -198px;
+    #globalQueryAccordion {
+      visibility: hidden;
+    }
+    .gui-panel-body {
+      background-color: @theme-color;
+    }
+  }
 }
 
 #globalQueryPanel {
@@ -100,5 +109,8 @@
       padding: @padding - 2 @padding;
       *position: static;
     }
+  }
+  .horizontal-collapse-btn {
+    display: none;
   }
 }

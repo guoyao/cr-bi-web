@@ -10,11 +10,31 @@ define(function (require) {
         template: template,
         id: "globalQueryPanel",
         className:"gui-panel gui-panel-default",
+        ui: {
+            expandButton: ".horizontal-expand-btn",
+            collapseButton: ".horizontal-collapse-btn"
+        },
+        events: {
+            "click .horizontal-expand-btn": "expand",
+            "click .horizontal-collapse-btn": "collapse"
+        },
         onRender: function () {
             iePatch.call(this);
             this.$el.find(".gui-btn-bar").guiButtonBar({
                 selectedIndex: 0
             });
+        },
+        expand: function () {
+            this.$el.parent().removeClass("collapsed");
+            this.ui.expandButton.hide();
+            this.ui.collapseButton.show();
+            return false;
+        },
+        collapse: function () {
+            this.$el.parent().addClass("collapsed");
+            this.ui.expandButton.show();
+            this.ui.collapseButton.hide();
+            return false;
         }
     });
 
