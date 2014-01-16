@@ -5,18 +5,20 @@
   border-top: @border-weight @border-type @border-color;
   border-bottom: @border-weight @border-type @border-color;
   background-color: @theme-color;
-  #logoSection {
-    padding: @padding*2 @padding*1.5;
-  }
-  #right {
-    position: absolute;
-    right: @padding * 1.5;
-    padding-top: 5px;
-  }
 }
 
 .header {
   top: 0;
+}
+
+.logo-section {
+  padding: @padding*2 @padding*1.5;
+}
+
+.header-right {
+  position: absolute;
+  right: @padding * 1.5;
+  padding-top: 5px;
 }
 
 #main {
@@ -32,13 +34,15 @@
   line-height: 32px;
   color: #99A9C8;
   background-color: @nav-theme-color;
-  #left {
-    padding-left: @padding*1.5;
-  }
-  #right {
-    padding-top: 0;
-    *margin-top: -5px;
-  }
+}
+
+.footer-left {
+  padding-left: @padding*1.5;
+}
+
+.footer-right {
+  padding-top: 0;
+  *margin-top: -5px;
 }
 
 #nav {
