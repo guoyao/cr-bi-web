@@ -9,14 +9,6 @@ define(function (require) {
             name: "",
             url: "",
             children: undefined
-        },
-        parse: function (response) {
-            if (response && _.isArray(response.children)) {
-                response.children = _.map(response.children, function (child) {
-                    return new NavItem(child);
-                });
-            }
-            return response;
         }
     });
 

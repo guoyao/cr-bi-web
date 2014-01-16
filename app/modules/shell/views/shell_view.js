@@ -22,12 +22,16 @@ define(function (require) {
             footerRegion: "#footer"
         },
         onShow: function () {
-            this.headerRegion.show(new HeaderView());
+            this.headerView = new HeaderView();
+            this.headerRegion.show(this.headerView);
             this.footerRegion.show(new FooterView());
             this.globalQueryRegion.show(new GlobalQueryPanel());
             this.trigger("shown");
 //            this.ui.datePicker.guiDatePicker();
             iePatch.call(this);
+        },
+        switchNav: function () {
+            this.headerView.switchNav();
         }
     });
 

@@ -21,6 +21,10 @@
   padding-top: 5px;
 }
 
+#switchToUserBtn {
+  display: none;
+}
+
 #main {
   position: relative;
   margin-top: @logo-large-height + @padding * 4 + @border-weight * 2 + 32 + @margin * 3; // 32 is nav's height
@@ -41,7 +45,8 @@
 }
 
 .footer-right {
-  padding-top: 0;
+  position: absolute;
+  right: @padding * 1.5;
   *margin-top: -5px;
 }
 

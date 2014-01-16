@@ -1,6 +1,6 @@
 define([
-    "modules/sale/views/sale_view"
-], function (SaleView) {
+    "modules/admin/views/admin_view"
+], function (AdminView) {
     "use strict";
 
     // load external dependencies
@@ -9,13 +9,13 @@ define([
         shell = app[appInfo.moduleMap.shell.artifact];
 
     // create module
-    var sale = app.module(appInfo.moduleMap.sale.artifact, function () {
+    var admin = app.module(appInfo.moduleMap.admin.artifact, function () {
         this.startWithParent = false;
         this.render = function (options) {
-            this.view = new SaleView(options);
-            this.view.on("view.shown", function () {
+            this.view = new AdminView(options);
+            this.view.on("shown", function () {
                 app.navigate(this.moduleName + "/" + this.view.view.artifact, {trigger: false});
-                shell.trigger("view.shown", {disableGlobalQuery: this.view.view.disableGlobalQuery});
+                shell.trigger("view.shown", {disableGlobalQuery: this.view.disableGlobalQuery || this.view.view.disableGlobalQuery});
             }, this);
             shell.trigger("module.shown", {view: this.view});
         };
@@ -26,9 +26,9 @@ define([
         };
     });
 
-    sale.on("start", function (options) {
+    admin.on("start", function (options) {
         this.render(options);
     });
 
-    return sale;
+    return admin;
 });

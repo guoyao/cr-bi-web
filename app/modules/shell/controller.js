@@ -7,6 +7,7 @@ define(function (require) {
 
     return {
         routeChange: function (module, view) {
+            appInfo.isInAdminSection = module == appInfo.moduleMap.admin.name;
             module = appInfo.moduleMap[module];
             if (!module) {
                 module = appInfo.defaultModule;

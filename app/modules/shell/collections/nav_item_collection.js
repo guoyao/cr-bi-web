@@ -7,8 +7,16 @@ define(function (require) {
 
     var NavItemCollection = Backbone.Collection.extend({
         model: NavItemModel,
-        url: 'assets/data/nav_item_collection.json'
+        url: 'assets/data/nav_item_collection.json',
+        parse: function (response) {
+            return response[this.category || NavItemCollection.category.user];
+        }
     });
+
+    NavItemCollection.category = {
+        user: "user_section",
+        admin: "admin_section"
+    };
 
     return NavItemCollection;
 });

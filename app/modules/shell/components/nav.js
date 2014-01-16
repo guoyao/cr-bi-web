@@ -5,6 +5,7 @@ define(function (require) {
     var Marionette = require("marionette"),
         _ = require("underscore"),
         gui = require("gui"),
+        appInfo = require("app_info"),
         template = require("text!templates/shell/components/nav.html"),
         NavItem = require("modules/shell/components/nav_item"),
         NavItemCollection = require("modules/shell/collections/nav_item_collection");
@@ -19,11 +20,18 @@ define(function (require) {
         },
         initialize: function () {
             this.collection = new NavItemCollection();
+            this.collection.category = appInfo.isInAdminSection ? NavItemCollection.category.admin : NavItemCollection.category.user;
             this.collection.fetch();
         },
         onShow: function () {
             if (!iePatch.call(this)) {
                 this.ui.menu.guiNav();
+            }
+        },
+        switchTo: function (category) {
+            if (category != this.collection.category) {
+                this.collection.category = category;
+                this.collection.fetch();
             }
         }
     });

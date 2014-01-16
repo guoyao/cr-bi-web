@@ -1,162 +1,266 @@
-[
-    {
-        "name": "首页",
-        "url": "index"
-    },
-    {
-        "name": "综合分析",
-        "url": "comprehensive",
-        "children": [
-            {
-                "name": "指标达成情况（采购）",
-                "url": "comprehensive/procurement"
-            },
-            {
-                "name": "指标达成情况（营运）",
-                "url": "comprehensive/operation"
-            },
-            {
-                "name": "门店异常分析",
-                "url": "exception/store"
-            },
-            {
-                "name": "品类异常分析",
-                "url": "exception/class_group"
-            }
-        ]
-    },
-    {
-        "name": "销售",
-        "url": "sale",
-        "children": [
-            {
-                "name": "销售分析",
-                "url": "sale/sale"
-            },
-            {
-                "name": "毛利分析",
-                "url": "sale/profit"
-            },
-            {
-                "name": "综合收益（采购）",
-                "url": "sale/comprehensive_procurement"
-            },
-            {
-                "name": "通道收益（采购）",
-                "url": "sale/channel_procurement"
-            },
-            {
-                "name": "通道收益（营运）",
-                "url": "sale/channel_operation"
-            }
-        ]
-    },
-    {
-        "name": "库存",
-        "url": "stock",
-        "children": [
-            {
-                "name": "库存周转分析",
-                "url": "stock/turnover"
-            },
-            {
-                "name": "库存配置",
-                "url": "stock/configuration"
-            }
-        ]
-    },
-    {
-        "name": "门店分析",
-        "url": "store",
-        "children": [
-            {
-                "name": "门店对比",
-                "url": "store/comparison"
-            },
-            {
-                "name": "门店对标",
-                "url": "store/benchmarking"
-            }
-        ]
-    },
-    {
-        "name": "节假日分析",
-        "url": "holiday",
-        "children": [
-            {
-                "name": "销售分析",
-                "url": "sale/sale_holiday"
-            },
-            {
-                "name": "库存分析",
-                "url": "stock/stock_holiday"
-            },
-            {
-                "name": "单品销售排名",
-                "url": "ranking/product_holiday"
-            },
-            {
-                "name": "类别销售排名",
-                "url": "ranking/category_holiday"
-            }
-        ]
-    },
-    {
-        "name": "排名分析",
-        "url": "ranking",
-        "children": [
-            {
-                "name": "门店销售排名",
-                "url": "ranking/store"
-            },
-            {
-                "name": "单品销售排名",
-                "url": "ranking/product"
-            },
-            {
-                "name": "品类组销售排名",
-                "url": "ranking/class_group"
-            },
-            {
-                "name": "类别销售排名",
-                "url": "ranking/category"
-            },
-            {
-                "name": "供应商销售排名",
-                "url": "ranking/supplier"
-            },
-            {
-                "name": "品牌售排名",
-                "url": "ranking/brand"
-            }
-        ]
-    },
-    {
-        "name": "品类分析",
-        "url": "assortment",
-        "children": [
-            {
-                "name": "价格带分析",
-                "url": "assortment/price_zone"
-            }
-        ]
-    },
-    {
-        "name": "会员分析",
-        "url": "member",
-        "children": [
-            {
-                "name": "会员发展分析",
-                "url": "member/growth"
-            },
-            {
-                "name": "会员消费分析",
-                "url": "member/consumption"
-            },
-            {
-                "name": "会员类别分析",
-                "url": "member/category"
-            }
-        ]
-    }
-]
+{
+    "user_section": [
+        {
+            "name": "首页",
+            "url": "index"
+        },
+        {
+            "name": "综合分析",
+            "url": "comprehensive",
+            "children": [
+                {
+                    "name": "指标达成情况（采购）",
+                    "url": "comprehensive/procurement"
+                },
+                {
+                    "name": "指标达成情况（营运）",
+                    "url": "comprehensive/operation"
+                },
+                {
+                    "name": "门店异常分析",
+                    "url": "exception/store"
+                },
+                {
+                    "name": "品类异常分析",
+                    "url": "exception/classGroup"
+                }
+            ]
+        },
+        {
+            "name": "销售",
+            "url": "sale",
+            "children": [
+                {
+                    "name": "销售分析",
+                    "url": "sale/sale"
+                },
+                {
+                    "name": "毛利分析",
+                    "url": "sale/profit"
+                },
+                {
+                    "name": "综合收益（采购）",
+                    "url": "sale/comprehensiveProcurement"
+                },
+                {
+                    "name": "通道收益（采购）",
+                    "url": "sale/channelProcurement"
+                },
+                {
+                    "name": "通道收益（营运）",
+                    "url": "sale/channelOperation"
+                }
+            ]
+        },
+        {
+            "name": "库存",
+            "url": "stock",
+            "children": [
+                {
+                    "name": "库存周转分析",
+                    "url": "stock/turnover"
+                },
+                {
+                    "name": "库存配置",
+                    "url": "stock/configuration"
+                }
+            ]
+        },
+        {
+            "name": "门店分析",
+            "url": "store",
+            "children": [
+                {
+                    "name": "门店对比",
+                    "url": "store/comparison"
+                },
+                {
+                    "name": "门店对标",
+                    "url": "store/benchmarking"
+                }
+            ]
+        },
+        {
+            "name": "节假日分析",
+            "url": "holiday",
+            "children": [
+                {
+                    "name": "销售分析",
+                    "url": "sale/saleHoliday"
+                },
+                {
+                    "name": "库存分析",
+                    "url": "stock/stockHholiday"
+                },
+                {
+                    "name": "单品销售排名",
+                    "url": "ranking/productHoliday"
+                },
+                {
+                    "name": "类别销售排名",
+                    "url": "ranking/categoryHoliday"
+                }
+            ]
+        },
+        {
+            "name": "排名分析",
+            "url": "ranking",
+            "children": [
+                {
+                    "name": "门店销售排名",
+                    "url": "ranking/store"
+                },
+                {
+                    "name": "单品销售排名",
+                    "url": "ranking/product"
+                },
+                {
+                    "name": "品类组销售排名",
+                    "url": "ranking/classGroup"
+                },
+                {
+                    "name": "类别销售排名",
+                    "url": "ranking/category"
+                },
+                {
+                    "name": "供应商销售排名",
+                    "url": "ranking/supplier"
+                },
+                {
+                    "name": "品牌售排名",
+                    "url": "ranking/brand"
+                }
+            ]
+        },
+        {
+            "name": "品类分析",
+            "url": "assortment",
+            "children": [
+                {
+                    "name": "价格带分析",
+                    "url": "assortment/priceZone"
+                }
+            ]
+        },
+        {
+            "name": "会员分析",
+            "url": "member",
+            "children": [
+                {
+                    "name": "会员发展分析",
+                    "url": "member/growth"
+                },
+                {
+                    "name": "会员消费分析",
+                    "url": "member/consumption"
+                },
+                {
+                    "name": "会员类别分析",
+                    "url": "member/category"
+                }
+            ]
+        }
+    ],
+    "admin_section": [
+        {
+            "name": "管理首页",
+            "url": "admin/index"
+        },
+        {
+            "name": "指标管理",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "Excel指标录入",
+                    "url": "admin/targetExcel"
+                },
+                {
+                    "name": "指标录入",
+                    "url": "admin/target"
+                }
+            ]
+        },
+        {
+            "name": "双向考核",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "双向考核录入",
+                    "url": "admin/twoWayAssessment"
+                }
+            ]
+        },
+        {
+            "name": "系统数据管理",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "用户信息维护",
+                    "url": "admin/userInfo"
+                },
+                {
+                    "name": "权限列表管理",
+                    "url": "admin/permission"
+                }
+            ]
+        },
+        {
+            "name": "节假日管理",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "节假日主数据维护",
+                    "url": "admin/masterHolidayDatum"
+                },
+                {
+                    "name": "节假日维护",
+                    "url": "admin/holiday"
+                }
+            ]
+        },
+        {
+            "name": "门店管理",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "门店调整维护",
+                    "url": "admin/store"
+                },
+                {
+                    "name": "门店可比时间统计",
+                    "url": "admin/storeComparableTime"
+                }
+            ]
+        },
+        {
+            "name": "行为日志",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "用户行为报表",
+                    "url": "admin/userActionLog"
+                }
+            ]
+        },
+        {
+            "name": "店群管理",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "店群维护",
+                    "url": "admin/storeGroup"
+                }
+            ]
+        },
+        {
+            "name": "监控日志",
+            "url": "admin",
+            "children": [
+                {
+                    "name": "监控日志",
+                    "url": "admin/monitorLog"
+                }
+            ]
+        }
+    ]
+}

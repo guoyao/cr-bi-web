@@ -31,6 +31,10 @@
         {
             "name": "modules/sale/sale",
             "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
+        },
+        {
+            "name": "modules/admin/admin",
+            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
         }
     ]
 }

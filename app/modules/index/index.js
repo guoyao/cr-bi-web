@@ -13,7 +13,7 @@ define([
         this.startWithParent = false;
         this.render = function () {
             this.view = new IndexView();
-            shell.trigger("show", {view: this.view});
+            shell.trigger("module.shown", {view: this.view});
             this.navigate();
         };
         this.navigate = function () {
