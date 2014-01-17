@@ -5,9 +5,12 @@ define(function (require) {
     var Marionette = require("marionette"),
         template = require("text!templates/sale/views/profit_analysis.html");
 
+    var artifact = "profit";
+
     var ProfitAnalysisView = Marionette.ItemView.extend({
-        artifact: "profit",
-        template: template
+        artifact: artifact,
+        template: template,
+        id: artifact + "View"
     });
 
     return ProfitAnalysisView;

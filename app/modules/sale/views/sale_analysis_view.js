@@ -6,9 +6,12 @@ define(function (require) {
         template = require("text!templates/sale/views/sale_analysis.html"),
         SaleAnalysisChart = require("modules/sale/components/sale_analysis_chart");
 
+    var artifact = "sale";
+
     var SaleAnalysisView = Marionette.ItemView.extend({
-        artifact: "sale",
+        artifact: artifact,
         template: template,
+        id: artifact + "View",
         ui: {
             timeSeriesChart: ".time-series-chart",
             classGroupChart: ".class-group-chart",

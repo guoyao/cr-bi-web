@@ -12,6 +12,7 @@ define(function (require) {
         stringUtil = require("modules/api/utils/string_util"),
         logUtil = require("modules/api/utils/log_util"),
         template = require("text!templates/index/views/index.html"),
+        DataGrid = require("modules/api/components/data_grids/data_grid"),
         ColumnChart = require("modules/api/components/charts/column_chart"),
         YearToDateComparisonChart = require("modules/index/components/year_to_date_comparison_chart"),
         ProportionChart = require("modules/index/components/proportion_chart");
@@ -103,51 +104,13 @@ define(function (require) {
         var that = this;
         $.getJSON("assets/data/index.json")
             .done(function (data) {
-                var sellReportMainKpiDatum = data["sell_report_main_kpi_datum"],
-                    retailSaleTrendDatum = data["retail_sale_trend_datum"],
-                    yearToDateRetailProportionDatum = data["year_to_date_retail_proportion_datum"],
-                    lastYearRetailProportionDatum = data["last_year_retail_proportion_datum"],
-                    tableWidth = that.ui.systemMessageTable.parent().width();
-                that.ui.sellReportMainKpiTable.find("td span").each(function (index) {
-                    var $this = $(this),
-                        text = $this.text();
-                    if (text == "万元" || text == "万次") {
-                        $this.text(numeral(sellReportMainKpiDatum[index] / 10000).format("0,0") + text);
-                    } else if (text == "%" || text == "元") {
-                        $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0.00") + text);
-                    } else {
-                        $this.text(numeral(sellReportMainKpiDatum[index]).format("0,0") + text);
-                    }
-                });
+                showSellReportMainKpiTable.call(that, data["sell_report_main_kpi_datum"]);
                 showYearToDateComparisonChart.call(that, data["year_to_date_comparison_chart_datum"]);
-                that.ui.systemMessageTable.flexigrid({
-                    dataType: 'json',
-                    width: tableWidth,
-                    height: 310,
-                    resizable: false,
-                    colModel: [
-                        { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
-                        { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
-                    ]
-                });
-                that.ui.systemMessageTable.flexAddData(data["system_messages"]);
-                that.ui.retailSaleTrendTable.find("td.text-primary").each(function (index) {
-                    var $this = $(this);
-                    $this.text(retailSaleTrendDatum[index] + $this.text());
-                });
+                showSystemMessageDataGrid.call(that, data["system_messages"]);
+                showRetailSaleTrendTable.call(that, data["retail_sale_trend_datum"]);
                 showRetailSaleTrendChart.call(that, data["retail_sale_trend_chart_datum"]);
-                that.ui.yearToDateRetailProportionTable.find("td span").each(function (index) {
-                    var $this = $(this);
-                    $this.text(numeral(yearToDateRetailProportionDatum[index]).format("0,0.00") + $this.text());
-                });
-                that.ui.lastYearRetailProportionTable.find("td span").each(function (index) {
-                    var $this = $(this);
-                    $this.text(numeral(lastYearRetailProportionDatum[index]).format("0,0.00") + $this.text());
-                });
-                showProportionChart.call(that,
-                    data["operation_proportion_chart_datum"],
-                    data["district_proportion_chart_datum"],
-                    data["retail_proportion_chart_datum"]);
+                showRetailProportionTable.call(that, data["year_to_date_retail_proportion_datum"], data["last_year_retail_proportion_datum"]);
+                showProportionChart.call(that, data["operation_proportion_chart_datum"], data["district_proportion_chart_datum"], data["retail_proportion_chart_datum"]);
             });
     }
 
@@ -198,6 +161,20 @@ define(function (require) {
             });
     }
 
+    function showSellReportMainKpiTable(datum) {
+        this.ui.sellReportMainKpiTable.find("td span").each(function (index) {
+            var $this = $(this),
+                text = $this.text();
+            if (text == "万元" || text == "万次") {
+                $this.text(numeral(datum[index] / 10000).format("0,0") + text);
+            } else if (text == "%" || text == "元") {
+                $this.text(numeral(datum[index]).format("0,0.00") + text);
+            } else {
+                $this.text(numeral(datum[index]).format("0,0") + text);
+            }
+        });
+    }
+
     function showYearToDateComparisonChart(dataProvider) {
         new YearToDateComparisonChart(this.ui.yearToDateSaleChart, dataProvider, {
             title: {
@@ -244,6 +221,27 @@ define(function (require) {
                 }
             ]
         }).render();
+    }
+
+    function showSystemMessageDataGrid(dataProvider) {
+        var tableWidth = this.ui.systemMessageTable.parent().width();
+        new DataGrid(this.ui.systemMessageTable, dataProvider, {
+            dataType: 'json',
+            width: tableWidth,
+            height: (gui.browserInfo.isIE && gui.browserInfo.version <=7) ? 323 : 336,
+            resizable: false,
+            colModel: [
+                { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
+                { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
+            ]
+        }).render();
+    }
+
+    function showRetailSaleTrendTable(datum) {
+        this.ui.retailSaleTrendTable.find("td.text-primary").each(function (index) {
+            var $this = $(this);
+            $this.text(datum[index] + $this.text());
+        });
     }
 
     function showRetailSaleTrendChart(dataProvider) {
@@ -301,6 +299,17 @@ define(function (require) {
                 }
             ]
         }).render();
+    }
+
+    function showRetailProportionTable(yearToDateDatum, lastYearDatum) {
+        this.ui.yearToDateRetailProportionTable.find("td span").each(function (index) {
+            var $this = $(this);
+            $this.text(numeral(yearToDateDatum[index]).format("0,0.00") + $this.text());
+        });
+        this.ui.lastYearRetailProportionTable.find("td span").each(function (index) {
+            var $this = $(this);
+            $this.text(numeral(lastYearDatum[index]).format("0,0.00") + $this.text());
+        });
     }
 
     function showProportionChart(operationChartDataProvider, districtChartDataProvider, retailChartDataProvider) {

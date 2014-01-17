@@ -13,4 +13,5 @@ define(function (require) {
     // components
     require("modules/api/components/charts/column_chart");
     require("modules/api/components/charts/pie_chart");
+    require("modules/api/components/data_grids/data_grid");
 });
