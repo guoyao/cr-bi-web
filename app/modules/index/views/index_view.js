@@ -223,16 +223,14 @@ define(function (require) {
         }).render();
     }
 
-    function showSystemMessageDataGrid(dataProvider) {
+    function showSystemMessageDataGrid(data) {
         var tableWidth = this.ui.systemMessageTable.parent().width();
-        new DataGrid(this.ui.systemMessageTable, dataProvider, {
-            dataType: 'json',
+        new DataGrid(this.ui.systemMessageTable, data, {
             width: tableWidth,
             height: (gui.browserInfo.isIE && gui.browserInfo.version <=7) ? 323 : 336,
-            resizable: false,
             colModel: [
-                { display: '消息内容', name: 'message', sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
-                { display: '日期', name: 'date', sortable: true, width: 60, align: 'center' }
+                { display: '消息内容', name: 'message', dataField: "message", sortable: true, width: tableWidth - 60 - 5 * 4 - 4 - 20, align: 'left' }, // 20是垂直滚动条的宽度
+                { display: '日期', name: 'date', dataField: "date", sortable: true, width: 60, align: 'center' }
             ]
         }).render();
     }

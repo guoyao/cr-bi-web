@@ -4,28 +4,44 @@ define(function (require) {
         Class = require("modules/api/core/class");
 
     var DataGrid = new Class({
-        initialize: function ($element, dataProvider, options, globalOptions) {
+        initialize: function ($element, data, options, globalOptions) {
             this.$element = $element;
             this.options = _.extend({}, globalOptions, this.constructor.defaultOptions, options);
-            this.setDataProvider(dataProvider);
+            this.setData(data);
         },
-        setDataProvider: function (dataProvider) {
-            this._dataProvider = dataProvider;
+        setData: function (data) {
+            this._data = data;
+            if (data && _.isArray(this.options.colModel) && _.isArray(data.datum)) {
+                var rowItem;
+                data.rows = [];
+                _.each(data.datum, function (item) {
+                    rowItem = {cell: []};
+                    _.each(this.options.colModel, function (column) {
+                        if (column.dataField) {
+                            rowItem.cell.push(item[column.dataField]);
+                        }
+                    });
+                    data.rows.push(rowItem);
+                }, this);
+            }
             return this;
         },
-        getDataProvider: function () {
-            return this._dataProvider;
+        getData: function () {
+            return this._data;
         },
         render: function () {
             this.$element.flexigrid(this.options);
-            if (this._dataProvider) {
-                this.$element.flexAddData(this._dataProvider);
+            if (this._data) {
+                this.$element.flexAddData(this._data);
             }
             return this;
         }
     });
 
-    DataGrid.defaultOptions = {};
+    DataGrid.defaultOptions = {
+        dataType: 'json',
+        resizable: false
+    };
 
     return DataGrid;
 });
