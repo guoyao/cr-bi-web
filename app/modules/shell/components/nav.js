@@ -20,18 +20,23 @@ define(function (require) {
         },
         initialize: function () {
             this.collection = new NavItemCollection();
-            this.collection.category = appInfo.isInAdminSection ? NavItemCollection.category.admin : NavItemCollection.category.user;
-            this.collection.fetch();
+            this.collection.on("reset", function () {
+                if (this.ui) {
+                    iePatch.call(this);
+                }
+            }, this);
+            this.doSwitch();
         },
         onShow: function () {
             if (!iePatch.call(this)) {
                 this.ui.menu.guiNav();
             }
         },
-        switchTo: function (category) {
+        doSwitch: function () {
+            var category = appInfo.isInAdminSection ? NavItemCollection.category.admin : NavItemCollection.category.user;
             if (category != this.collection.category) {
                 this.collection.category = category;
-                this.collection.fetch();
+                this.collection.fetch({reset: true});
             }
         }
     });

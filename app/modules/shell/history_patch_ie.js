@@ -28,6 +28,7 @@ define(function (require) {
         if (matches) {
             module = matches[1];
             view = matches[2];
+            appInfo.isInAdminSection = module == appInfo.moduleMap.admin.name;
             module = appInfo.moduleMap[module];
             if (!module) {
                 module = appInfo.defaultModule;

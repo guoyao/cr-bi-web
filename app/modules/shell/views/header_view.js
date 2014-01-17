@@ -15,7 +15,8 @@ define(function (require) {
         className: "header",
         ui: {
             switchToAdminButton: "#switchToAdminBtn",
-            switchToUserButton: "#switchToUserBtn"
+            switchToUserButton: "#switchToUserBtn",
+            buttons: ".gui-btn"
         },
         events: {
             "click #switchToAdminBtn": "switchToAdminOrUser",
@@ -34,17 +35,26 @@ define(function (require) {
             if (e.target === this.ui.switchToAdminButton[0]) {
                 this.ui.switchToAdminButton.hide();
                 this.ui.switchToUserButton.show();
-                this.nav.switchTo(NavItemCollection.category.admin);
+                appInfo.isInAdminSection = true;
+                this.nav.doSwitch();
                 app.navigate(appInfo.moduleMap.admin.hash);
             } else {
                 this.ui.switchToAdminButton.show();
                 this.ui.switchToUserButton.hide();
-                this.nav.switchTo(NavItemCollection.category.user);
+                appInfo.isInAdminSection = false;
+                this.nav.doSwitch();
                 app.navigate(appInfo.moduleMap.index.hash);
             }
         },
         switchNav: function () {
-            this.nav.switchTo(appInfo.isInAdminSection ? NavItemCollection.category.admin : NavItemCollection.category.user);
+            if (appInfo.isInAdminSection) {
+                this.ui.switchToAdminButton.hide();
+                this.ui.switchToUserButton.show();
+            } else {
+                this.ui.switchToAdminButton.show();
+                this.ui.switchToUserButton.hide();
+            }
+            this.nav.doSwitch();
         },
         logout: function () {
             app.shell.trigger("logout");
@@ -52,8 +62,17 @@ define(function (require) {
     });
 
     function iePatch() {
-        if (gui.browserInfo.isIE && gui.browserInfo.version <= 6) {
-            this.$el.guiAffix({ offset: 0 });
+        if (gui.browserInfo.isIE) {
+            if (gui.browserInfo.version <= 9) {
+                this.ui.buttons.guiButton();
+            }
+            if (gui.browserInfo.version < 9) {
+                this.ui.switchToAdminButton.css("margin-right", 5);
+                this.ui.switchToUserButton.css("margin-right", 5);
+            }
+            if (gui.browserInfo.version <= 6) {
+                this.$el.guiAffix({ offset: 0 });
+            }
         }
     }
 
