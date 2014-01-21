@@ -10,31 +10,51 @@
     "generateSourceMaps": true,
     "modules": [
         {
-            "name": "aggregation"
+            "name": "preloader",
+            "include": [
+                "config",
+                "text",
+                "json2",
+                "numeral",
+                "underscore",
+                "jquery",
+                "backbone",
+                "marionette",
+                "gui",
+                "jquery.cookie",
+                "jquery.dateFormat",
+                "highcharts",
+                "flexigrid",
+                "modules/api/utils/string_util",
+                "modules/api/utils/storage_util",
+                "modules/api/utils/log_util",
+                "app_info",
+                "app"
+            ]
         },
         {
             "name": "modules/api/api",
-            "exclude": ["aggregation"]
+            "exclude": ["preloader"]
         },
         {
             "name": "modules/login/login",
-            "exclude": ["aggregation", "modules/api/api"]
+            "exclude": ["preloader", "modules/api/api"]
         },
         {
             "name": "modules/shell/shell",
-            "exclude": ["aggregation", "modules/api/api"]
+            "exclude": ["preloader", "modules/api/api"]
         },
         {
             "name": "modules/index/index",
-            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
+            "exclude": ["preloader", "modules/api/api", "modules/shell/shell"]
         },
         {
             "name": "modules/sale/sale",
-            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
+            "exclude": ["preloader", "modules/api/api", "modules/shell/shell"]
         },
         {
             "name": "modules/admin/admin",
-            "exclude": ["aggregation", "modules/api/api", "modules/shell/shell"]
+            "exclude": ["preloader", "modules/api/api", "modules/shell/shell"]
         }
     ]
 }
