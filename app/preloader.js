@@ -61,8 +61,6 @@
         .load();
 
     function complete() {
-        // merge dependencies to single file
-
         var $ = require("jquery"),
             app = require("app"),
             appInfo = require("app_info"),
