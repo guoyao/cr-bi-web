@@ -50,7 +50,7 @@
         {artifact: "modules/api/utils/storage_util", description: "系统启动程序"},
         {artifact: "modules/api/utils/log_util", description: "系统启动程序"},
         {artifact: "app_info", description: "系统启动程序"},
-        {artifact: "app", description: "系统启动程序"},
+        {artifact: "app", description: "系统启动程序"}
     ], {
         progress: function () {
             var percentString = parseInt((this.currentLoadingPackageIndex + 1) / this.totalPackage * 100, 10) + "%";
