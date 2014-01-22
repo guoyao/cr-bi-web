@@ -7,8 +7,7 @@ define(function (require) {
         app = require("app"),
         appInfo = require("app_info"),
         template = require("text!templates/shell/views/header.html"),
-        Nav = require("modules/shell/components/nav"),
-        NavItemCollection = require("modules/shell/collections/nav_item_collection");
+        Nav = require("modules/shell/components/nav");
 
     var HeaderView = Marionette.Layout.extend({
         template: template,
