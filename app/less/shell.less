@@ -1,4 +1,4 @@
-.header, .footer {
+.shell-header, .shell-footer {
   width: 100%;
   position: fixed;
   z-index: 10000;
@@ -7,7 +7,7 @@
   background-color: @theme-color;
 }
 
-.header {
+.shell-header {
   top: 0;
 }
 
@@ -25,7 +25,7 @@
   display: none;
 }
 
-#main {
+.shell-main {
   position: relative;
 //  margin-top: @logo-large-height + @padding * 4 + @border-weight * 2 + 32 + @margin * 3; // 32 is nav's height
   padding-top: @logo-large-height + @padding * 4 + @border-weight * 2 + 32 + @margin * 3; // 32 is nav's height
@@ -33,7 +33,7 @@
   padding-bottom: 32 + @border-weight * 2 + @margin;
 }
 
-.footer {
+.shell-footer {
   bottom: 0;
   height: 32px;
   line-height: 32px;
@@ -51,7 +51,7 @@
   *margin-top: -5px;
 }
 
-#nav {
+.shell-nav {
   background-color: @nav-theme-color;
 }
 
@@ -125,4 +125,8 @@
   .horizontal-collapse-btn {
     display: none;
   }
+}
+
+#moduleContainer {
+  width: 1080px;
 }

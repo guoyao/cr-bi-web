@@ -12,10 +12,10 @@ define(function (require) {
 
     var FooterView = Marionette.ItemView.extend({
         template: template,
-        className: "footer",
+        className: "shell-footer",
         ui: {
-            username: "#username",
-            loginDuration: "#loginDuration"
+            username: ".js-username",
+            loginDuration: ".js-login-duration"
         },
         onShow: function () {
             this.ui.username.text(appInfo.loginInfo.userInfo.username);

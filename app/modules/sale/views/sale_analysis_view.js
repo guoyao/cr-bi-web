@@ -13,12 +13,12 @@ define(function (require) {
         template: template,
         id: artifact + "View",
         ui: {
-            timeSeriesChart: ".time-series-chart",
-            classGroupChart: ".class-group-chart",
-            categoryChart: ".category-chart",
-            operationChart: ".operation-chart",
-            districtChart: ".district-chart",
-            supplierChart: ".supplier-chart"
+            timeSeriesChart: ".js-time-series-chart",
+            classGroupChart: ".js-class-group-chart",
+            categoryChart: ".js-category-chart",
+            operationChart: ".js-operation-chart",
+            districtChart: ".js-district-chart",
+            supplierChart: ".js-supplier-chart"
         },
         onShow: function () {
             fetchDatum.call(this);

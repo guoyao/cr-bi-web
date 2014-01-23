@@ -11,7 +11,7 @@ define(function (require) {
 
     var HeaderView = Marionette.Layout.extend({
         template: template,
-        className: "header",
+        className: "shell-header",
         ui: {
             switchToAdminButton: "#switchToAdminBtn",
             switchToUserButton: "#switchToUserBtn",
@@ -23,7 +23,7 @@ define(function (require) {
             "click #logoutBtn": "logout"
         },
         regions: {
-            navRegion: "#nav"
+            navRegion: ".shell-nav"
         },
         onShow: function () {
             this.nav = new Nav();

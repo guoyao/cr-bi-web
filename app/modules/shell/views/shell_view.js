@@ -10,16 +10,14 @@ define(function (require) {
     var ShellView = Marionette.Layout.extend({
         template: template,
         ui: {
-            header: "#header",
             globalQueryContainer: "#globalQueryContainer",
             datePicker: ".date-picker"
         },
         regions: {
-            headerRegion: "#header",
-            mainRegion: "#main",
+            headerRegion: ".js-header",
             globalQueryRegion: "#globalQueryContainer",
             moduleRegion: "#moduleContainer",
-            footerRegion: "#footer"
+            footerRegion: ".js-footer"
         },
         onShow: function () {
             this.headerView = new HeaderView();
