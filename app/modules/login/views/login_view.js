@@ -4,7 +4,6 @@ define(function (require) {
     // load external dependencies
     var $ = require("jquery"),
         Marionette = require("marionette"),
-        gui = require("gui"),
         app = require("app"),
         stringUtil = require("modules/api/utils/string_util"),
         logUtil = require("modules/api/utils/log_util"),

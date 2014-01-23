@@ -47,7 +47,7 @@ define(function (require) {
 
         it("should display index module when index menu clicked", function (done) {
             var indexModule = this.shell[appInfo.moduleMap.index.name],
-                $indexMenu = $("#header .gui-nav [href=#" + appInfo.moduleMap.index.hash + "]");
+                $indexMenu = $(".js-header .gui-nav [href=#" + appInfo.moduleMap.index.hash + "]");
             $indexMenu.click(function () {
                 window.location.hash = $indexMenu.attr("href");
                 setTimeout(function () {
