@@ -9,14 +9,15 @@ define(function (require) {
 
     // Test that the app start succeed.
     describe("Login Module", function () {
+        this.timeout(karmaOptions.asyncWaitTime * 5);
+
         before(function(){
             this.login = app[appInfo.moduleMap.login.artifact];
-            this.loginView = this.login.view;
         });
 
         after(function () {
             this.login = null;
-            this.loginView = null;
+            delete this.login;
         });
 
         it("should started", function () {
@@ -25,18 +26,18 @@ define(function (require) {
 
         it("should login failed if username or password not correct", function (done) {
             var that = this;
-            this.loginView.login();
+            this.login.view.login();
             setTimeout(function () {
-                expect(stringUtil.isBlank(that.loginView.ui.errorMessage.text())).to.be.false;
+                expect(stringUtil.isBlank(that.login.view.ui.errorMessage.text())).to.be.false;
                 done();
             }, karmaOptions.asyncWaitTime);
         });
 
         it("should login succeed and display shell module if username or password are correct", function (done) {
             var that = this;
-            this.loginView.ui.username.val("changju");
-            this.loginView.ui.password.val("123456");
-            this.loginView.login();
+            this.login.view.ui.username.val("changju");
+            this.login.view.ui.password.val("123456");
+            this.login.view.login();
             setTimeout(function () {
                 var shellModule = app[appInfo.moduleMap.shell.artifact];
                 expect(shellModule).to.exist;

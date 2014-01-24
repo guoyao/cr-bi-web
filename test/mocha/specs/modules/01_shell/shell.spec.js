@@ -9,12 +9,15 @@ define(function (require) {
 
     // Test that the app start succeed.
     describe("Shell", function () {
+        this.timeout(karmaOptions.asyncWaitTime * 5);
+
         before(function(){
             this.shell = app[appInfo.moduleMap.shell.artifact];
         });
 
         after(function () {
             this.shell = null;
+            delete this.shell;
         });
 
         it("should started after login", function () {
@@ -42,7 +45,7 @@ define(function (require) {
                     expect(app).to.have.property("currentModule", saleModule);
                     done();
                 }, karmaOptions.asyncWaitTime);
-            }, karmaOptions.asyncWaitTime / 2);
+            }, karmaOptions.asyncWaitTime);
         });
 
         it("should display index module when index menu clicked", function (done) {

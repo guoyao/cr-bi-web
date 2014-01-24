@@ -4,7 +4,7 @@
     var karma = window.__karma__;
 
     karma.options = {
-        asyncWaitTime: 1000
+        asyncWaitTime: 2000
     };
 
     // Put Karma into an asynchronous waiting mode until we have loaded our

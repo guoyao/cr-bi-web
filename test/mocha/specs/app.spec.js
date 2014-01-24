@@ -9,6 +9,8 @@ define(function (require) {
 
     // Test that the app start succeed.
     describe("App", function () {
+        this.timeout(karmaOptions.asyncWaitTime * 5);
+
         it("should started", function () {
             expect(app).to.exist;
             expect(app).to.be.an.instanceof(Marionette.Application);
