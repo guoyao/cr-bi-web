@@ -17,7 +17,7 @@ define(function (require) {
         this.currentModule = null; // current showing module
         this.router = new Marionette.AppRouter();
         this.navigate = function (fragment, options) {
-            options = options || {trigger: true};
+            options || (options = {trigger: true});
             this.router.navigate(fragment, options);
             if (gui.browserInfo.isIE && gui.browserInfo.version <= 7) {
                 window.location.hash = fragment;
