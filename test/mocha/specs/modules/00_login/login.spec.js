@@ -11,8 +11,12 @@ define(function (require) {
     describe("Login Module", function () {
         this.timeout(karmaOptions.asyncWaitTime * 5);
 
-        before(function(){
-            this.login = app[appInfo.moduleMap.login.artifact];
+        before(function(done){
+            var that = this;
+            setTimeout(function () {
+                that.login = app[appInfo.moduleMap.login.artifact];
+                done();
+            }, karmaOptions.asyncWaitTime);
         });
 
         after(function () {
@@ -33,7 +37,7 @@ define(function (require) {
             }, karmaOptions.asyncWaitTime);
         });
 
-        it("should login succeed and display shell module if username or password are correct", function (done) {
+        it("should login succeed and display shell module if username and password are correct", function (done) {
             var that = this;
             this.login.view.ui.username.val("changju");
             this.login.view.ui.password.val("123456");
