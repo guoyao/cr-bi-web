@@ -12,9 +12,9 @@ define(function (require) {
 
         before(function(done) {
             var that = this;
-            this.shell = app[appInfo.moduleMap.shell.artifact];
             app.navigate(appInfo.moduleMap.index.hash);
             setTimeout(function () {
+                that.shell = app[appInfo.moduleMap.shell.artifact];
                 that.index = that.shell[appInfo.moduleMap.index.name];
                 done();
             }, karmaOptions.asyncWaitTime);

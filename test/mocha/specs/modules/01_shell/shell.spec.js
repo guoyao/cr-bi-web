@@ -11,8 +11,12 @@ define(function (require) {
     describe("Shell", function () {
         this.timeout(karmaOptions.asyncWaitTime * 5);
 
-        before(function(){
-            this.shell = app[appInfo.moduleMap.shell.artifact];
+        before(function(done){
+            var that = this;
+            setTimeout(function () {
+                that.shell = app[appInfo.moduleMap.shell.artifact];
+                done();
+            }, karmaOptions.asyncWaitTime);
         });
 
         after(function () {
