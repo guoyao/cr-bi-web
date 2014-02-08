@@ -11,17 +11,20 @@ define(function (require) {
     describe("App", function () {
         this.timeout(karmaOptions.asyncWaitTime * 5);
 
+        before(function (done) {
+            setTimeout(function () {
+                done();
+            }, karmaOptions.asyncWaitTime);
+        });
+
         it("should started", function () {
             expect(app).to.exist;
             expect(app).to.be.an.instanceof(Marionette.Application);
         });
 
-        it("should display login module", function (done) {
-            setTimeout(function () {
-                expect(app).to.not.have.property(appInfo.moduleMap.shell.artifact);
-                expect(app).to.have.property(appInfo.moduleMap.login.artifact).that.exist;
-                done();
-            }, karmaOptions.asyncWaitTime);
+        it("should display login module", function () {
+            expect(app).to.not.have.property(appInfo.moduleMap.shell.artifact);
+            expect(app).to.have.property(appInfo.moduleMap.login.artifact).that.exist;
         });
     });
 });
