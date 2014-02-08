@@ -94,7 +94,6 @@
         // load external dependencies
         var $ = require("jquery"),
             _ = require("underscore"),
-            app = require("app"),
             appInfo = require("app_info"),
             stringUtil = require("modules/api/utils/string_util");
 
@@ -138,10 +137,9 @@
             })
             .value();
 
-        // Load all specs then start Karma and app
+        // Load all specs then start Karma
         require(specs, function () {
             karma.start();
-            app.start();
         });
     });
 })(this);

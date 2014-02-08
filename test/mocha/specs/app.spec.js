@@ -12,6 +12,7 @@ define(function (require) {
         this.timeout(karmaOptions.asyncWaitTime * 5);
 
         before(function (done) {
+            app.start();
             setTimeout(function () {
                 done();
             }, karmaOptions.asyncWaitTime);
